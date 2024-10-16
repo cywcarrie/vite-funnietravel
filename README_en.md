@@ -23,7 +23,7 @@ Vue.js, Vite, Pinia, ESLint, Bootstrap 5, SCSS
 - Front-end 
    - Home Page
    - About Us Page
-   - Products Page：Product classification and Sort by price : low to high or high to low
+   - Products Page：Product classification and sort products by price : low to high or high to low
    - Product Page : Product details
    - Favorites Page: Add items to Favorites and remove items as needed
    - FAQs Page
