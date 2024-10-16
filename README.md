@@ -39,7 +39,7 @@ npm install
 ### 運行專案
 
 ```sh
-npm run serve
+npm run dev
 ```
 
 ### 打包專案
