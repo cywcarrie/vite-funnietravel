@@ -58,6 +58,7 @@ npm run deploy
 
 - vue - ^3.4.29
 - vite - ^5.3.1
+- pinia - v2.1.7
 - vue-router - ^4.3.3
 - axios - ^1.7.7
 - vue-axios - ^3.5.2
