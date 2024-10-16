@@ -1,0 +1,92 @@
+.home {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(https://i.imgur.com/uqtYcRW.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.home-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  background-color: rgba(55, 55, 55, 0.6);
+  padding-bottom: 20px;
+}
+
+.more {
+  top: 55vh;
+  &:active {
+    color: white !important;
+  }
+}
+
+.home-first-btn {
+  background-color: rgba(55, 55, 55, 0.6);
+  color: white;
+  &:hover {
+    background-color: rgba(55, 55, 55, 0.6);
+  }
+  &:active {
+    color: white !important;
+  }
+}
+
+.home-second-text {
+  height: 3rem;
+}
+
+.homebtn-img {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 250px;
+}
+
+.homebtn-img1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://storage.googleapis.com/vue-course-api.appspot.com/funnietravel-api/1701758317741.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=mYH8KXrhsNBPtxUAsVMC77diSiCR2L%2B9pondogtl2KkSrs%2FdYSzWFsEbQFY8oGexVO4GfK18imaNBG53rahkwd5uhG%2F%2FUYQPbxTbJhEBhRnNbiK1mvb6P0kP%2FObTAJVACEUKnyxMdz54T7JcZF7GcUd%2FiLoxOKMq5OVeOaQGQvwF6jyvTfw3IT9TYX%2BxG3%2FiFHqNMM%2BFzGneQkl9U83ja2Gz5SLpbnxBSgiLmMIo%2Bi5mhUAa8KtgaagTOGlLMHu87XkNtTg7%2FKN3CMlnVPxN5dhk0sC5TVG2svjy5EFBD7eTAf73bf0eFyKFUPcJrPjavMzh3rTddEo3jnkQazGZvA%3D%3D);
+}
+
+.homebtn-img2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://storage.googleapis.com/vue-course-api.appspot.com/funnietravel-api/1701758529246.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=a7WDb8COJzOH1iE5MoiCD7U7TM7CMeQcrb2wWwekxLaUXF1dsy20t%2BVp8BXK2pvsJM6jCUVrEP7rPnVIpef8TqOIkrssXqiLg5KI7DcILYnGE%2BeWNEQCoqrrWl6c%2BAseCyRWNPLO1hcJK6tmg601CgZ6bm%2FIEZkoeD3Xhaq7Z9HaoJDx61m%2FvcuqJZijljaM5FZvd7ru6d2CYgwBvOqg2Kxh0ze418%2BObn5nhPinF%2Fl0eFJR4mVjkcV%2BDeA1alEPoPe61XC2dwY0GFhgbJ3W74Q%2FqGpyWnJYhE%2BnIk5JkNUSFdw5F8Xute2Dujj726Tgjvzl3tgtb1bFEXAaCmN%2F0Q%3D%3D);
+}
+
+.homebtn-img3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://storage.googleapis.com/vue-course-api.appspot.com/funnietravel-api/1701746929643.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=APWv1%2FznXvOnu1OHiNicM5K%2Bt4i0f6HclzWWBmxZtGjath80AYtAqMc0DwuoZMFYlp4aCguEtPEvovpH4DlamGE%2BJVOehx1ldNdK2AZ5A7XyclDCpbkRTyTubBphJQLYxxxeHxHKsttL88N6CZ9XbseuIc0hzX%2Fok84U%2Byc7ODvjIZxxn7LkrO5oX45EKK1wa3i4J%2Bxu%2FkRWXucgWi9gEHpFv%2F8Pbp36%2Fma7hkZnpdyWcheDb0T4isoquWr3sxDA8zsNlBX8QdWnEwv2Y6ysAT4%2BsKT630riPydpY%2FkgvZci3AeKcN4O8%2FdZjA%2BTbWQAdSSXDAjxtYFUNg%2BhqzGB9Q%3D%3D);
+}
+
+.homebtn-img4 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://storage.googleapis.com/vue-course-api.appspot.com/funnietravel-api/1701698980344.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=mAd2%2FKK9WYCoRvIVcMiqlsnmqRyv5mtZpVZaiDr1DLbc04VkT0qcUQSk862DOi8n9auoOn%2F42gZaWgbsc6EbI0%2F1aciIaLs%2B1PBAoHkbl%2Bg4AODmR7ngr3A1le5kpTtYLOqB%2FMMscN4DeRN80Ezk%2BKkvY%2FA8wvjocHHQeaC6ZV%2BkW0zDMsS%2FluhKjmGCt5gJjjBW7SAVdjGe1OrpkJEfgWfriZtVy1D1WbUR%2FKAvS2EWpF2%2FJSLh7SdkgS6hSQaMCdPvEofa%2FOZuCOYr4n3uctpO9SdoYbelMw%2FBHWKPmWXBfAPeHl%2B8YIg1QWphx0%2F%2B3pLM1xqpvfj1LUQs0MI46Q%3D%3D);
+}
+
+.about {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(https://i.imgur.com/3eGy6TD.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.home-about-btn {
+  &:active {
+    color: white !important;
+  }
+}
+
+.home-bottom-content {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(https://i.imgur.com/cMLIXzz.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}

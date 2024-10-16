@@ -1,0 +1,21 @@
+.banner {
+  width: 100%;
+  height: 30vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://i.imgur.com/l5misfO.jpg);
+}
+
+.banner2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(https://i.imgur.com/IksZ3T4.jpg);
+}
+
+.banner-title {
+  top: 50%;
+}

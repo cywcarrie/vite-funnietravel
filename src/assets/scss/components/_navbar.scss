@@ -1,0 +1,16 @@
+.hover-nav {
+  transition: all ease 0.3s;
+  &:hover {
+    color: #76a2bd !important;
+  }
+}
+.navbar-marquee {
+  margin: 0 30px;
+}
+.navbar-badge-position {
+  top: -6px;
+  right: -11px;
+}
+.funnie-logo-img {
+  height: 40px;
+}

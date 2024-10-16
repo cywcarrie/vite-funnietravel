@@ -1,0 +1,20 @@
+@import 'bootstrap/scss/functions';
+@import './utils/variables';
+@import 'bootstrap/scss/mixins';
+
+@import 'bootstrap/scss/bootstrap';
+
+// Then add additional custom code here
+@import './base/base';
+@import './components/navbar';
+@import './components/banner';
+@import './components/footer';
+@import './components/home';
+@import './components/products';
+@import './components/product';
+@import './components/favorite';
+@import './components/cart';
+@import './components/check';
+@import './components/card';
+@import './components/swiper';
+@import './components/orderModal';
