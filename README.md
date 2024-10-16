@@ -31,23 +31,26 @@
    - 優惠券管理：新增、修改、刪除優惠劵
 
 ## 安裝套件
-```
+
+```sh
 npm install
 ```
 
 ### 運行專案
-```
+
+```sh
 npm run serve
 ```
 
 ### 打包專案
-```
+
+```sh
 npm run build
 ```
 
 ### 部署專案
 
-```
+```sh
 npm run deploy
 ```
 
