@@ -29,7 +29,7 @@ Vue.js, Vite, Pinia, ESLint, Bootstrap 5, SCSS
    - FAQs Page
    - Shopping Cart： Add items to cart and remove items as needed
    - Checkout Process：Create and submit order
-- Back-end
+- Back-end (Administrator)
    - Product management：Manage product functionalities by adding, removing, and modifying items
    - Order management： View order details
    - Coupon management：Manage coupon functions by adding, removing, and modifying coupons
