@@ -4,7 +4,7 @@
 
 ### Demo Website : [Link](https://cywcarrie.github.io/vite-funnietravel/#/)
 
-Simulated travel e-commerce website, including a shopping cart, favorites, product list, and FAQ pages. Users can add products to the shopping cart or favorites, add or remove products, apply coupons, and place orders. They can also browse detailed information about individual products. The backend allows administrator to add and modify products and coupons.
+Simulated travel e-commerce website, including shopping cart, favorites, product list, and FAQ pages. Users can add products to the shopping cart or favorites, add or remove products, apply coupons, and place orders. They can also browse detailed information about individual products. The backend allows administrator to add and modify products and coupons.
 
 ## Technologies Used
 
