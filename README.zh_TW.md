@@ -56,20 +56,20 @@ npm run deploy
 
 ## 專案套件
 
-- vue - ^3.4.29
-- vite - ^5.3.1
+- vue - v3.4.29
+- vite - v5.3.1
 - pinia - v2.1.7
-- vue-router - ^4.3.3
-- axios - ^1.7.7
-- vue-axios - ^3.5.2
+- vue-router - v4.3.3
+- axios - v1.7.7
+- vue-axios - v3.5.2
 - vue-loading-overlay - v6.0
-- aos - ^2.3.4
-- sweetalert2 - ^11.14.2
-- swiper - ^11.1.14
-- vee-validate - 4.13.2
-- vue3-marquee - ^4.2.2
-- bootstrap - ^5.3.3
-- bootstrap-icons - ^1.11.3
+- aos - v2.3.4
+- sweetalert2 - v11.14.2
+- swiper - v11.1.14
+- vee-validate - v4.13.2
+- vue3-marquee - v4.2.2
+- bootstrap - v5.3.3
+- bootstrap-icons - v1.11.3
 
 ## 使用版本
 
