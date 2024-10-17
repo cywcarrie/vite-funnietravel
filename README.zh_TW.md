@@ -1,6 +1,6 @@
 # Funnie Travel - 旅遊電商網站
 
-## 專案說明 - 其他版本語言 : [English](README_en.md)
+## 專案說明 - 其他版本語言 : [English](README.md)
 
 ### Demo Website : [Link](https://cywcarrie.github.io/vite-funnietravel/#/)
 
