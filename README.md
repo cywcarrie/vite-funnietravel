@@ -12,7 +12,7 @@ Vue.js, Vite, Pinia, ESLint, Bootstrap 5, SCSS
 
 ## Key Contributions
 
-- Developed the application using Vue.js and Vite, optimizing build processes for improved performance and responsiveness.
+- Created the project using Vue.js and Vite, optimizing build processes for improved performance and responsiveness.
 - Integrated Vue Router and Vue Axios, enhancing route management and streamlining API requests, which led to a more intuitive user navigation experience.
 - Configured ESLint to adhere to Standard specifications, ensuring robust code quality and maintainability throughout the project lifecycle.
 - Utilized Pinia for state management, facilitating efficient data operations and promoting seamless communication among components.
