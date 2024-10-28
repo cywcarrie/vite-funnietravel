@@ -1,1 +1,0 @@
-import{_ as n,r as t,o as a,E as s}from"./index-CDcTfnKC.js";const c={data(){return{isLoading:!1}}};function r(i,d,p,_,o,l){const e=t("LoadingVue");return a(),s(e,{active:o.isLoading,loader:"dots",color:"#336b87",width:70,height:70,opacity:.6},null,8,["active"])}const f=n(c,[["render",r]]);export{f as V};
