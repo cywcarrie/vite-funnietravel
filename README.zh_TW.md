@@ -67,7 +67,6 @@ npm run deploy
 - sweetalert2 - v11.14.2
 - swiper - v11.1.14
 - vee-validate - v4.13.2
-- vue3-marquee - v4.2.2
 - bootstrap - v5.3.3
 - bootstrap-icons - v1.11.3
 
