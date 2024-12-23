@@ -1,17 +1,8 @@
 <template>
   <div class="fixed-top">
-    <div class="bg-secondary py-1">
-      <div class="container">
-        <Vue3Marquee class="container text-dark text-center fw-bold" :pause-on-hover="true">
-          <span class="navbar-marquee">
-            優惠期間結帳時輸入優惠碼<span class="text-white"> funnietravel</span>，即可享
-            <span class="text-white">85</span> 折優惠 !
-          </span>
-          <span class="navbar-marquee">
-            優惠期間結帳時輸入優惠碼<span class="text-white"> funnietravel</span>，即可享
-            <span class="text-white">85</span> 折優惠 !
-          </span>
-        </Vue3Marquee>
+    <div class="bg-secondary py-1 d-none d-lg-block">
+      <div class="container text-dark text-center fw-bold">
+        我們專注於真誠的旅遊服務，為您打造難忘的旅程，讓每一刻都成為珍貴的回憶
       </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -65,16 +56,12 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cartStore.js'
-import { Vue3Marquee } from 'vue3-marquee'
 
 export default {
   data() {
     return {
       collapse: {}
     }
-  },
-  components: {
-    Vue3Marquee
   },
   methods: {
     ...mapActions(cartStore, ['getCart'])
