@@ -105,10 +105,8 @@ export default {
     },
     updateProduct(item) {
       this.tempProduct = item
-      // 新增
       let api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product`
       let httpMethod = 'post'
-      // 編輯
       if (!this.isNew) {
         api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${item.id}`
         httpMethod = 'put'
@@ -128,7 +126,6 @@ export default {
           ShowNotification('error', `${error.response.data.message}`)
         })
     },
-    // 開啟刪除 Modal
     openDelProductModal(item) {
       this.tempProduct = { ...item }
       const delComponent = this.$refs.delModal

@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       status: {
-        loadingItem: '' // 對應品項 id
+        loadingItem: ''
       }
     }
   },

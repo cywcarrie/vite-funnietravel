@@ -59,7 +59,6 @@
 import VueLoading from './VueLoading.vue'
 import { Pagination, A11y, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-
 import 'swiper/css'
 import 'swiper/css/pagination'
 

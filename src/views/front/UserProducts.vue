@@ -180,7 +180,7 @@ export default {
       pagination: {},
       isLoading: false,
       status: {
-        loadingItem: '' // 對應品項 id
+        loadingItem: ''
       }
     }
   },

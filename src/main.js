@@ -25,10 +25,10 @@ Object.keys(all).forEach((rule) => {
 })
 
 configure({
-  generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
-  validateOnInput: true // 當輸入任何內容直接進行驗證
+  generateMessage: localize({ zh_TW: zhTW }),
+  validateOnInput: true
 })
-// 設定預設語系
+
 setLocale('zh_TW')
 
 app.use(createPinia())
