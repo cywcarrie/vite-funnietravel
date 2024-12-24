@@ -39,7 +39,7 @@
             <h3 class="fw-bolder fs-4">全球服務據點</h3>
             <p class="lh-lg">
               <span class="fw-bold text-primary">Funnie Travel </span>在亞洲地區共有 6
-              個服務據點，分別為台灣、新加坡、馬來西亞、南韓、泰國與印尼，並且結合 Funnie Travel
+              個服務據點，分別位於台灣、新加坡、馬來西亞、日本、泰國與印尼，並且結合 Funnie Travel
               官方旅遊網站，為全球旅人提供最專業與最貼心的在地服務。
             </p>
           </div>

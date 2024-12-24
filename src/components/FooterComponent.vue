@@ -28,7 +28,7 @@
               </li>
               <li class="nav-item mb-2">
                 <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>南韓</a
+                  ><i class="bi bi-geo-alt-fill text-secondary"></i>日本</a
                 >
               </li>
             </ul>
