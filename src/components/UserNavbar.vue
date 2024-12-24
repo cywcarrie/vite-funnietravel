@@ -1,7 +1,7 @@
 <template>
   <div class="fixed-top">
     <div class="bg-body-secondary py-1 d-none d-lg-block">
-      <div class="container text-black text-center">
+      <div class="container text-dark text-center">
         我們專注於真誠的旅遊服務，為您打造難忘的旅程，讓每一刻都成為珍貴的回憶
       </div>
     </div>
