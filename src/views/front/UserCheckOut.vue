@@ -380,9 +380,11 @@ export default {
     createOrder() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/order`
       const order = this.form
+      this.isLoading = true
       this.$http
         .post(url, { data: order })
         .then((response) => {
+          this.isLoading = false
           this.$router.push(`/checkorder/${response.data.orderId}`)
           this.getCart()
         })

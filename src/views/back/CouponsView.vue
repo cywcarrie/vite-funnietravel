@@ -95,8 +95,8 @@ export default {
       delComponent.showModal()
     },
     getCoupons() {
-      this.isLoading = true
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupons`
+      this.isLoading = true
       this.$http.get(url, this.tempProduct).then((response) => {
         this.coupons = response.data.coupons
         this.isLoading = false
@@ -105,7 +105,9 @@ export default {
     updateCoupon(tempCoupon) {
       if (this.isNew) {
         const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon`
+        this.isLoading = true
         this.$http.post(url, { data: tempCoupon }).then((response) => {
+          this.isLoading = false
           if (response.data.success) {
             ShowNotification('success', '新增優惠券成功')
             this.getCoupons()
@@ -116,9 +118,11 @@ export default {
         })
       } else {
         const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
+        this.isLoading = true
         this.$http
           .put(url, { data: this.tempCoupon })
           .then((response) => {
+            this.isLoading = false
             if (response.data.success) {
               ShowNotification('success', '更新優惠券成功')
               this.getCoupons()
@@ -138,6 +142,7 @@ export default {
       this.$http
         .delete(url)
         .then((response) => {
+          this.isLoading = false
           if (response.data.success) {
             ShowNotification('success', '刪除優惠券成功')
             const delComponent = this.$refs.delModal

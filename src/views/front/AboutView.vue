@@ -1,5 +1,4 @@
 <template>
-  <VueLoading :active="isLoading" />
   <div
     class="d-flex justify-content-center align-items-center my-5 position-relative banner banner1 container-fluid"
   >
@@ -7,9 +6,6 @@
   </div>
   <section class="mb-5">
     <div class="container">
-      <a href="#" title="回上一頁" class="text-secondary fw-bold" @click.prevent="$router.go(-1)"
-        ><i class="bi bi-arrow-left-square-fill fs-2"></i
-      ></a>
       <nav aria-label="breadcrumb" class="mt-3 mb-md-4 d-flex justify-content-start">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -48,18 +44,3 @@
     </div>
   </section>
 </template>
-
-<script>
-import VueLoading from '@/components/VueLoading.vue'
-
-export default {
-  components: {
-    VueLoading
-  },
-  data() {
-    return {
-      isLoading: false
-    }
-  }
-}
-</script>

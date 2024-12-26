@@ -107,6 +107,7 @@ export default {
       this.tempProduct = item
       let api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product`
       let httpMethod = 'post'
+      this.isLoading = true
       if (!this.isNew) {
         api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${item.id}`
         httpMethod = 'put'
@@ -114,6 +115,7 @@ export default {
       const productComponent = this.$refs.productModal
       this.$http[httpMethod](api, { data: this.tempProduct })
         .then((response) => {
+          this.isLoading = false
           productComponent.hideModal()
           if (response.data.success) {
             this.getProducts()
@@ -133,9 +135,11 @@ export default {
     },
     delProduct() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`
+      this.isLoading = true
       this.$http
         .delete(url)
         .then((response) => {
+          this.isLoading = false
           const delComponent = this.$refs.delModal
           delComponent.hideModal()
           if (response.data.success) {

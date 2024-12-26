@@ -167,11 +167,6 @@ import Swiper from '@/components/SwiperComponent.vue'
 export default {
   components: {
     Swiper
-  },
-  data() {
-    return {
-      isLoading: false
-    }
   }
 }
 </script>

@@ -139,9 +139,11 @@ export default {
   methods: {
     getOrder() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/order/${this.orderId}`
+      this.isLoading = true
       this.$http
         .get(url)
         .then((response) => {
+          this.isLoading = false
           if (response.data.success) {
             this.order = response.data.order
           }
@@ -152,9 +154,11 @@ export default {
     },
     payOrder() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/pay/${this.orderId}`
+      this.isLoading = true
       this.$http
         .post(url)
         .then((response) => {
+          this.isLoading = false
           if (response.data.success) {
             this.getOrder()
           }
