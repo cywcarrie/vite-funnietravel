@@ -145,7 +145,7 @@ import favoriteStore from '@/stores/favoriteStore'
 import FavoriteBtn from '@/components/FavoriteBtn.vue'
 import Swiper from '@/components/SwiperComponent.vue'
 import VueLoading from '@/components/VueLoading.vue'
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 

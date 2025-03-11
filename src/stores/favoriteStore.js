@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 

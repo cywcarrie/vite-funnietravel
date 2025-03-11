@@ -6,7 +6,7 @@
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="modal"
+    ref="delModal"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content border-0">
@@ -34,17 +34,28 @@
     </div>
   </div>
 </template>
+
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import Modal from 'bootstrap/js/dist/modal'
 export default {
   props: {
     item: {}
   },
   data() {
     return {
-      modal: ''
+      delModal: null
     }
   },
-  mixins: [modalMixin]
+  methods: {
+    showModal() {
+      this.delModal.show()
+    },
+    hideModal() {
+      this.delModal.hide()
+    }
+  },
+  mounted() {
+    this.delModal = new Modal(this.$refs.delModal)
+  }
 }
 </script>

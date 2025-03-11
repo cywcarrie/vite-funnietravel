@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API } = import.meta.env
 

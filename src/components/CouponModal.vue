@@ -6,7 +6,7 @@
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="modal"
+    ref="couponModal"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -71,7 +71,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
           <button type="button" class="btn btn-primary" @click="$emit('update-coupon', tempCoupon)">
-            更新優惠券
+            確認
           </button>
         </div>
       </div>
@@ -79,7 +79,8 @@
   </div>
 </template>
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import Modal from 'bootstrap/js/dist/modal'
+
 export default {
   name: 'couponModal',
   props: {
@@ -87,6 +88,7 @@ export default {
   },
   data() {
     return {
+      couponModal: null,
       tempCoupon: {},
       due_date: ''
     }
@@ -102,6 +104,16 @@ export default {
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
     }
   },
-  mixins: [modalMixin]
+  methods: {
+    showModal() {
+      this.couponModal.show()
+    },
+    hideModal() {
+      this.couponModal.hide()
+    }
+  },
+  mounted() {
+    this.couponModal = new Modal(this.$refs.couponModal)
+  }
 }
 </script>

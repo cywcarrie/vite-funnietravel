@@ -1,17 +1,17 @@
 <template>
   <div
     class="modal fade"
-    id="exampleModal"
+    id="productModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="modal"
+    ref="productModal"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>新增產品</span>
+            <span>產品內容</span>
           </h5>
           <button
             type="button"
@@ -198,7 +198,7 @@
 </template>
 
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import Modal from 'bootstrap/js/dist/modal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
@@ -221,7 +221,7 @@ export default {
   },
   data() {
     return {
-      modal: {},
+      productModal: null,
       tempProduct: {}
     }
   },
@@ -236,8 +236,16 @@ export default {
           this.tempProduct.imageUrl = response.data.imageUrl
         }
       })
+    },
+    showModal() {
+      this.productModal.show()
+    },
+    hideModal() {
+      this.productModal.hide()
     }
   },
-  mixins: [modalMixin]
+  mounted() {
+    this.productModal = new Modal(this.$refs.productModal)
+  }
 }
 </script>

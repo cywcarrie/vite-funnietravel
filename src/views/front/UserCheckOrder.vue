@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 import VueLoading from '@/components/VueLoading.vue'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env

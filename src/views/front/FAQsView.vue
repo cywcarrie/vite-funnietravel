@@ -228,7 +228,7 @@
 </template>
 
 <script>
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 
 export default {
   methods: {

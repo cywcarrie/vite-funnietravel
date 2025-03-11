@@ -161,7 +161,7 @@ import cartStore from '@/stores/cartStore'
 import Pagination from '@/components/PaginationComponent.vue'
 import VueLoading from '@/components/VueLoading.vue'
 import categoryObjectData from '@/data/categoryObjectData'
-import ShowNotification from '@/mixins/swal'
+import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 

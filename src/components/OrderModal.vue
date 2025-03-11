@@ -1,18 +1,18 @@
 <template>
   <div
     class="modal fade"
-    id="productModal"
+    id="orderModal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="modal"
+    ref="orderModal"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>訂單細節</span>
+            <span>訂單內容</span>
           </h5>
           <button
             type="button"
@@ -104,10 +104,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-            取消
-          </button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-order', tempOrder)">
-            確認
+            關閉
           </button>
         </div>
       </div>
@@ -115,7 +112,7 @@
   </div>
 </template>
 <script>
-import modalMixin from '@/mixins/modalMixin'
+import Modal from 'bootstrap/js/dist/modal'
 export default {
   name: 'orderModal',
   props: {
@@ -129,18 +126,28 @@ export default {
   data() {
     return {
       status: {},
-      modal: '',
+      orderModal: null,
       tempOrder: {},
       isPaid: false
     }
   },
   emits: ['update-product'],
-  mixins: [modalMixin],
   watch: {
     order() {
       this.tempOrder = this.order
       this.isPaid = this.tempOrder.is_paid
     }
+  },
+  methods: {
+    showModal() {
+      this.orderModal.show()
+    },
+    hideModal() {
+      this.orderModal.hide()
+    }
+  },
+  mounted() {
+    this.orderModal = new Modal(this.$refs.orderModal)
   }
 }
 </script>

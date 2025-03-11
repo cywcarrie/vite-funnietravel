@@ -89,7 +89,7 @@ export default {
     },
     getSwiper() {
       const randomSwiper = []
-      for (let i = 0; i < 6; i += 1) {
+      for (let i = 0; i < 6; i++) {
         const num = Math.floor(Math.random() * this.products.length)
         randomSwiper.push(this.products[num])
         this.products.splice(num, 1)
