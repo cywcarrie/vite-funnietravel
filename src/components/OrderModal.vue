@@ -12,7 +12,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>訂單內容</span>
+            <span>訂單</span>
           </h5>
           <button
             type="button"
