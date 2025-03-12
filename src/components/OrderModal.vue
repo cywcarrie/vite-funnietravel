@@ -132,7 +132,6 @@ export default {
       isPaid: false
     }
   },
-  emits: ['update-product'],
   watch: {
     order() {
       this.tempOrder = this.order

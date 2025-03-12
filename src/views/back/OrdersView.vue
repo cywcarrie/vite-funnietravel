@@ -64,7 +64,7 @@
       </tbody>
     </table>
   </div>
-  <OrderModal :order="tempOrder" ref="orderModal" @update-paid="updatePaid" />
+  <OrderModal :order="tempOrder" ref="orderModal" />
   <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder" />
   <Pagination :pages="pagination" @emit-pages="getOrders" />
 </template>
