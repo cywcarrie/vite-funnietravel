@@ -1,4 +1,4 @@
-# Funnie Travel - E-commerce website (Chinese)   
+# Funnie Travel - E-commerce website (Chinese)
 
 ## Introduction - Read this in Chinese : [繁體中文](README.zh_TW.md)
 
@@ -13,26 +13,26 @@ Vue.js, Vite, Pinia, ESLint, Bootstrap 5, SCSS
 ## Key Contributions
 
 - Created the project using Vue.js and Vite, optimizing build processes for improved performance and responsiveness.
-- Integrated Vue Router and Vue Axios, enhancing route management and streamlining API requests, which led to a more intuitive user navigation experience.
+- Integrated Vue Router and Axios, enhancing route management and streamlining API requests, resulting in a more intuitive user navigation experience.
 - Configured ESLint to adhere to Standard specifications, ensuring robust code quality and maintainability throughout the project lifecycle.
 - Utilized Pinia for state management, facilitating efficient data operations and promoting seamless communication among components.
 - Employed Bootstrap 5 and SCSS to design a responsive interface that significantly improved user experience, based on user feedback and testing insights.
 
 ## Website features
 
-- Front-end 
-   - Home Page
-   - About Us Page
-   - Products Page：Product classification and sort products by price : low to high or high to low
-   - Product Page : Product details
-   - Favorites Page: Add items to Favorites and remove items as needed
-   - FAQs Page
-   - Shopping Cart： Add items to cart and remove items as needed
-   - Checkout Process：Create and submit order
+- Front-end
+  - Home Page
+  - About Us Page
+  - Products Page：Product classification and sort products by price : low to high or high to low
+  - Product Page : Product details
+  - Favorites Page: Add items to Favorites and remove items as needed
+  - FAQs Page
+  - Shopping Cart： Add items to cart and remove items as needed
+  - Checkout Process：Create and submit order
 - Back-end (Administrator)
-   - Product management：Manage product functionalities by adding, removing, and modifying items
-   - Order management： View order details
-   - Coupon management：Manage coupon functions by adding, removing, and modifying coupons
+  - Product management：Manage product functionalities by adding, removing, and modifying items
+  - Order management： View order details
+  - Coupon management：Manage coupon functions by adding, removing, and modifying coupons
 
 ## Project Setup
 
@@ -72,4 +72,3 @@ npm run deploy
 - vee-validate - v4.13.2
 - bootstrap - v5.3.3
 - bootstrap-icons - v1.11.3
- 
