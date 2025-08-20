@@ -15,7 +15,7 @@
       <tbody>
         <template v-for="item in orders" :key="`orders ${item.id}`">
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
-            <td>{{ $filters.date(item.create_at) }}</td>
+            <td>{{ $format.date(item.create_at) }}</td>
             <td><span v-text="item.user.email" v-if="item.user"></span></td>
             <td>
               <ul class="list-unstyled text-nowrap">
@@ -25,7 +25,7 @@
                 </li>
               </ul>
             </td>
-            <td class="text-right">{{ item.total }}</td>
+            <td class="text-nowrap">{{ item.total }}</td>
             <td>
               <div class="form-check form-switch">
                 <input
@@ -64,15 +64,16 @@
       </tbody>
     </table>
   </div>
-  <OrderModal :order="tempOrder" ref="orderModal" />
+  <OrderModal :order="tempOrder" ref="orderModal" @update-order="checkOrderInfo" />
   <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder" />
   <Pagination :pages="pagination" @emit-pages="getOrders" />
 </template>
 
 <script>
+import { inject, ref, onMounted } from 'vue'
+import VueLoading from '@/components/VueLoading.vue'
 import DelModal from '@/components/DelModal.vue'
 import OrderModal from '@/components/OrderModal.vue'
-import VueLoading from '@/components/VueLoading.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 import ShowNotification from '@/shared/swal'
 
@@ -85,81 +86,132 @@ export default {
     DelModal,
     OrderModal
   },
-  data() {
-    return {
-      orders: {},
-      isNew: false,
-      pagination: {},
-      isLoading: false,
-      tempOrder: {},
-      currentPage: 1
+  setup() {
+    const axios = inject('$axios')
+    const orders = ref([])
+    const isNew = ref(false)
+    const pagination = ref({})
+    const isLoading = ref(false)
+    const tempOrder = ref({})
+    const currentPage = ref(1)
+
+    const orderModal = ref(null)
+    const delModal = ref(null)
+
+    function getOrders(currentPageParam = 1) {
+      currentPage.value = currentPageParam
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/orders?page=${currentPageParam}`
+      isLoading.value = true
+      axios
+        .get(url)
+        .then((response) => {
+          orders.value = response.data.orders
+          pagination.value = response.data.pagination
+        })
+        .catch((error) => {
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
     }
-  },
-  methods: {
-    getOrders(currentPage = 1) {
-      this.currentPage = currentPage
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/orders?page=${currentPage}`
-      this.isLoading = true
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.orders = response.data.orders
-        this.pagination = response.data.pagination
-        this.isLoading = false
-      })
-    },
-    openModal(item) {
-      this.tempOrder = { ...item }
-      const orderComponent = this.$refs.orderModal
+
+    function openModal(item) {
+      // eslint-disable-next-line no-const-assign
+      tempOrder.value = { ...item }
+      const orderComponent = orderModal.value
       orderComponent.showModal()
-    },
-    openDelOrderModal(item) {
-      this.tempOrder = { ...item }
-      const delComponent = this.$refs.delModal
+    }
+    function openDelOrderModal(item) {
+      // eslint-disable-next-line no-const-assign
+      tempOrder.value = { ...item }
+      // Object.assign(tempOrder, item)
+      const delComponent = delModal.value
       delComponent.showModal()
-    },
-    updatePaid(item) {
+    }
+    function updatePaid(item) {
       const api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/order/${item.id}`
-      const paid = {
-        is_paid: item.is_paid
-      }
-      this.isLoading = true
-      this.$http
+      const paid = { is_paid: item.is_paid }
+      isLoading.value = true
+      axios
         .put(api, { data: paid })
         .then((response) => {
-          this.isLoading = false
           if (response.data.success) {
-            this.getOrders(this.currentPage)
+            getOrders(currentPage.value)
             ShowNotification('success', '更新付款狀態成功')
           } else {
             ShowNotification('error', '更新付款狀態失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
-    },
-    delOrder() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/order/${this.tempOrder.id}`
-      this.isLoading = true
-      this.$http
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    function checkOrderInfo(item) {
+      const api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/order/${item.id}`
+      const paid = { is_paid: item.is_paid }
+      isLoading.value = true
+      const orderComponent = orderModal.value
+      axios.put(api, { data: paid }).then((response) => {
+        isLoading.value = false
+        orderComponent.hideModal()
+        if (response.data.success) {
+          getOrders(currentPage.value)
+          ShowNotification('success', '確認成功')
+        } else {
+          isLoading.value = false
+          ShowNotification('error', '確認失敗')
+        }
+      })
+    }
+    function delOrder() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/order/${tempOrder.value.id}`
+      isLoading.value = true
+      axios
         .delete(url)
         .then((response) => {
-          this.isLoading = false
-          const delComponent = this.$refs.delModal
+          const delComponent = delModal.value
           delComponent.hideModal()
           if (response.data.success) {
             ShowNotification('success', '刪除成功')
-            this.getOrders(this.currentPage)
+            getOrders(currentPage.value)
           } else {
             ShowNotification('error', '刪除失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  created() {
-    this.getOrders()
+
+    onMounted(() => {
+      getOrders()
+    })
+    return {
+      orders,
+      isNew,
+      pagination,
+      isLoading,
+      tempOrder,
+      currentPage,
+      getOrders,
+      openModal,
+      openDelOrderModal,
+      updatePaid,
+      delOrder,
+      orderModal,
+      delModal,
+      checkOrderInfo
+    }
   }
 }
 </script>

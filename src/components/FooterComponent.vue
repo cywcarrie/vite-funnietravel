@@ -6,61 +6,23 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5 class="text-white fw-bold">全球據點</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>新加坡</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>馬來西亞</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>泰國</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>印尼</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>日本</a
-                >
-              </li>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2" v-for="location in locations" :key="location">
+                  <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
+                    <i class="bi bi-geo-alt-fill text-secondary"></i>{{ location }}
+                  </a>
+                </li>
+              </ul>
             </ul>
           </div>
 
           <div class="col-6 col-lg-2 mb-3">
             <h5 class="text-white fw-bold">追蹤 Funnie</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-facebook text-secondary"></i>Facebook</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-instagram text-secondary"></i>Instagram</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-youtube text-secondary"></i>YouTube</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-twitter text-secondary"></i>Twitter</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-line text-secondary"></i>Line</a
-                >
+              <li class="nav-item mb-2" v-for="social in socials" :key="social.name">
+                <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
+                  <i :class="social.iconClass"></i>{{ social.name }}
+                </a>
               </li>
             </ul>
           </div>
@@ -68,25 +30,14 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5 class="text-white fw-bold">聯絡 Funnie</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-geo-alt-fill text-secondary"></i>台北</a
+              <li class="nav-item mb-2" v-for="contact in contacts" :key="contact.text">
+                <a
+                  :href="contact.href || '#'"
+                  @click.prevent="!contact.href && $event.preventDefault()"
+                  class="nav-link p-0 text-white footer-icon-hover"
                 >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="tel:+886-2-1234567" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-telephone-fill text-secondary"></i>123-4567</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="tel:+886-2-0000000" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-telephone-fill text-secondary"></i>000-0000</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" @click.prevent="" class="nav-link p-0 text-white footer-icon-hover"
-                  ><i class="bi bi-person-fill text-secondary"></i>9:00 - 18:00</a
-                >
+                  <i :class="contact.iconClass"></i>{{ contact.text }}
+                </a>
               </li>
             </ul>
           </div>
@@ -131,12 +82,12 @@
           <p class="text-white">本網站僅供作為個人作品使用，非商業用途</p>
           <ul class="list-unstyled d-flex">
             <li class="nav-item">
-              <a class="text-white" href="#" @click.prevent=""
+              <a class="text-white" href="#" @click.prevent
                 ><i class="bi bi-facebook footer-icon-size"></i
               ></a>
             </li>
             <li class="nav-item ms-3">
-              <a class="text-white" href="#" @click.prevent=""
+              <a class="text-white" href="#" @click.prevent
                 ><i class="bi bi-github footer-icon-size"></i
               ></a>
             </li>
@@ -153,22 +104,59 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import ShowNotification from '@/shared/swal'
 
 export default {
-  data() {
-    return {
-      subscribe: { email: '' }
+  setup() {
+    const subscribe = ref({ email: '' })
+    const subscribeForm = ref(null)
+    const router = useRouter()
+
+    const locations = ['新加坡', '馬來西亞', '泰國', '印尼', '日本']
+
+    const socials = [
+      { name: 'Facebook', iconClass: 'bi bi-facebook text-secondary' },
+      { name: 'Instagram', iconClass: 'bi bi-instagram text-secondary' },
+      { name: 'YouTube', iconClass: 'bi bi-youtube text-secondary' },
+      { name: 'Twitter', iconClass: 'bi bi-twitter text-secondary' },
+      { name: 'Line', iconClass: 'bi bi-line text-secondary' }
+    ]
+
+    const contacts = [
+      { text: '台北', iconClass: 'bi bi-geo-alt-fill text-secondary' },
+      {
+        text: '123-4567',
+        iconClass: 'bi bi-telephone-fill text-secondary',
+        href: 'tel:+886-2-1234567'
+      },
+      {
+        text: '000-0000',
+        iconClass: 'bi bi-telephone-fill text-secondary',
+        href: 'tel:+886-2-0000000'
+      },
+      { text: '9:00 - 18:00', iconClass: 'bi bi-person-fill text-secondary' }
+    ]
+
+    function goToLogin() {
+      router.push('/login')
     }
-  },
-  methods: {
-    goToLogin() {
-      this.$router.push('/login')
-    },
-    subscribeUs() {
+
+    function subscribeUs() {
       ShowNotification('success', '感謝您的訂閱，我們將不定時寄送優惠通知')
-      this.subscribe.email = ''
-      this.$refs.subscribeForm.resetForm()
+      subscribe.value.email = ''
+      subscribeForm.value.resetForm()
+    }
+
+    return {
+      locations,
+      socials,
+      contacts,
+      subscribe,
+      subscribeForm,
+      goToLogin,
+      subscribeUs
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="fixed-top">
     <div class="bg-body-secondary py-1 d-none d-lg-block">
-      <div class="container text-black text-center">
+      <div class="container text-dark text-center">
         我們專注於真誠的旅遊服務，為您打造難忘的旅程，讓每一刻都成為珍貴的回憶
       </div>
     </div>
@@ -54,23 +54,23 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cartStore.js'
+import { onMounted } from 'vue'
+import { useCartStore } from '@/stores/cartStore'
+import { storeToRefs } from 'pinia'
 
 export default {
-  data() {
+  setup() {
+    const userCart = useCartStore()
+    const { cart } = storeToRefs(userCart)
+    const { getCart } = userCart
+
+    onMounted(() => {
+      getCart()
+    })
     return {
-      collapse: {}
+      cart,
+      getCart
     }
-  },
-  methods: {
-    ...mapActions(cartStore, ['getCart'])
-  },
-  computed: {
-    ...mapState(cartStore, ['cart'])
-  },
-  mounted() {
-    this.getCart()
   }
 }
 </script>

@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import 'bootstrap'
@@ -12,10 +11,10 @@ import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import App from './App.vue'
 import router from './router'
-import { currency, date } from '@/methods/filters'
+import { currency, date } from '@/methods/format'
 
 const app = createApp(App)
-app.config.globalProperties.$filters = {
+app.config.globalProperties.$format = {
   date,
   currency
 }
@@ -33,7 +32,7 @@ setLocale('zh_TW')
 
 app.use(createPinia())
 app.use(router)
-app.use(VueAxios, axios)
+app.provide('$axios', axios)
 app.component('LoadingVue', Loading)
 app.component('FormVue', Form)
 app.component('FieldVue', Field)

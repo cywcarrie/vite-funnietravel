@@ -9,6 +9,7 @@
     <div class="container">
       <nav
         aria-label="breadcrumb"
+        style="--bs-breadcrumb-divider: '>'"
         class="mt-3 mb-md-4 d-flex justify-content-start d-none d-md-block"
       >
         <ol class="breadcrumb">
@@ -37,9 +38,9 @@
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <h4 class="m-0 fw-bold">{{ product.title }}</h4>
-            <FavoriteBtn :productFavoriteId="product.id" />
+            <FavoriteBtn v-if="product.id" :productFavoriteId="product.id" />
           </div>
-          <div class="d-flex align-items-center text-primary mt-2">
+          <div class="d-flex align-items-center text-dark mt-2">
             <small class="border border-white bg-light px-2 py-2 rounded-pill me-2 text-nowrap"
               >2人成行</small
             >
@@ -58,13 +59,13 @@
           </div>
           <div class="d-flex justify-content-end align-items-center">
             <div class="h5 text-black-50" v-if="!product.price">
-              NTD {{ $filters.currency(product.origin_price) }}
+              NTD {{ $format.currency(product.origin_price) }}
             </div>
             <del class="h6 text-black-50" v-if="product.price"
-              >NTD {{ $filters.currency(product.origin_price) }}</del
+              >NTD {{ $format.currency(product.origin_price) }}</del
             >
             <div class="h5 ms-2 text-danger fw-bold" v-if="product.price">
-              NTD {{ $filters.currency(product.price) }}
+              NTD {{ $format.currency(product.price) }}
             </div>
           </div>
           <div class="d-flex justify-content-end align-items-center">
@@ -139,13 +140,15 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cartStore'
-import favoriteStore from '@/stores/favoriteStore'
+import { inject, ref, onMounted, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cartStore'
+import { useFavoriteStore } from '@/stores/favoriteStore'
 import FavoriteBtn from '@/components/FavoriteBtn.vue'
-import Swiper from '@/components/SwiperComponent.vue'
 import VueLoading from '@/components/VueLoading.vue'
+import Swiper from '@/components/SwiperComponent.vue'
 import ShowNotification from '@/shared/swal'
+import { useRoute } from 'vue-router'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
@@ -155,48 +158,73 @@ export default {
     FavoriteBtn,
     Swiper
   },
-  data() {
-    return {
-      product: {},
-      qty: 1,
-      id: '',
-      isLoading: false
-    }
-  },
-  watch: {
-    $route() {
-      if (this.$route.params.productId !== undefined) {
-        this.id = this.$route.params.productId
-        this.getProduct()
+  setup() {
+    const axios = inject('$axios')
+    const route = useRoute()
+    const product = ref({})
+    const qty = ref(1)
+    const id = ref('')
+    const isLoading = ref(false)
+    const store = useCartStore()
+    const { cart } = storeToRefs(store)
+    const { addCart } = store
+    const favoriteStore = useFavoriteStore()
+    const { favoriteData } = storeToRefs(favoriteStore)
+    const { addFavorite } = favoriteStore
+
+    watch(
+      () => route.params.productId,
+      (newProductId) => {
+        if (newProductId !== undefined) {
+          id.value = newProductId
+          getProduct()
+        } else {
+          ShowNotification('error', '無法獲取產品資訊')
+        }
       }
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['addCart']),
-    ...mapActions(favoriteStore, ['addFavorite']),
-    getProduct() {
-      const api = `${VITE_APP_API}api/${VITE_APP_PATH}/product/${this.id}`
-      this.isLoading = true
-      this.$http
-        .get(api)
+    )
+    function getProduct() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/product/${id.value}`
+      isLoading.value = true
+      axios
+        .get(url)
         .then((response) => {
-          this.isLoading = false
+          isLoading.value = false
           if (response.data.success) {
-            this.product = response.data.product
+            product.value = response.data.product
+          } else {
+            ShowNotification('error', '無法獲取產品資訊')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  computed: {
-    ...mapState(cartStore, ['cart']),
-    ...mapState(favoriteStore, ['favoriteData'])
-  },
-  created() {
-    this.id = this.$route.params.productId
-    this.getProduct()
+
+    onMounted(() => {
+      id.value = route.params.productId
+      getProduct()
+    })
+
+    onMounted(() => {
+      getProduct()
+    })
+
+    return {
+      product,
+      qty,
+      isLoading,
+      id,
+      favoriteData,
+      cart,
+      addCart,
+      getProduct,
+      addFavorite
+    }
   }
 }
 </script>

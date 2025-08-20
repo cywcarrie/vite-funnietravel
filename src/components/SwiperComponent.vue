@@ -38,14 +38,14 @@
             </div>
             <h5 class="card-title fw-bolder mb-3">{{ item.title }}</h5>
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <div class="h5 text-secondary" v-if="!item.price">
-                NTD {{ $filters.currency(item.origin_price) }}
+              <div class="h5 text-black-50" v-if="!item.price">
+                NTD {{ $format.currency(item.origin_price) }}
               </div>
-              <del class="h6 text-secondary" v-if="item.price">
-                NTD {{ $filters.currency(item.origin_price) }}</del
+              <del class="h6 text-black-50" v-if="item.price">
+                NTD {{ $format.currency(item.origin_price) }}</del
               >
-              <div class="h5 text-primary fw-bold" v-if="item.price">
-                NTD {{ $filters.currency(item.price) }}
+              <div class="h5 text-danger fw-bold" v-if="item.price">
+                NTD {{ $format.currency(item.price) }}
               </div>
             </div>
           </div>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { inject, ref, onMounted } from 'vue'
 import VueLoading from './VueLoading.vue'
 import { Pagination, A11y, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -70,35 +71,42 @@ export default {
     Swiper,
     SwiperSlide
   },
-  data() {
-    return {
-      isLoading: false,
-      products: [],
-      modules: [Pagination, A11y, Autoplay]
-    }
-  },
-  methods: {
-    getProducts() {
+  setup() {
+    const axios = inject('$axios')
+    const isLoading = ref(false)
+    const products = ref([])
+    const modules = [Pagination, A11y, Autoplay]
+
+    function getProducts() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/products/all`
-      this.isLoading = true
-      this.$http.get(url).then((response) => {
-        this.isLoading = false
-        this.products = response.data.products
-        this.getSwiper()
+      isLoading.value = true
+      axios.get(url).then((response) => {
+        isLoading.value = false
+        products.value = response.data.products
+        getSwiper()
       })
-    },
-    getSwiper() {
-      const randomSwiper = []
-      for (let i = 0; i < 6; i++) {
-        const num = Math.floor(Math.random() * this.products.length)
-        randomSwiper.push(this.products[num])
-        this.products.splice(num, 1)
-      }
-      this.products = randomSwiper
     }
-  },
-  mounted() {
-    this.getProducts()
+    function getSwiper() {
+      const sourceProducts = [...products.value]
+      const randomSwiper = []
+
+      for (let i = 0; i < 6 && sourceProducts.length > 0; i++) {
+        const num = Math.floor(Math.random() * sourceProducts.length)
+        randomSwiper.push(sourceProducts[num])
+        sourceProducts.splice(num, 1)
+      }
+
+      products.value = randomSwiper
+    }
+
+    onMounted(() => {
+      getProducts()
+    })
+    return {
+      isLoading,
+      products,
+      modules
+    }
   }
 }
 </script>

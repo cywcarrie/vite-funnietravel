@@ -5,7 +5,7 @@
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="productModal"
+    ref="modalElement"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
@@ -184,13 +184,7 @@
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             取消
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="$emit('update-product', tempProduct)"
-          >
-            確認
-          </button>
+          <button type="button" class="btn btn-primary" @click="pushProduct">確認</button>
         </div>
       </div>
     </div>
@@ -198,7 +192,8 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import { inject, ref, watch } from 'vue'
+import useModal from '@/shared/modal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
@@ -211,41 +206,46 @@ export default {
       }
     }
   },
-  watch: {
-    product() {
-      this.tempProduct = this.product
-      if (!this.tempProduct.images) {
-        this.tempProduct.images = []
+  emits: ['update-product'],
+  setup(props, { emit }) {
+    const { modalElement, showModal, hideModal } = useModal()
+    const axios = inject('$axios')
+    const modal = ref({})
+    const tempProduct = ref({})
+
+    watch(
+      () => props.product,
+      (newProduct) => {
+        tempProduct.value = newProduct
+        if (!tempProduct.value.images) {
+          tempProduct.value.images = []
+        }
       }
-    }
-  },
-  data() {
-    return {
-      productModal: null,
-      tempProduct: {}
-    }
-  },
-  methods: {
-    uploadFile() {
-      const uploadedFile = this.$refs.fileInput.files[0]
+    )
+
+    function uploadFile() {
+      const uploadedFile = modal.value.$refs.fileInput.files[0]
       const formData = new FormData()
       formData.append('file-to-upload', uploadedFile)
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/upload`
-      this.$http.post(url, formData).then((response) => {
+      axios.post(url, formData).then((response) => {
         if (response.data.success) {
-          this.tempProduct.imageUrl = response.data.imageUrl
+          tempProduct.value.imageUrl = response.data.imageUrl
         }
       })
-    },
-    showModal() {
-      this.productModal.show()
-    },
-    hideModal() {
-      this.productModal.hide()
     }
-  },
-  mounted() {
-    this.productModal = new Modal(this.$refs.productModal)
+    function pushProduct() {
+      emit('update-product', tempProduct.value)
+    }
+
+    return {
+      tempProduct,
+      uploadFile,
+      showModal,
+      hideModal,
+      modalElement,
+      pushProduct
+    }
   }
 }
 </script>

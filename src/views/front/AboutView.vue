@@ -6,7 +6,11 @@
   </div>
   <section class="mb-5">
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-3 mb-md-4 d-flex justify-content-start">
+      <nav
+        aria-label="breadcrumb"
+        style="--bs-breadcrumb-divider: '>'"
+        class="mt-3 mb-md-4 d-flex justify-content-start"
+      >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <RouterLink to="/" class="text-dark hover-nav fw-bold">首頁</RouterLink>

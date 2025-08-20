@@ -38,9 +38,13 @@
 <script>
 export default {
   props: ['pages'],
-  methods: {
-    updatePage(page) {
-      this.$emit('emit-pages', page)
+  setup(props, { emit }) {
+    function updatePage(page) {
+      emit('emit-pages', page)
+    }
+
+    return {
+      updatePage
     }
   }
 }

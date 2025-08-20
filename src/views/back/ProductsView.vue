@@ -21,11 +21,11 @@
         <tr v-for="item in products" :key="item.id">
           <td class="text-nowrap">{{ item.category }}</td>
           <td class="text-nowrap">{{ item.title }}</td>
-          <td class="text-right">
-            {{ $filters.currency(item.origin_price) }}
+          <td class="text-nowrap">
+            {{ $format.currency(item.origin_price) }}
           </td>
-          <td class="text-right">
-            {{ $filters.currency(item.price) }}
+          <td class="text-nowrap">
+            {{ $format.currency(item.price) }}
           </td>
           <td>
             <span class="text-success" v-if="item.is_enabled">上架</span>
@@ -45,16 +45,17 @@
       </tbody>
     </table>
   </div>
-  <PaginationComponent :pages="pagination" @emit-pages="getProducts" />
+  <Pagination :pages="pagination" @emit-pages="getProducts" />
   <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct" />
   <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct" />
 </template>
 
 <script>
-import ProductModal from '@/components/ProductModal.vue'
-import PaginationComponent from '@/components/PaginationComponent.vue'
-import DelModal from '@/components/DelModal.vue'
+import { inject, ref, onMounted } from 'vue'
 import VueLoading from '@/components/VueLoading.vue'
+import ProductModal from '@/components/ProductModal.vue'
+import Pagination from '@/components/PaginationComponent.vue'
+import DelModal from '@/components/DelModal.vue'
 import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
@@ -64,100 +65,125 @@ export default {
     VueLoading,
     ProductModal,
     DelModal,
-    PaginationComponent
+    Pagination
   },
-  data() {
-    return {
-      products: [],
-      pagination: {},
-      tempProduct: {},
-      isNew: false,
-      isLoading: false
-    }
-  },
-  methods: {
-    getProducts(page = 1) {
+  setup() {
+    const axios = inject('$axios')
+    const products = ref([])
+    const pagination = ref({})
+    const tempProduct = ref({})
+    const isNew = ref(false)
+    const isLoading = ref(false)
+
+    const productModal = ref(null)
+    const delModal = ref(null)
+
+    function getProducts(page = 1) {
       const api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/products/?page=${page}`
-      this.isLoading = true
-      this.$http
+      isLoading.value = true
+      axios
         .get(api)
         .then((response) => {
-          this.isLoading = false
           if (response.data.success) {
-            this.products = response.data.products
-            this.pagination = response.data.pagination
+            products.value = response.data.products
+            pagination.value = response.data.pagination
           }
         })
         .catch((error) => {
-          this.pushMsg({
-            style: 'danger',
-            title: `${error.response.data.message}`
-          })
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
-    },
-    openModal(isNew, item) {
-      if (isNew) {
-        this.tempProduct = {}
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    function openModal(isNewModal, item) {
+      if (isNewModal) {
+        // eslint-disable-next-line no-const-assign
+        tempProduct.value = {}
       } else {
-        this.tempProduct = { ...item }
+        // eslint-disable-next-line no-const-assign
+        tempProduct.value = { ...item }
       }
-      this.isNew = isNew
-      const productComponent = this.$refs.productModal
+      isNew.value = isNewModal
+      const productComponent = productModal.value
       productComponent.showModal()
-    },
-    updateProduct(item) {
-      this.tempProduct = item
+    }
+    function updateProduct(item) {
+      // eslint-disable-next-line no-const-assign
+      tempProduct.value = { ...item }
       let api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product`
       let httpMethod = 'post'
-      this.isLoading = true
-      if (!this.isNew) {
+      isLoading.value = true
+      if (!isNew.value) {
         api = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${item.id}`
         httpMethod = 'put'
       }
-      const productComponent = this.$refs.productModal
-      this.$http[httpMethod](api, { data: this.tempProduct })
+      const productComponent = productModal.value
+      axios[httpMethod](api, { data: tempProduct.value })
         .then((response) => {
-          this.isLoading = false
           productComponent.hideModal()
           if (response.data.success) {
-            this.getProducts()
+            getProducts()
             ShowNotification('success', '更新成功')
           } else {
             ShowNotification('error', '更新失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
-    },
-    openDelProductModal(item) {
-      this.tempProduct = { ...item }
-      const delComponent = this.$refs.delModal
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    function openDelProductModal(item) {
+      // eslint-disable-next-line no-const-assign
+      tempProduct.value = { ...item }
+      const delComponent = delModal.value
       delComponent.showModal()
-    },
-    delProduct() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`
-      this.isLoading = true
-      this.$http
+    }
+    function delProduct() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/product/${tempProduct.value.id}`
+      const delComponent = delModal.value
+      isLoading.value = true
+      axios
         .delete(url)
         .then((response) => {
-          this.isLoading = false
-          const delComponent = this.$refs.delModal
           delComponent.hideModal()
           if (response.data.success) {
-            this.getProducts()
-            ShowNotification('success', '刪除商品成功')
+            getProducts()
+            ShowNotification('success', '刪除成功')
           } else {
-            ShowNotification('error', '刪除商品失敗')
+            ShowNotification('error', '刪除失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  created() {
-    this.getProducts()
+    onMounted(() => {
+      getProducts()
+    })
+    return {
+      products,
+      pagination,
+      tempProduct,
+      isNew,
+      isLoading,
+      getProducts,
+      openModal,
+      updateProduct,
+      openDelProductModal,
+      productModal,
+      delProduct,
+      delModal
+    }
   }
 }
 </script>

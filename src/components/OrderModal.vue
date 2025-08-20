@@ -1,18 +1,18 @@
 <template>
   <div
     class="modal fade"
-    id="orderModal"
+    id="productModal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="orderModal"
+    ref="modalElement"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>訂單內容</span>
+            <span>訂單</span>
           </h5>
           <button
             type="button"
@@ -56,13 +56,13 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{ $filters.date(tempOrder.create_at) }}</td>
+                    <td>{{ $format.date(tempOrder.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
                       <span v-if="tempOrder.paid_date">
-                        {{ $filters.date(tempOrder.paid_date) }}
+                        {{ $format.date(tempOrder.paid_date) }}
                       </span>
                       <span v-else>時間不正確</span>
                     </td>
@@ -77,7 +77,7 @@
                   <tr>
                     <th>總金額</th>
                     <td>
-                      {{ $filters.currency(tempOrder.total) }}
+                      {{ $format.currency(tempOrder.total) }}
                     </td>
                   </tr>
                 </tbody>
@@ -94,7 +94,7 @@
                     </th>
                     <td>{{ item.qty }} / {{ item.product.unit }}</td>
                     <td class="text-end">
-                      {{ $filters.currency(item.final_total) }}
+                      {{ $format.currency(item.final_total) }}
                     </td>
                   </tr>
                 </tbody>
@@ -106,6 +106,7 @@
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             關閉
           </button>
+          <button type="button" class="btn btn-primary" @click="pushOrderModal">確認</button>
         </div>
       </div>
     </div>
@@ -113,7 +114,9 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import { ref, watch } from 'vue'
+import useModal from '@/shared/modal'
+
 export default {
   name: 'orderModal',
   props: {
@@ -124,30 +127,36 @@ export default {
       }
     }
   },
-  data() {
+  emits: ['update-product', 'update-order'],
+  setup(props, { emit }) {
+    const { modalElement, showModal, hideModal } = useModal()
+    const modal = ref('')
+    const status = ref({})
+    const tempOrder = ref({})
+    const isPaid = ref(false)
+
+    watch(
+      () => props.order,
+      (newOrder) => {
+        tempOrder.value = newOrder
+        isPaid.value = tempOrder.value.is_paid
+      }
+    )
+
+    function pushOrderModal() {
+      emit('update-order', tempOrder.value)
+    }
+
     return {
-      status: {},
-      orderModal: null,
-      tempOrder: {},
-      isPaid: false
+      modal,
+      status,
+      tempOrder,
+      isPaid,
+      showModal,
+      hideModal,
+      modalElement,
+      pushOrderModal
     }
-  },
-  watch: {
-    order() {
-      this.tempOrder = this.order
-      this.isPaid = this.tempOrder.is_paid
-    }
-  },
-  methods: {
-    showModal() {
-      this.orderModal.show()
-    },
-    hideModal() {
-      this.orderModal.hide()
-    }
-  },
-  mounted() {
-    this.orderModal = new Modal(this.$refs.orderModal)
   }
 }
 </script>

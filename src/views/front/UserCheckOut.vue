@@ -35,7 +35,7 @@
                       <small v-if="cart.final_total !== cart.total" class="text-success text-end"
                         >優惠價：</small
                       >
-                      {{ $filters.currency(item.final_total) }}
+                      {{ $format.currency(item.final_total) }}
                     </td>
                   </tr>
                 </tbody>
@@ -43,13 +43,13 @@
                   <tr>
                     <td colspan="2" class="text-end fs-5">總計</td>
                     <td class="text-end fs-5 text-primary fw-bold">
-                      {{ $filters.currency(cart.total) }}
+                      {{ $format.currency(cart.total) }}
                     </td>
                   </tr>
                   <tr v-if="cart.final_total !== cart.total">
                     <td colspan="2" class="text-end text-success fs-5">優惠價</td>
                     <td class="text-end text-success fs-5 fw-bold">
-                      {{ $filters.currency(cart.final_total) }}
+                      {{ $format.currency(cart.final_total) }}
                     </td>
                   </tr>
                 </tfoot>
@@ -313,10 +313,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cartStore'
-import ShowNotification from '@/shared/swal'
+import { inject, ref, reactive, watch, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cartStore'
 import VueLoading from '@/components/VueLoading.vue'
+import ShowNotification from '@/shared/swal'
+import { useRouter } from 'vue-router'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
@@ -324,80 +326,94 @@ export default {
   components: {
     VueLoading
   },
-  data() {
-    return {
-      isLoading: false,
-      total: 0,
-      final_total: 0,
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-          pay: '',
-          bill: '',
-          billNum: ''
-        },
-        message: ''
+  setup() {
+    const axios = inject('$axios')
+    const router = useRouter()
+    const store = useCartStore()
+    const { cart } = storeToRefs(store)
+    const isLoading = ref(false)
+    const total = ref(0)
+    const final_total = ref(0)
+    const coupon_code = ref('')
+    const expiryDate = ref('')
+    const cardNumber = ref('')
+
+    const form = reactive({
+      user: {
+        name: '',
+        email: '',
+        tel: '',
+        address: '',
+        pay: '',
+        bill: '',
+        billNum: ''
       },
-      coupon_code: '',
-      expiryDate: '',
-      cardNumber: ''
-    }
-  },
-  watch: {
-    cardNumber(newCardNumber, oldCardNumber) {
+      message: ''
+    })
+
+    watch(cardNumber, (newCardNumber, oldCardNumber) => {
       if (
         newCardNumber.length < oldCardNumber.length &&
         newCardNumber.charAt(newCardNumber.length - 1) === ' '
       ) {
-        this.cardNumber = oldCardNumber.slice(0, -2)
+        cardNumber.value = oldCardNumber.slice(0, -2)
       }
       if (
         newCardNumber.length > oldCardNumber.length &&
         (newCardNumber.length + 1) % 5 === 0 &&
-        this.cardNumber.length !== 0 &&
-        this.cardNumber.length < 19
+        cardNumber.value.length !== 0 &&
+        cardNumber.value.length < 19
       ) {
-        this.cardNumber = newCardNumber + ' '
+        cardNumber.value = newCardNumber + ' '
       }
-    },
-    expiryDate(newExpiryDate, oldExpiryDate) {
+    })
+
+    watch(expiryDate, (newExpiryDate, oldExpiryDate) => {
       if (newExpiryDate.length === 2 && newExpiryDate.length > oldExpiryDate.length) {
-        this.expiryDate += '/'
+        expiryDate.value += '/'
       } else if (
         newExpiryDate.length < oldExpiryDate.length &&
         oldExpiryDate.charAt(2) === '/' &&
         oldExpiryDate.length === 3
       ) {
-        this.expiryDate = oldExpiryDate.slice(0, 1)
+        expiryDate.value = oldExpiryDate.slice(0, 1)
       }
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['getCart']),
-    createOrder() {
+    })
+
+    function createOrder() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/order`
-      const order = this.form
-      this.isLoading = true
-      this.$http
+      const order = form
+      isLoading.value = true
+      axios
         .post(url, { data: order })
         .then((response) => {
-          this.isLoading = false
-          this.$router.push(`/checkorder/${response.data.orderId}`)
-          this.getCart()
+          router.push(`/checkorder/${response.data.orderId}`)
+          store.getCart()
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  computed: {
-    ...mapState(cartStore, ['cart'])
-  },
-  created() {
-    this.getCart()
+
+    onMounted(() => {
+      store.getCart()
+    })
+
+    return {
+      isLoading,
+      total,
+      final_total,
+      form,
+      coupon_code,
+      expiryDate,
+      cardNumber,
+      cart,
+      createOrder
+    }
   }
 }
 </script>

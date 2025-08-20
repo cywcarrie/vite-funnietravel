@@ -7,7 +7,11 @@
   </div>
   <section class="mb-5">
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-3 mb-md-4 d-flex justify-content-start">
+      <nav
+        aria-label="breadcrumb"
+        style="--bs-breadcrumb-divider: '>'"
+        class="mt-3 mb-md-4 d-flex justify-content-start"
+      >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <RouterLink to="/" class="text-dark hover-nav fw-bold">首頁</RouterLink>
@@ -62,12 +66,12 @@
                       </div>
                     </div>
                   </td>
-                  <td class="text-end text-nowrap">{{ $filters.currency(item.product.price) }}</td>
+                  <td class="text-end text-nowrap">{{ $format.currency(item.product.price) }}</td>
                   <td class="text-end text-nowrap">
                     <small v-if="cart.final_total !== cart.total" class="text-success"
                       >優惠價：</small
                     >
-                    {{ $filters.currency(item.final_total) }}
+                    {{ $format.currency(item.final_total) }}
                   </td>
                   <td>
                     <button
@@ -84,13 +88,13 @@
                 <tr>
                   <td colspan="3" class="text-end fs-4">總計</td>
                   <td class="text-end fs-4 text-primary fw-bold">
-                    {{ $filters.currency(cart.total) }}
+                    {{ $format.currency(cart.total) }}
                   </td>
                 </tr>
                 <tr v-if="cart.final_total !== cart.total">
                   <td colspan="3" class="text-end text-success fs-4">優惠價</td>
                   <td class="text-end text-success fs-4 fw-bold">
-                    {{ $filters.currency(cart.final_total) }}
+                    {{ $format.currency(cart.final_total) }}
                   </td>
                 </tr>
               </tfoot>
@@ -147,35 +151,48 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cartStore'
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cartStore'
 import VueLoading from '@/components/VueLoading.vue'
 
 export default {
   components: {
     VueLoading
   },
-  data() {
+  setup() {
+    const {
+      getCart,
+      updateCart,
+      removeCartItem,
+      deleteAllCart,
+      getProduct,
+      addCouponCode,
+      copyCouponCode
+    } = useCartStore()
+    const { carts, total, final_total, cart, isLoading } = storeToRefs(useCartStore())
+
+    const coupon_code = ref('')
+
+    onMounted(() => {
+      getCart()
+    })
+
     return {
-      coupon_code: ''
+      carts,
+      total,
+      final_total,
+      cart,
+      isLoading,
+      coupon_code,
+      getCart,
+      updateCart,
+      removeCartItem,
+      deleteAllCart,
+      getProduct,
+      addCouponCode,
+      copyCouponCode
     }
-  },
-  methods: {
-    ...mapActions(cartStore, [
-      'getCart',
-      'updateCart',
-      'removeCartItem',
-      'deleteAllCart',
-      'getProduct',
-      'addCouponCode',
-      'copyCouponCode'
-    ])
-  },
-  computed: {
-    ...mapState(cartStore, ['carts', 'total', 'final_total', 'cart', 'isLoading'])
-  },
-  mounted() {
-    this.getCart()
   }
 }
 </script>

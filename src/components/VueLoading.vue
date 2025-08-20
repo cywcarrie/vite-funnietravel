@@ -10,10 +10,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
-  data() {
+  setup() {
+    const isLoading = ref(false)
+
     return {
-      isLoading: false
+      isLoading
     }
   }
 }

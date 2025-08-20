@@ -52,7 +52,7 @@
                     <td class="text-center text-primary fw-bold">{{ item.product.title }}</td>
                     <td class="text-center text-nowrap">{{ item.qty }}/{{ item.product.unit }}</td>
                     <td class="text-center text-nowrap">
-                      {{ $filters.currency(item.final_total) }}
+                      {{ $format.currency(item.final_total) }}
                     </td>
                   </tr>
                 </tbody>
@@ -60,7 +60,7 @@
                   <tr>
                     <td colspan="2" class="text-end text-nowrap">總計</td>
                     <td class="fs-5 text-primary fw-bold text-nowrap">
-                      {{ $filters.currency(order.total) }}
+                      {{ $format.currency(order.total) }}
                     </td>
                   </tr>
                 </tfoot>
@@ -118,59 +118,77 @@
 </template>
 
 <script>
-import ShowNotification from '@/shared/swal'
+import { inject, ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import VueLoading from '@/components/VueLoading.vue'
+import ShowNotification from '@/shared/swal'
+import { RouterLink } from 'vue-router'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
 export default {
   components: {
-    VueLoading
+    VueLoading,
+    RouterLink
   },
-  data() {
-    return {
-      order: {
-        user: {}
-      },
-      orderId: '',
-      isLoading: false
-    }
-  },
-  methods: {
-    getOrder() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/order/${this.orderId}`
-      this.isLoading = true
-      this.$http
+  setup() {
+    const axios = inject('$axios')
+    const route = useRoute()
+    const order = ref({
+      user: {}
+    })
+    const orderId = ref('')
+    const isLoading = ref(false)
+
+    function getOrder() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/order/${orderId.value}`
+      isLoading.value = true
+      axios
         .get(url)
         .then((response) => {
-          this.isLoading = false
           if (response.data.success) {
-            this.order = response.data.order
+            order.value = response.data.order
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
-    },
-    payOrder() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/pay/${this.orderId}`
-      this.isLoading = true
-      this.$http
-        .post(url)
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getOrder()
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  created() {
-    this.orderId = this.$route.params.orderId
-    this.getOrder()
+    function payOrder() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/pay/${orderId.value}`
+      isLoading.value = true
+      axios
+        .post(url)
+        .then((response) => {
+          if (response.data.success) {
+            ShowNotification('success', '付款成功')
+            getOrder()
+          }
+        })
+        .catch((error) => {
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+
+    onMounted(() => {
+      orderId.value = route.params.orderId
+      getOrder()
+    })
+    return {
+      order,
+      orderId,
+      isLoading,
+      getOrder,
+      payOrder
+    }
   }
 }
 </script>

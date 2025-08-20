@@ -6,7 +6,7 @@
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="delModal"
+    ref="modalElement"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content border-0">
@@ -36,27 +36,23 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import { ref } from 'vue'
+import useModal from '@/shared/modal'
 
 export default {
   props: {
     item: {}
   },
-  data() {
+  setup() {
+    const { modalElement, showModal, hideModal } = useModal()
+    const modal = ref('')
+
     return {
-      delModal: null
+      showModal,
+      hideModal,
+      modal,
+      modalElement
     }
-  },
-  methods: {
-    showModal() {
-      this.delModal.show()
-    },
-    hideModal() {
-      this.delModal.hide()
-    }
-  },
-  mounted() {
-    this.delModal = new Modal(this.$refs.delModal)
   }
 }
 </script>

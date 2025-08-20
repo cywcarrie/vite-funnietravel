@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '@/router'
@@ -5,140 +6,173 @@ import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
-export default defineStore('cartStore', {
-  state: () => ({
-    isLoading: false,
-    carts: [],
-    total: 0,
-    final_total: 0,
-    cart: {},
-    isDone: ''
-  }),
-  actions: {
-    getCart() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart`
-      this.isLoading = true
-      axios
-        .get(url)
-        .then((response) => {
-          this.isLoading = false
-          this.cart = response.data.data
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    addCart(id, qty = 1) {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart`
-      this.isDone = id
-      const cart = {
-        product_id: id,
-        qty
-      }
-      this.isLoading = true
-      axios
-        .post(url, { data: cart })
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getCart()
-            this.isDone = ''
-            ShowNotification('success', '已加入購物車')
-          } else {
-            ShowNotification('error', '加入購物車失敗')
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    updateCart(item) {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart/${item.id}`
-      this.isLoading = true
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty
-      }
-      axios
-        .put(url, { data: cart })
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getCart()
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    removeCartItem(id) {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart/${id}`
-      this.isLoading = true
-      axios
-        .delete(url)
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getCart()
-            ShowNotification('success', '已從購物車移除')
-          } else {
-            ShowNotification('error', '從購物車移除失敗')
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    deleteAllCart() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/carts`
-      this.isLoading = true
-      axios
-        .delete(url)
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getCart()
-            ShowNotification('success', '已清空購物車')
-          } else {
-            ShowNotification('error', '清空購物車失敗')
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    getProduct(id) {
-      router.push(`/product/${id}`)
-    },
-    addCouponCode(coupon_code) {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/coupon`
-      const coupon = {
-        code: coupon_code
-      }
-      this.isLoading = true
-      axios
-        .post(url, { data: coupon })
-        .then((response) => {
-          this.isLoading = false
-          if (response.data.success) {
-            this.getCart()
-            ShowNotification('success', '已套用優惠劵')
-          } else {
-            ShowNotification('error', '套用優惠劵失敗')
-          }
-        })
-        .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
-        })
-    },
-    copyCouponCode() {
-      const copyText = document.createElement('input')
-      const text = 'funnietravel'
-      copyText.select()
-      copyText.setSelectionRange(0, 99999)
-      navigator.clipboard.writeText(text).then(() => {
+export const useCartStore = defineStore('cartStore', () => {
+  const isLoading = ref(false)
+  const carts = ref([])
+  const total = ref(0)
+  const final_total = ref(0)
+  const cart = ref({})
+  const isDone = ref('')
+
+  function getCart() {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart`
+    isLoading.value = true
+    axios
+      .get(url)
+      .then((response) => {
+        cart.value = response.data.data
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function addCart(id, qty = 1) {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart`
+    isDone.value = id
+    const cart = {
+      product_id: id,
+      qty
+    }
+    isLoading.value = true
+    axios
+      .post(url, { data: cart })
+      .then((response) => {
+        if (response.data.success) {
+          this.getCart()
+          isDone.value = ''
+          ShowNotification('success', '已加入購物車')
+        } else {
+          ShowNotification('error', '加入購物車失敗')
+        }
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function updateCart(item) {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart/${item.id}`
+    const data = {
+      product_id: item.product_id,
+      qty: item.qty
+    }
+    isLoading.value = true
+    axios
+      .put(url, { data })
+      .then((response) => {
+        if (response.data.success) {
+          getCart()
+        }
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function removeCartItem(id) {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/cart/${id}`
+    isLoading.value = true
+    axios
+      .delete(url)
+      .then((response) => {
+        if (response.data.success) {
+          getCart()
+          ShowNotification('success', '已從購物車移除')
+        } else {
+          ShowNotification('error', '從購物車移除失敗')
+        }
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function deleteAllCart() {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/carts`
+    isLoading.value = true
+    axios
+      .delete(url)
+      .then((response) => {
+        if (response.data.success) {
+          getCart()
+          ShowNotification('success', '已清空購物車')
+        } else {
+          ShowNotification('error', '清空購物車失敗')
+        }
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function getProduct(id) {
+    router.push(`/product/${id}`)
+  }
+  function addCouponCode(coupon_code) {
+    const url = `${VITE_APP_API}api/${VITE_APP_PATH}/coupon`
+    const coupon = {
+      code: coupon_code
+    }
+    isLoading.value = true
+    axios
+      .post(url, { data: coupon })
+      .then((response) => {
+        if (response.data.success) {
+          getCart()
+          ShowNotification('success', '已套用優惠劵')
+        } else {
+          ShowNotification('error', '套用優惠劵失敗')
+        }
+      })
+      .catch((error) => {
+        const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+        ShowNotification('error', message)
+      })
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  function copyCouponCode() {
+    const text = 'funnietravel'
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
         ShowNotification('success', '優惠碼複製成功')
       })
-    }
+      .catch(() => {
+        ShowNotification('error', '複製失敗，請再試一次')
+      })
+  }
+  return {
+    isLoading,
+    carts,
+    total,
+    final_total,
+    cart,
+    isDone,
+    getCart,
+    addCart,
+    updateCart,
+    removeCartItem,
+    deleteAllCart,
+    getProduct,
+    addCouponCode,
+    copyCouponCode
   }
 })

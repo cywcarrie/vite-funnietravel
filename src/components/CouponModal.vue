@@ -6,7 +6,7 @@
     role="dialog"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    ref="couponModal"
+    ref="modalElement"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -70,9 +70,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-coupon', tempCoupon)">
-            確認
-          </button>
+          <button type="button" class="btn btn-primary" @click="pushCoupon">確認</button>
         </div>
       </div>
     </div>
@@ -80,41 +78,49 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import { ref, watch } from 'vue'
+import useModal from '@/shared/modal'
 
 export default {
   name: 'couponModal',
   props: {
-    coupon: {}
-  },
-  data() {
-    return {
-      couponModal: null,
-      tempCoupon: {},
-      due_date: ''
+    coupon: {
+      type: Object,
+      default: () => ({})
     }
   },
   emits: ['update-coupon'],
-  watch: {
-    coupon() {
-      this.tempCoupon = this.coupon
-      const dateAndTime = new Date(this.tempCoupon.due_date * 1000).toISOString().split('T')
-      ;[this.due_date] = dateAndTime
-    },
-    due_date() {
-      this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
+  setup(props, { emit }) {
+    const { modalElement, showModal, hideModal } = useModal()
+    const tempCoupon = ref({})
+    const due_date = ref('')
+
+    watch(
+      () => props.coupon,
+      (newCoupon) => {
+        tempCoupon.value = { ...newCoupon }
+        const dueDateTime = new Date(tempCoupon.value.due_date * 1000)
+        due_date.value = dueDateTime.toISOString().split('T')[0]
+      }
+    )
+
+    watch(due_date, (newDate) => {
+      tempCoupon.value.due_date = Math.floor(new Date(newDate) / 1000)
+    })
+
+    function pushCoupon() {
+      emit('update-coupon', tempCoupon.value)
+      hideModal()
     }
-  },
-  methods: {
-    showModal() {
-      this.couponModal.show()
-    },
-    hideModal() {
-      this.couponModal.hide()
+
+    return {
+      modalElement,
+      showModal,
+      hideModal,
+      tempCoupon,
+      due_date,
+      pushCoupon
     }
-  },
-  mounted() {
-    this.couponModal = new Modal(this.$refs.couponModal)
   }
 }
 </script>

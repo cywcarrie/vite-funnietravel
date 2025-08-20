@@ -7,7 +7,11 @@
   </div>
   <section class="mb-5">
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-3 mb-md-4 d-flex justify-content-start">
+      <nav
+        aria-label="breadcrumb"
+        style="--bs-breadcrumb-divider: '>'"
+        class="mt-3 mb-md-4 d-flex justify-content-start"
+      >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <RouterLink to="/" class="text-dark hover-nav fw-bold">首頁</RouterLink>
@@ -70,7 +74,7 @@
               class="form-select fw-bold text-primary"
               aria-label="Default select example"
               v-model="selectPrice"
-              @change="sortPrice"
+              @change="sortedProducts()"
             >
               <option selected disabled class="fw-bold">價格</option>
               <option value="priceLowToHigh" class="fw-bold">由低至高</option>
@@ -93,7 +97,7 @@
             </div>
           </div>
           <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
-            <div class="col mb-4" v-for="item in products" :key="item.id">
+            <div class="col mb-4" v-for="item in products" :key="`product-${item.id}`">
               <div class="card product-card w-100 h-100">
                 <RouterLink class="" :to="`/product/${item.id}`">
                   <div class="product-img cursor-pointer" @click="getProduct(item.id)">
@@ -116,13 +120,13 @@
                     <h5 class="card-title fw-bolder mb-3 text-primary">{{ item.title }}</h5>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div class="h5 text-black-50" v-if="!item.price">
-                        NTD {{ $filters.currency(item.origin_price) }}
+                        NTD {{ $format.currency(item.origin_price) }}
                       </div>
                       <del class="h6 text-black-50" v-if="item.price"
-                        >NTD {{ $filters.currency(item.origin_price) }}
+                        >NTD {{ $format.currency(item.origin_price) }}
                       </del>
                       <div class="h5 text-danger fw-bold" v-if="item.price">
-                        NTD {{ $filters.currency(item.price) }}
+                        NTD {{ $format.currency(item.price) }}
                       </div>
                     </div>
                   </div>
@@ -156,8 +160,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import cartStore from '@/stores/cartStore'
+import { inject, ref, onMounted, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useRoute, useRouter } from 'vue-router'
+import { useCartStore } from '@/stores/cartStore'
 import Pagination from '@/components/PaginationComponent.vue'
 import VueLoading from '@/components/VueLoading.vue'
 import categoryObjectData from '@/data/categoryObjectData'
@@ -170,94 +176,111 @@ export default {
     VueLoading,
     Pagination
   },
-  data() {
-    return {
-      product: {},
-      products: [],
-      category: '',
-      categoryIntro: categoryObjectData,
-      selectPrice: '價格',
-      pagination: {},
-      isLoading: false,
-      status: {
-        loadingItem: ''
-      }
-    }
-  },
-  watch: {
-    $route() {
-      if (this.$route.name === 'products') {
-        this.category = this.$route.params.category
-        this.getProducts()
-      }
-    }
-  },
-  methods: {
-    ...mapActions(cartStore, ['addCart']),
-    getProducts(page = 1) {
-      this.isLoading = true
-      let url = `${VITE_APP_API}api/${VITE_APP_PATH}/products?page=${page}`
-      if (this.category !== '全部') {
-        url = `${VITE_APP_API}api/${VITE_APP_PATH}/products/all`
-      }
-      this.$http
+  setup() {
+    const axios = inject('$axios')
+    const route = useRoute()
+    const router = useRouter()
+
+    const { addCart } = useCartStore()
+    const { isDone } = storeToRefs(useCartStore())
+    const product = ref({})
+    const products = ref([])
+    const category = ref(route.params.category || '')
+    const categoryIntro = ref(categoryObjectData)
+    const selectPrice = ref('價格')
+    const pagination = ref({})
+    const isLoading = ref(false)
+    const status = ref({
+      loadingItem: ''
+    })
+
+    function getProducts(page = 1) {
+      isLoading.value = true
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/products/all`
+
+      axios
         .get(url)
         .then((response) => {
           if (response.data.success) {
-            if (this.category !== '全部') {
-              this.products = response.data.products.filter(
-                (item) => item.category === this.category
-              )
-              const perPageItem = 5
-              const totalPage = Math.ceil(this.products.length / perPageItem)
-              const start = (page - 1) * perPageItem
-              const end = page * perPageItem
-              this.products = this.products.slice(start, end)
-              this.pagination = {
-                category: null,
-                current_page: page,
-                has_next: page < totalPage,
-                has_pre: page !== 1,
-                total_pages: totalPage
-              }
-            } else {
-              this.products = response.data.products
-              this.pagination = response.data.pagination
+            let allProducts = response.data.products
+
+            if (category.value && category.value !== '全部') {
+              allProducts = allProducts.filter((item) => item.category === category.value)
             }
+
+            const perPageItem = 6
+            const totalPage = Math.ceil(allProducts.length / perPageItem)
+            const start = (page - 1) * perPageItem
+            const end = page * perPageItem
+
+            products.value = allProducts.slice(start, end)
+            pagination.value = {
+              current_page: page,
+              has_next: page < totalPage,
+              has_pre: page > 1,
+              total_pages: totalPage
+            }
+
+            sortedProducts()
+          } else {
+            ShowNotification('error', response.data.message || '無法取得產品資料')
           }
-          this.isLoading = false
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
-    },
-    goToCategory(category) {
-      this.$router.push(`/products/${category}`)
-    },
-    getProduct(id) {
-      this.$router.push(`/product/${id}`)
-    },
-    sortedProducts() {
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    function goToCategory(category) {
+      router.push(`/products/${category}`)
+    }
+    function getProduct(id) {
+      router.push(`/product/${id}`)
+    }
+
+    function sortedProducts() {
       let getSortPrice = ''
-      this.products.sort((a, b) => {
-        if (this.selectPrice === 'priceLowToHigh') {
+      products.value.sort((a, b) => {
+        if (selectPrice.value === 'priceLowToHigh') {
           return (getSortPrice = a.price - b.price)
-        } else if (this.selectPrice === 'priceHighToLow') {
+        } else if (selectPrice.value === 'priceHighToLow') {
           return (getSortPrice = b.price - a.price)
         }
         return getSortPrice
       })
     }
-  },
-  computed: {
-    ...mapState(cartStore, ['isDone']),
-    sortPrice() {
-      return this.sortedProducts()
+    watch(
+      () => route.params.category,
+      (newCategory) => {
+        if (route.name === 'products') {
+          category.value = newCategory
+          getProducts()
+        }
+      }
+    )
+    onMounted(() => {
+      getProducts()
+    })
+
+    return {
+      product,
+      products,
+      category,
+      categoryIntro,
+      selectPrice,
+      pagination,
+      isLoading,
+      status,
+      getProducts,
+      goToCategory,
+      getProduct,
+      sortedProducts,
+      addCart,
+      isDone
     }
-  },
-  created() {
-    this.category = this.$route.params.category
-    this.getProducts()
   }
 }
 </script>

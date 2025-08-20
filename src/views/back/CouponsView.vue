@@ -21,7 +21,7 @@
           <tr v-for="item in coupons" :key="`coupon ${item.id}`">
             <td>{{ item.title }}</td>
             <td>{{ item.percent }}%</td>
-            <td class="text-nowrap">{{ $filters.date(item.due_date) }}</td>
+            <td class="text-nowrap">{{ $format.date(item.due_date) }}</td>
             <td>
               <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
               <span v-else class="text-muted">未起用</span>
@@ -48,15 +48,16 @@
         </tbody>
       </table>
     </div>
-    <couponModal :coupon="tempCoupon" ref="couponModal" @update-coupon="updateCoupon" />
+    <CouponModal :coupon="tempCoupon" ref="couponModal" @update-coupon="updateCoupon" />
     <DelModal :item="tempCoupon" ref="delModal" @del-item="delCoupon" />
   </div>
 </template>
 
 <script>
+import { inject, ref, onMounted } from 'vue'
+import VueLoading from '@/components/VueLoading.vue'
 import CouponModal from '@/components/CouponModal.vue'
 import DelModal from '@/components/DelModal.vue'
-import VueLoading from '@/components/VueLoading.vue'
 import ShowNotification from '@/shared/swal'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
@@ -66,101 +67,129 @@ export default {
   props: {
     config: Object
   },
-  data() {
-    return {
-      coupons: {},
-      tempCoupon: {
-        title: '',
-        is_enabled: 0,
-        percent: 100,
-        code: ''
-      },
-      isLoading: false,
-      isNew: false
-    }
-  },
-  methods: {
-    openCouponModal(isNew, item) {
-      this.isNew = isNew
-      if (this.isNew) {
-        this.tempCoupon = {
-          due_date: new Date().getTime() / 1000
-        }
+  setup() {
+    const axios = inject('$axios')
+    const coupons = ref({})
+    const tempCoupon = ref({
+      title: '',
+      is_enabled: 0,
+      percent: 100,
+      code: ''
+    })
+    const isLoading = ref(false)
+    const isNew = ref(false)
+    const couponModal = ref(null)
+    const delModal = ref(null)
+
+    function openCouponModal(isNewFlag, item) {
+      isNew.value = isNewFlag
+      if (isNew.value) {
+        tempCoupon.value.due_date = new Date().getTime() / 1000
       } else {
-        this.tempCoupon = { ...item }
+        // eslint-disable-next-line no-const-assign
+        tempCoupon.value = { ...item }
       }
-      this.$refs.couponModal.showModal()
-    },
-    openDelCouponModal(item) {
-      this.tempCoupon = { ...item }
-      const delComponent = this.$refs.delModal
+      couponModal.value.showModal()
+    }
+    function openDelCouponModal(item) {
+      // eslint-disable-next-line no-const-assign
+      tempCoupon.value = { ...item }
+      const delComponent = delModal.value
       delComponent.showModal()
-    },
-    getCoupons() {
+    }
+    function getCoupons() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupons`
-      this.isLoading = true
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.coupons = response.data.coupons
-        this.isLoading = false
-      })
-    },
-    updateCoupon(tempCoupon) {
-      if (this.isNew) {
+      isLoading.value = true
+      axios
+        .get(url, tempCoupon.value)
+        .then((response) => {
+          coupons.value = response.data.coupons
+        })
+        .catch((error) => {
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    function updateCoupon(tempCoupon) {
+      if (isNew.value) {
         const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon`
-        this.isLoading = true
-        this.$http.post(url, { data: tempCoupon }).then((response) => {
-          this.isLoading = false
+        isLoading.value = true
+        axios.post(url, { data: tempCoupon }).then((response) => {
+          isLoading.value = false
           if (response.data.success) {
-            ShowNotification('success', '新增優惠券成功')
-            this.getCoupons()
-            this.$refs.couponModal.hideModal()
+            ShowNotification('success', '新增優惠劵成功')
+            getCoupons()
+            couponModal.value.hideModal()
           } else {
-            ShowNotification('error', '新增優惠券失敗')
+            ShowNotification('error', '新增優惠劵失敗')
           }
         })
       } else {
-        const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
-        this.isLoading = true
-        this.$http
-          .put(url, { data: this.tempCoupon })
+        const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon/${tempCoupon.id}`
+        isLoading.value = true
+        axios
+          .put(url, { data: tempCoupon })
           .then((response) => {
-            this.isLoading = false
             if (response.data.success) {
-              ShowNotification('success', '更新優惠券成功')
-              this.getCoupons()
-              this.$refs.couponModal.hideModal()
+              ShowNotification('success', '更新優惠劵成功')
+              getCoupons()
+              couponModal.value.hideModal()
             } else {
-              ShowNotification('error', '新增優惠券失敗')
+              ShowNotification('error', '更新優惠劵失敗')
             }
           })
           .catch((error) => {
-            ShowNotification('error', `${error.response.data.message}`)
+            const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+            ShowNotification('error', message)
+          })
+          .finally(() => {
+            isLoading.value = false
           })
       }
-    },
-    delCoupon() {
-      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
-      this.isLoading = true
-      this.$http
+    }
+    function delCoupon() {
+      const url = `${VITE_APP_API}api/${VITE_APP_PATH}/admin/coupon/${tempCoupon.value.id}`
+      isLoading.value = true
+      axios
         .delete(url)
         .then((response) => {
-          this.isLoading = false
           if (response.data.success) {
-            ShowNotification('success', '刪除優惠券成功')
-            const delComponent = this.$refs.delModal
+            ShowNotification('success', '刪除優惠劵成功')
+            const delComponent = delModal.value
             delComponent.hideModal()
-            this.getCoupons()
+            getCoupons()
           } else {
-            ShowNotification('error', '刪除優惠券失敗')
+            ShowNotification('error', '刪除優惠劵失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
+        })
+        .finally(() => {
+          isLoading.value = false
         })
     }
-  },
-  created() {
-    this.getCoupons()
+
+    onMounted(() => {
+      getCoupons()
+    })
+    return {
+      coupons,
+      tempCoupon,
+      isLoading,
+      isNew,
+      couponModal,
+      delModal,
+      openCouponModal,
+      openDelCouponModal,
+      getCoupons,
+      updateCoupon,
+      delCoupon
+    }
   }
 }
 </script>

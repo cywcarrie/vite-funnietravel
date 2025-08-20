@@ -37,27 +37,42 @@
 </template>
 
 <script>
+import { inject, ref } from 'vue'
 import ShowNotification from '@/shared/swal'
+import { useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
 const { VITE_APP_API } = import.meta.env
 
 export default {
-  methods: {
-    logout() {
+  name: 'AdminNavbar',
+  components: {
+    RouterLink
+  },
+  setup() {
+    const axios = inject('$axios')
+    const user = ref({})
+    const router = useRouter()
+
+    function logout() {
       const api = `${VITE_APP_API}logout`
-      this.$http
-        .post(api, this.user)
+      axios
+        .post(api, user.value)
         .then((response) => {
           if (response.data.success) {
             ShowNotification('success', '登出成功')
-            this.$router.push('/login')
+            router.push('/login')
           } else {
             ShowNotification('error', '登出失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
+    }
+    return {
+      logout
     }
   }
 }

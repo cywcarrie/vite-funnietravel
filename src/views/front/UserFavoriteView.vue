@@ -1,5 +1,4 @@
 <template>
-  <VueLoading :active="isLoading" />
   <div
     class="d-flex justify-content-center align-items-center my-5 position-relative banner banner1 container-fluid"
   >
@@ -7,7 +6,11 @@
   </div>
   <section class="mb-5">
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-3 mb-md-4 d-flex justify-content-start">
+      <nav
+        aria-label="breadcrumb"
+        style="--bs-breadcrumb-divider: '>'"
+        class="mt-3 mb-md-4 d-flex justify-content-start"
+      >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <RouterLink to="/" class="text-dark hover-nav fw-bold">首頁</RouterLink>
@@ -15,7 +18,10 @@
           <li class="breadcrumb-item active" aria-current="page">我的最愛</li>
         </ol>
       </nav>
-      <template v-if="favoriteProduct.length !== 0">
+      <template v-if="isLoading">
+        <VueLoading :active="true" />
+      </template>
+      <template v-else-if="favoriteProduct.length !== 0">
         <div class="d-flex justify-content-center mt-5">
           <h2 class="fw-bold">我的最愛清單</h2>
         </div>
@@ -47,13 +53,13 @@
                   </td>
                   <td class="text-nowrap">
                     <div class="h5 text-black-50" v-if="!item.price">
-                      NTD {{ $filters.currency(item.origin_price) }}
+                      NTD {{ $format.currency(item.origin_price) }}
                     </div>
                     <del class="h6 text-black-50" v-if="item.price"
-                      >NTD {{ $filters.currency(item.origin_price) }}
+                      >NTD {{ $format.currency(item.origin_price) }}
                     </del>
-                    <div class="h5 text-black" v-if="item.price">
-                      NTD {{ $filters.currency(item.price) }}
+                    <div class="h5 text-dark" v-if="item.price">
+                      NTD {{ $format.currency(item.price) }}
                     </div>
                   </td>
                   <td class="text-nowrap text-end ps-4 ps-lg-0">
@@ -110,35 +116,51 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
-import favoriteStore from '@/stores/favoriteStore'
-import cartStore from '@/stores/cartStore'
+import { ref, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useFavoriteStore } from '@/stores/favoriteStore'
+import { useCartStore } from '@/stores/cartStore'
+import { useRouter } from 'vue-router'
 import VueLoading from '@/components/VueLoading.vue'
 
 export default {
-  components: {
-    VueLoading
-  },
-  data() {
+  components: { VueLoading },
+  setup() {
+    const favoriteStore = useFavoriteStore()
+    const cartStore = useCartStore()
+    const router = useRouter()
+
+    const { isLoading, products, favoriteProduct, favoriteData } = storeToRefs(favoriteStore)
+    const { getProducts, getFavorite, removeFavorite, addFavorite } = favoriteStore
+    const { cart } = storeToRefs(cartStore)
+    const { addCart } = cartStore
+
+    const status = ref({
+      loadingItem: ''
+    })
+
+    function getProduct(id) {
+      router.push(`/product/${id}`)
+    }
+
+    onMounted(() => {
+      getProducts(), getFavorite()
+    })
+
     return {
-      status: {
-        loadingItem: ''
-      }
+      isLoading,
+      products,
+      favoriteProduct,
+      favoriteData,
+      getProducts,
+      getFavorite,
+      removeFavorite,
+      addFavorite,
+      cart,
+      addCart,
+      status,
+      getProduct
     }
-  },
-  methods: {
-    ...mapActions(cartStore, ['addCart']),
-    ...mapActions(favoriteStore, ['getProducts', 'getFavorite', 'removeFavorite']),
-    getProduct(id) {
-      this.$router.push(`/product/${id}`)
-    }
-  },
-  computed: {
-    ...mapState(favoriteStore, ['isLoading', 'products', 'favoriteProduct', 'favoriteData']),
-    ...mapState(cartStore, ['cart'])
-  },
-  created() {
-    this.getProducts()
   }
 }
 </script>

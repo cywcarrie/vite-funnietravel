@@ -1,4 +1,5 @@
 <template>
+  <VueLoading :active="isLoading" />
   <div class="container my-5 py-5">
     <form class="row justify-content-center py-5 px-3" @submit.prevent="signIn">
       <div class="col-md-7 col-lg-4 bg-light p-5 rounded-2">
@@ -6,7 +7,7 @@
           <i class="bi bi-person-circle pe-2"></i>管理者後台登入
         </h2>
         <div class="mb-2">
-          <label for="inputEmail" class="sr-only">Email</label>
+          <label for="inputEmail" class="visually-hidden">Email</label>
           <input
             type="email"
             id="inputEmail"
@@ -18,7 +19,7 @@
           />
         </div>
         <div class="mb-2">
-          <label for="inputPassword" class="sr-only">密碼</label>
+          <label for="inputPassword" class="visually-hidden">密碼</label>
           <input
             type="password"
             id="inputPassword"
@@ -29,7 +30,13 @@
           />
         </div>
         <div class="text-center mt-4">
-          <button class="btn btn-secondary btn-block px-4 fw-bold" type="submit">登入</button>
+          <button
+            class="btn btn-secondary btn-block px-4 fw-bold"
+            type="submit"
+            :disabled="isLoading"
+          >
+            登入
+          </button>
         </div>
       </div>
     </form>
@@ -37,37 +44,53 @@
 </template>
 
 <script>
+import { inject, ref, reactive } from 'vue'
+import VueLoading from '@/components/VueLoading.vue'
 import ShowNotification from '@/shared/swal'
+import { useRouter } from 'vue-router'
 
 const { VITE_APP_API } = import.meta.env
 
 export default {
-  data() {
-    return {
-      user: {
-        username: '',
-        password: ''
-      }
-    }
+  components: {
+    VueLoading
   },
-  methods: {
-    signIn() {
+  setup() {
+    const axios = inject('$axios')
+    const router = useRouter()
+    const user = reactive({
+      username: '',
+      password: ''
+    })
+    const isLoading = ref(false)
+    function signIn() {
+      isLoading.value = true
       const api = `${VITE_APP_API}admin/signin`
-      this.$http
-        .post(api, this.user)
+      axios
+        .post(api, user)
         .then((response) => {
           if (response.data.success) {
             const { token, expired } = response.data
-            document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
+            document.cookie = `hexToken=${token}; expires=${new Date(expired)}; path=/`
+            axios.defaults.headers.common.Authorization = token
             ShowNotification('success', '登入成功')
-            this.$router.push('/admin/products')
+            router.push('/admin/products')
           } else {
             ShowNotification('error', '登入失敗')
           }
         })
         .catch((error) => {
-          ShowNotification('error', `${error.response.data.message}`)
+          const message = error.response?.data?.message || '發生錯誤，請稍後再試'
+          ShowNotification('error', message)
         })
+        .finally(() => {
+          isLoading.value = false
+        })
+    }
+    return {
+      user,
+      isLoading,
+      signIn
     }
   }
 }
