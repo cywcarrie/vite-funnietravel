@@ -62,7 +62,6 @@ npm run deploy
 - pinia - v2.1.7
 - vue-router - v4.3.3
 - axios - v1.7.7
-- vue-axios - v3.5.2
 - vue-loading-overlay - v6.0
 - aos - v2.3.4
 - sweetalert2 - v11.14.2
@@ -73,5 +72,5 @@ npm run deploy
 
 ## 使用版本
 
-- Node.js - v18.16.1
-- npm - v9.5.1
+- Node.js - v22.17.1
+- npm - v10.9.2

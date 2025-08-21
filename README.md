@@ -65,7 +65,6 @@ npm run deploy
 - vite - v5.3.1
 - vue-router - v4.3.3
 - axios - v1.7.7
-- vue-axios - v3.5.2
 - vue-loading-overlay - v6.0
 - aos - v2.3.4
 - sweetalert2 - v11.14.2
