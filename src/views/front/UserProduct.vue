@@ -148,7 +148,7 @@ import FavoriteBtn from '@/components/FavoriteBtn.vue'
 import VueLoading from '@/components/VueLoading.vue'
 import Swiper from '@/components/SwiperComponent.vue'
 import ShowNotification from '@/shared/swal'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
 
@@ -161,6 +161,7 @@ export default {
   setup() {
     const axios = inject('$axios')
     const route = useRoute()
+    const router = useRouter()
     const product = ref({})
     const qty = ref(1)
     const id = ref('')
@@ -194,6 +195,7 @@ export default {
             product.value = response.data.product
           } else {
             ShowNotification('error', '無法獲取產品資訊')
+            router.push('/not-found')
           }
         })
         .catch((error) => {
