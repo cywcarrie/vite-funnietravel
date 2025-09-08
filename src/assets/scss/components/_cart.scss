@@ -1,6 +1,18 @@
 .cart-qty {
-  width: 110px;
+  width: 100px;
 }
-.coupon-input {
-  max-width: 400px;
+.cart-section {
+  overflow-x: hidden;
+}
+
+.cart-table th,
+.cart-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+@media (max-width: 767.98px) {
+  .cart-qty input {
+    min-width: 60px;
+  }
 }

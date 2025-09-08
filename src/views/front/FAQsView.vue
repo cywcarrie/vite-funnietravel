@@ -1,8 +1,9 @@
 <template>
   <div
-    class="d-flex justify-content-center align-items-center my-5 position-relative banner banner1 container-fluid"
+    class="my-5 position-relative banner container-fluid"
+    style="background: linear-gradient(to right, #336b87, #90afc5)"
   >
-    <h2 class="position-absolute text-center text-white fw-bolder banner-title">常見問題</h2>
+    <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">常見問題</h2>
   </div>
   <section class="mb-5">
     <div class="container">
@@ -18,7 +19,7 @@
           <li class="breadcrumb-item active" aria-current="page">常見問題</li>
         </ol>
       </nav>
-      <h2 class="text-center fw-bold text-primary mt-5">常見 Q & A</h2>
+      <h2 class="text-center fw-bold text-dark mt-5">常見 Q & A</h2>
       <div class="row justify-content-center mt-4 py-5">
         <div class="col-md-8 col-11">
           <div class="accordion" id="accordionExample">
@@ -98,11 +99,11 @@ export default {
       },
       {
         question: '什麼是優惠碼 ?',
-        answer: `優惠碼是 Funnie Travel 提供的優惠方式。優惠期間內，在我們的網站上訂購行程結帳時輸入優惠碼 <span class="text-secondary fw-bold">${couponCode}</span> 即可享有 85 折優惠。`
+        answer: `優惠碼是 Funnie Travel 提供的優惠方式。優惠期間內，在我們的網站上訂購行程結帳時輸入優惠碼 &#12300;<span class="fw-bold">${couponCode}</span>&#12301;，即可享有 85 折限時優惠。`
       },
       {
         question: '優惠碼使用說明 ?',
-        answer: `請於購物車頁面的「優惠碼」欄位輸入優惠碼 <span class="text-secondary fw-bold">${couponCode}</span>，若優惠碼輸入正確，系統將套用折扣並於畫面顯示折抵金額。`
+        answer: `請於購物車頁面的「優惠碼」欄位輸入優惠碼 &#12300;<span class="fw-bold">${couponCode}</span>&#12301;，若優惠碼輸入正確，系統將套用折扣並於畫面顯示折抵金額。`
       }
     ])
 

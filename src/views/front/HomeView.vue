@@ -140,8 +140,8 @@
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">熱門行程推薦</h2>
         <Swiper />
         <div class="text-end">
-          <RouterLink to="/products/全部" class="btn btn-primary rounded-pill">
-            更多行程<i class="bi bi-caret-right-fill"></i>
+          <RouterLink to="/products/全部" class="btn btn-sm btn-outline-primary">
+            更多行程<i class="bi bi-caret-right-fill ps-1"></i>
           </RouterLink>
         </div>
       </div>

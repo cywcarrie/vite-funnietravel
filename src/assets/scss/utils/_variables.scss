@@ -311,7 +311,7 @@ $dark: $gray-900 !default;
 // scss-docs-start theme-colors-map
 $theme-colors: (
   'primary': #336b87,
-  'secondary': #76a2bd,
+  'secondary': #90afc5,
   'success': $success,
   'info': $info,
   'warning': $warning,
@@ -1243,12 +1243,12 @@ $navbar-toggler-focus-width: $btn-focus-width !default;
 $navbar-toggler-transition: box-shadow 0.15s ease-in-out !default;
 
 $navbar-light-color: #336b87; // rgba(var(--#{$prefix}emphasis-color-rgb), .65) !default;
-$navbar-light-hover-color: #76a2bd; // rgba(var(--#{$prefix}emphasis-color-rgb), .8) !default;
+$navbar-light-hover-color: #90afc5; // rgba(var(--#{$prefix}emphasis-color-rgb), .8) !default;
 $navbar-light-active-color: rgba(var(--#{$prefix}emphasis-color-rgb), 1) !default;
 $navbar-light-disabled-color: rgba(var(--#{$prefix}emphasis-color-rgb), 0.3) !default;
 $navbar-light-icon-color: #336b87; // rgba($body-color, .75) !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
-$navbar-light-toggler-border-color: #76a2bd; // rgba(var(--#{$prefix}emphasis-color-rgb), .15) !default;
+$navbar-light-toggler-border-color: #90afc5; // rgba(var(--#{$prefix}emphasis-color-rgb), .15) !default;
 $navbar-light-brand-color: $navbar-light-active-color !default;
 $navbar-light-brand-hover-color: $navbar-light-active-color !default;
 // scss-docs-end navbar-variables
@@ -1426,7 +1426,7 @@ $accordion-button-bg: var(--#{$prefix}accordion-bg) !default;
 $accordion-transition:
   $btn-transition,
   border-radius 0.15s ease !default;
-$accordion-button-active-bg: #76a2bd; // var(--#{$prefix}primary-bg-subtle) !default;
+$accordion-button-active-bg: #90afc5; // var(--#{$prefix}primary-bg-subtle) !default;
 $accordion-button-active-color: #fff; // var(--#{$prefix}primary-text-emphasis) !default;
 
 $accordion-button-focus-border-color: $input-focus-border-color !default;
@@ -1646,7 +1646,7 @@ $list-group-disabled-color: var(--#{$prefix}secondary-color) !default;
 $list-group-disabled-bg: $list-group-bg !default;
 
 $list-group-action-color: var(--#{$prefix}secondary-color) !default;
-$list-group-action-hover-color: #76a2bd !default; //var(--#{$prefix}emphasis-color) !default;
+$list-group-action-hover-color: #90afc5 !default; //var(--#{$prefix}emphasis-color) !default;
 
 $list-group-action-active-color: var(--#{$prefix}body-color) !default;
 $list-group-action-active-bg: var(--#{$prefix}secondary-bg) !default;

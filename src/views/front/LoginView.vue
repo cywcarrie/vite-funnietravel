@@ -12,7 +12,7 @@
             type="email"
             id="inputEmail"
             class="form-control"
-            placeholder="Email address"
+            placeholder="電子郵件地址"
             required
             autofocus
             v-model="user.username"
@@ -24,14 +24,14 @@
             type="password"
             id="inputPassword"
             class="form-control"
-            placeholder="Password"
+            placeholder="密碼"
             required
             v-model="user.password"
           />
         </div>
         <div class="text-center mt-4">
           <button
-            class="btn btn-secondary btn-block px-4 fw-bold"
+            class="btn btn-primary btn-block px-4 fw-bold"
             type="submit"
             :disabled="isLoading"
           >

@@ -1,15 +1,16 @@
 <template>
   <div
-    class="d-flex justify-content-center align-items-center my-5 position-relative banner banner1 container-fluid"
+    class="my-5 position-relative banner container-fluid"
+    style="background: linear-gradient(to right, #336b87, #90afc5, #336b87)"
   >
-    <h2 class="position-absolute text-center text-white fw-bolder banner-title">我的最愛</h2>
+    <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">我的最愛</h2>
   </div>
   <section class="mb-5">
     <div class="container">
       <nav
         aria-label="breadcrumb"
         style="--bs-breadcrumb-divider: '>'"
-        class="mt-3 mb-md-4 d-flex justify-content-start"
+        class="mt-3 mb-lg-4 d-flex justify-content-start"
       >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -23,10 +24,10 @@
       </template>
       <template v-else-if="favoriteProduct.length !== 0">
         <div class="d-flex justify-content-center mt-5">
-          <h2 class="fw-bold">我的最愛清單</h2>
+          <h2 class="fw-bold text-dark">我的最愛清單</h2>
         </div>
-        <div class="row mt-4 mb-5 bg-light rounded-2 py-3">
-          <div class="col table-responsive mt-4 mb-4">
+        <div class="row mt-4 mb-5 bg-light rounded-4 py-3 d-lg-block d-none">
+          <div class="col table-responsive mt-4 mb-4 overflow-x-hidden">
             <table class="table align-middle text-center table-light table-borderless">
               <thead class="table-secondary">
                 <tr>
@@ -55,11 +56,13 @@
                     <div class="h5 text-black-50" v-if="!item.price">
                       NTD {{ $format.currency(item.origin_price) }}
                     </div>
-                    <del class="h6 text-black-50" v-if="item.price"
-                      >NTD {{ $format.currency(item.origin_price) }}
-                    </del>
-                    <div class="h5 text-dark" v-if="item.price">
-                      NTD {{ $format.currency(item.price) }}
+                    <div>
+                      <del class="h6 text-black-50" v-if="item.price"
+                        >NTD {{ $format.currency(item.origin_price) }}
+                      </del>
+                      <div class="h5 text-dark" v-if="item.price">
+                        NTD {{ $format.currency(item.price) }}
+                      </div>
                     </div>
                   </td>
                   <td class="text-nowrap text-end ps-4 ps-lg-0">
@@ -95,20 +98,70 @@
             </table>
           </div>
         </div>
-        <div class="text-end mt-4 mb-5">
-          <RouterLink class="btn btn-primary ms-auto text-end hover-btn" to="/cart"
-            >前往購物車<i class="bi bi-cart-fill ps-1"></i
-          ></RouterLink>
+        <div class="d-block d-lg-none py-3 mt-4 mb-3">
+          <div
+            class="bg-white p-3 shadow-sm rounded-4 mb-3"
+            v-for="item in favoriteProduct"
+            :key="item.id"
+          >
+            <div
+              class="text-primary fw-bold cursor-pointer hover-nav mb-4"
+              @click="getProduct(item.id)"
+            >
+              <span class="">{{ item.title }}</span>
+            </div>
+            <div class="d-flex justify-content-end align-items-center mt-2">
+              <div class="h5 text-black-50" v-if="!item.price">
+                NTD {{ $format.currency(item.origin_price) }}
+              </div>
+
+              <del class="h6 text-black-50 me-2" v-if="item.price"
+                >NTD {{ $format.currency(item.origin_price) }}
+              </del>
+              <div class="h5 text-dark" v-if="item.price">
+                NTD {{ $format.currency(item.price) }}
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <button
+                type="button"
+                class="btn btn-outline-primary px-4"
+                :disabled="this.status.loadingItem === item.id"
+                @click="addCart(item.id)"
+              >
+                <div
+                  v-if="this.status.loadingItem === item.id"
+                  class="spinner-border text-primary spinner-border-sm"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <i class="bi bi-cart-fill"></i>
+                加入購物車
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                :disabled="status.loadingItem === item.id"
+                @click="removeFavorite(item)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mb-5">
+          <RouterLink class="btn btn-primary hover-btn" to="/cart">
+            前往購物車<i class="bi bi-cart-fill ps-1"></i>
+          </RouterLink>
         </div>
       </template>
       <template v-else>
-        <div class="py-5 mb-5">
-          <div class="text-center pt-4">
-            <h2 class="fw-bold mb-5">您尚未有行程加入我的最愛</h2>
-            <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部"
-              >馬上開始瀏覽行程吧 !</RouterLink
-            >
-          </div>
+        <div class="py-5 mb-5 text-center">
+          <h2 class="fw-bold mb-5">您尚未有行程加入我的最愛</h2>
+          <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部"
+            >馬上開始瀏覽行程吧 !</RouterLink
+          >
         </div>
       </template>
     </div>

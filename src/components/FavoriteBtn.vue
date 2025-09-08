@@ -1,7 +1,7 @@
 <template>
   <a href="#" title="我的最愛" @click.prevent="toggleFavorite()" class="ps-3 ps-md-0">
-    <i class="bi bi-heart text-primary fs-3" v-if="!isFavorite"></i>
-    <i class="bi bi-heart-fill text-primary fs-3" v-else></i>
+    <i class="bi bi-heart text-danger fs-3" v-if="!isFavorite"></i>
+    <i class="bi bi-heart-fill text-danger fs-3" v-else></i>
   </a>
 </template>
 

@@ -1,9 +1,10 @@
 <template>
   <VueLoading :active="isLoading" />
   <div
-    class="d-flex justify-content-center align-items-center my-5 position-relative banner banner2 container-fluid"
+    class="my-5 position-relative banner container-fluid"
+    style="background: linear-gradient(to right, #336b87, #f0e9e0)"
   >
-    <h2 class="position-absolute text-center text-white fw-bolder banner-title">結帳流程</h2>
+    <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">結帳流程</h2>
   </div>
   <section class="mb-5">
     <div class="container">
@@ -39,66 +40,72 @@
           <div class="my-5 row justify-content-center">
             <h3 class="text-center fw-bold mb-4">訂單明細</h3>
             <form class="col-lg-6" @submit.prevent="payOrder">
-              <table class="table align-middle table-light table-borderless mb-4">
-                <thead class="text-center bg-light">
-                  <tr>
-                    <th class="text-nowrap">行程名稱</th>
-                    <th class="text-center text-nowrap">數量</th>
-                    <th class="text-nowrap">價格</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in order.products" :key="item.id">
-                    <td class="text-center text-primary fw-bold">{{ item.product.title }}</td>
-                    <td class="text-center text-nowrap">{{ item.qty }}/{{ item.product.unit }}</td>
-                    <td class="text-center text-nowrap">
-                      {{ $format.currency(item.final_total) }}
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2" class="text-end text-nowrap">總計</td>
-                    <td class="fs-5 text-primary fw-bold text-nowrap">
-                      {{ $format.currency(order.total) }}
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
+              <div class="border border-primary rounded-4 p-4 mb-5">
+                <table class="table align-middle table-white table-borderless mb-4">
+                  <thead class="text-center bg-light">
+                    <tr>
+                      <th class="text-nowrap">行程名稱</th>
+                      <th class="text-center text-nowrap">數量</th>
+                      <th class="text-nowrap">價格</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in order.products" :key="item.id">
+                      <td class="text-center text-primary fw-bold">{{ item.product.title }}</td>
+                      <td class="text-center text-nowrap">
+                        {{ item.qty }}/{{ item.product.unit }}
+                      </td>
+                      <td class="text-center text-nowrap">
+                        {{ $format.currency(item.final_total) }}
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="2" class="text-end text-nowrap">總計</td>
+                      <td class="fs-5 text-primary fw-bold text-nowrap">
+                        {{ $format.currency(order.total) }}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
               <h3 class="text-center fw-bold mb-4">訂購人資訊</h3>
-              <table class="table table-light table-borderless mb-4">
-                <tbody>
-                  <tr class="table-nowrap">
-                    <th class="text-nowrap">姓名</th>
-                    <td class="text-nowrap">{{ order.user.name }}</td>
-                  </tr>
-                  <tr class="table-nowrap">
-                    <th width="100" class="text-nowrap">Email</th>
-                    <td class="text-nowrap">{{ order.user.email }}</td>
-                  </tr>
-                  <tr class="table-nowrap">
-                    <th class="text-nowrap">電話</th>
-                    <td class="text-nowrap">{{ order.user.tel }}</td>
-                  </tr>
-                  <tr class="table-nowrap">
-                    <th>地址</th>
-                    <td class="text-nowrap">{{ order.user.address }}</td>
-                  </tr>
-                  <tr class="table-nowrap">
-                    <th>付款方式</th>
-                    <td class="text-nowrap">{{ order.user.pay }}</td>
-                  </tr>
-                  <tr class="table-nowrap">
-                    <th>付款狀態</th>
-                    <td>
-                      <span v-if="!order.is_paid" class="text-nowrap fw-bold text-danger"
-                        >尚未付款</span
-                      >
-                      <span v-else class="text-success fw-bold text-nowrap">付款完成</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="border border-primary rounded-4 p-4 mb-4">
+                <table class="table table-white table-borderless mb-4">
+                  <tbody>
+                    <tr class="table-nowrap">
+                      <th class="text-nowrap">姓名</th>
+                      <td class="text-nowrap">{{ order.user.name }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
+                      <th width="100" class="text-nowrap">Email</th>
+                      <td class="text-nowrap">{{ order.user.email }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
+                      <th class="text-nowrap">電話</th>
+                      <td class="text-nowrap">{{ order.user.tel }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
+                      <th>地址</th>
+                      <td class="text-nowrap">{{ order.user.address }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
+                      <th>付款方式</th>
+                      <td class="text-nowrap">{{ order.user.pay }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
+                      <th>付款狀態</th>
+                      <td>
+                        <span v-if="!order.is_paid" class="text-nowrap fw-bold text-danger"
+                          >尚未付款</span
+                        >
+                        <span v-else class="text-success fw-bold text-nowrap">付款完成</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="text-end" v-if="order.is_paid === false">
                 <button class="btn btn-primary ms-auto" type="submit">
                   確認付款<i class="bi bi-caret-right-fill"></i>

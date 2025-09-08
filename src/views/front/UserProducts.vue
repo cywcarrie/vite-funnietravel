@@ -1,9 +1,10 @@
 <template>
   <VueLoading :active="isLoading" />
   <div
-    class="d-flex justify-content-center align-items-center my-5 position-relative banner banner1 container-fluid"
+    class="my-5 position-relative banner container-fluid"
+    style="background: linear-gradient(to right, #90afc5, #336b87)"
   >
-    <h2 class="position-absolute text-center text-white fw-bolder banner-title">行程列表</h2>
+    <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">行程列表</h2>
   </div>
   <section class="mb-5">
     <div class="container">
