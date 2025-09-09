@@ -153,7 +153,7 @@
                 <div class="text-dark fw-bold mb-3">
                   <i class="bi bi-globe pe-2"></i>
                   結帳前輸入優惠碼 &#12300;<span class="text-primary">funnietravel</span
-                  >&#12301;，即可享有 <span class="text-primary">85</span> 折優惠
+                  >&#12301;，即可享有 <span class="text-primary">85</span> 折限時優惠
                 </div>
 
                 <button

@@ -108,17 +108,22 @@
                       alt="allProuctsImages"
                     />
                     <span
-                      class="seemore-text d-flex justify-content-center align-items-center text-white"
+                      class="category-text d-flex justify-content-start align-items-start text-white p-3 fw-bold"
                     >
-                      <i class="bi bi-search pe-1"></i>
-                      查看更多
+                      <i class="bi bi-globe pe-2"></i>
+                      {{ item.category }}
                     </span>
                   </div>
                   <div class="card-body p-3">
-                    <div class="d-flex justify-content-start text-primary fw-bold">
-                      <p><i class="bi bi-globe me-2"></i>{{ item.category }}</p>
+                    <h5 class="card-title fw-bolder mb-2 text-primary">{{ item.title }}</h5>
+                    <div class="d-flex align-items-center mb-3 gap-2">
+                      <small class="badge text-bg-light p-2 rounded-pill text-nowrap">{{
+                        categoryIntro[item.category].badge1
+                      }}</small>
+                      <small class="badge text-bg-light p-2 rounded-pill text-nowrap">{{
+                        categoryIntro[item.category].badge2
+                      }}</small>
                     </div>
-                    <h5 class="card-title fw-bolder mb-3 text-primary">{{ item.title }}</h5>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div class="h5 text-black-50" v-if="!item.price">
                         NTD {{ $format.currency(item.origin_price) }}
@@ -127,7 +132,8 @@
                         >NTD {{ $format.currency(item.origin_price) }}
                       </del>
                       <div class="h5 text-danger fw-bold" v-if="item.price">
-                        NTD {{ $format.currency(item.price) }}
+                        <small class="text-body-secondary">NTD</small>
+                        {{ $format.currency(item.price) }}
                       </div>
                     </div>
                   </div>

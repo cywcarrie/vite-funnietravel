@@ -41,20 +41,27 @@
             <h4 class="m-0 fw-bold">{{ product.title }}</h4>
             <FavoriteBtn v-if="product.id" :productFavoriteId="product.id" />
           </div>
-          <div class="d-flex align-items-center text-dark mt-2">
-            <small class="border border-white bg-light px-2 py-2 rounded-pill me-2 text-nowrap"
+          <div class="d-flex align-items-center mt-2 gap-2">
+            <small
+              class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
               >2人成行</small
             >
-            <small class="border border-white bg-light px-2 py-2 rounded-pill me-2 text-nowrap"
-              >贈WIFI</small
+            <small
+              class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
+              >贈 WIFI</small
             >
-            <small class="border border-white bg-light px-2 py-2 rounded-pill me-2 text-nowrap"
-              >多人享優惠</small
+            <small
+              class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
+              >免費接送</small
+            >
+            <small
+              class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
+              >限時優惠</small
             >
           </div>
           <div class="mt-4 text-primary">
             <p class="mb-2 fw-bold"><i class="bi bi-airplane-fill pe-2"></i>台北高雄皆可出發</p>
-            <p class="mb-2 fw-bold"><i class="bi bi-taxi-front-fill pe-2"></i>提供免費機場接送</p>
+            <p class="mb-2 fw-bold"><i class="bi bi-person-badge-fill pe-2"></i>提供中文導遊服務</p>
             <p class="mb-2 fw-bold"><i class="bi bi-check-circle-fill pe-2"></i>可以延回或是續住</p>
             <p class="fw-bold"><i class="bi bi-clock-fill pe-2"></i>24小時內確認訂單</p>
           </div>
