@@ -123,6 +123,9 @@
                       <small class="badge text-bg-light p-2 rounded-pill text-nowrap">{{
                         categoryIntro[item.category].badge2
                       }}</small>
+                      <small class="badge text-bg-light p-2 rounded-pill text-nowrap">{{
+                        categoryIntro[item.category].badge3
+                      }}</small>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div class="h5 text-black-50" v-if="!item.price">
