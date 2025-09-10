@@ -100,7 +100,7 @@
         </div>
         <div class="d-block d-lg-none py-3 mt-4 mb-3">
           <div
-            class="bg-white p-3 shadow-sm rounded-4 mb-3"
+            class="bg-light p-3 shadow-sm rounded-4 mb-3"
             v-for="item in favoriteProduct"
             :key="item.id"
           >
