@@ -36,6 +36,9 @@
             <li class="nav-item">
               <RouterLink to="/faqs" class="nav-link">常見問題</RouterLink>
             </li>
+            <li class="nav-item">
+              <RouterLink to="/searchorder" class="nav-link">查詢訂單</RouterLink>
+            </li>
           </ul>
           <form class="form-inline d-flex justify-content-center">
             <RouterLink to="/cart" class="nav-link text-primary hover-nav position-relative"

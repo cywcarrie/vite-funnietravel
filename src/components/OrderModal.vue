@@ -71,7 +71,7 @@
                     <th>付款狀態</th>
                     <td>
                       <strong v-if="tempOrder.is_paid" class="text-success">已付款</strong>
-                      <span v-else class="text-muted">尚未付款</span>
+                      <span v-else class="text-body-secondary">尚未付款</span>
                     </td>
                   </tr>
                   <tr>

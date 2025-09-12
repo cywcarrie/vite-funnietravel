@@ -75,6 +75,10 @@
                 <table class="table table-white table-borderless mb-4">
                   <tbody>
                     <tr class="table-nowrap">
+                      <th>訂單編號</th>
+                      <td class="text-nowrap">{{ order.id }}</td>
+                    </tr>
+                    <tr class="table-nowrap">
                       <th class="text-nowrap">姓名</th>
                       <td class="text-nowrap">{{ order.user.name }}</td>
                     </tr>

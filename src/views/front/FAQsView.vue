@@ -23,17 +23,22 @@
       <div class="row justify-content-center mt-4 py-5">
         <div class="col-md-8 col-11">
           <div class="accordion" id="accordionExample">
-            <div class="accordion-item" v-for="(item, index) in faqItems" :key="index">
-              <h2 class="accordion-header" :id="`heading${index}`">
+            <div
+              class="accordion-item mb-3 border border-3 rounded-3"
+              v-for="(item, index) in faqItems"
+              :key="index"
+            >
+              <h2 class="accordion-header rounded-3" :id="`heading${index}`">
                 <button
-                  class="accordion-button collapsed fs-5 fw-bold"
+                  class="accordion-button collapsed fs-5 fw-bold rounded-3"
                   type="button"
                   data-bs-toggle="collapse"
                   :data-bs-target="`#collapse${index}`"
                   aria-expanded="false"
                   :aria-controls="`collapse${index}`"
                 >
-                  {{ index + 1 }}. {{ item.question }}
+                  <i class="bi bi-question-circle-fill me-2 text-primary fs-2"></i
+                  >{{ item.question }}
                 </button>
               </h2>
               <div
@@ -44,15 +49,6 @@
               >
                 <div class="accordion-body">
                   <span v-html="item.answer" />
-                  <template v-if="index === 7">
-                    <button
-                      @click="copyCouponCode"
-                      class="btn btn-outline-primary btn-sm ms-2"
-                      type="button"
-                    >
-                      <i class="bi bi-clipboard-fill pe-1"></i> 複製優惠碼
-                    </button>
-                  </template>
                 </div>
               </div>
             </div>
@@ -65,7 +61,6 @@
 
 <script>
 import { ref } from 'vue'
-import ShowNotification from '@/shared/swal'
 
 export default {
   setup() {
@@ -99,29 +94,17 @@ export default {
       },
       {
         question: '什麼是優惠碼 ?',
-        answer: `優惠碼是 Funnie Travel 提供的優惠方式。優惠期間內，在我們的網站上訂購行程結帳時輸入優惠碼 &#12300;<span class="fw-bold">${couponCode}</span>&#12301;，即可享有 85 折限時優惠。`
+        answer: `優惠碼是 Funnie Travel 提供的優惠方式。優惠期間內，在我們的網站上訂購行程結帳時輸入優惠碼 &#12300;<strong class="text-primary">${couponCode}</strong>&#12301;，即可享有<strong> 85 </strong>折限時優惠。`
       },
       {
         question: '優惠碼使用說明 ?',
-        answer: `請於購物車頁面的「優惠碼」欄位輸入優惠碼 &#12300;<span class="fw-bold">${couponCode}</span>&#12301;，若優惠碼輸入正確，系統將套用折扣並於畫面顯示折抵金額。`
+        answer: `請於購物車頁面的「優惠碼」欄位輸入優惠碼 &#12300;<strong class="text-primary">${couponCode}</strong>&#12301;，並點選&#12300;套用&#12301;按鈕。若優惠碼輸入正確，系統將套用折扣並於畫面顯示折抵金額。`
       }
     ])
 
-    function copyCouponCode() {
-      navigator.clipboard
-        .writeText(couponCode)
-        .then(() => {
-          ShowNotification('success', '優惠碼複製成功')
-        })
-        .catch(() => {
-          ShowNotification('error', '複製失敗，請再試一次')
-        })
-    }
-
     return {
       faqItems,
-      couponCode,
-      copyCouponCode
+      couponCode
     }
   }
 }

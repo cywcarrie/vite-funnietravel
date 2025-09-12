@@ -29,7 +29,7 @@
           </td>
           <td>
             <span class="text-success" v-if="item.is_enabled">上架</span>
-            <span class="text-muted" v-else>未上架</span>
+            <span class="text-body-secondary" v-else>未上架</span>
           </td>
           <td>
             <div class="btn-group">

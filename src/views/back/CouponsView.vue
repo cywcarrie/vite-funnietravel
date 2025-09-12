@@ -24,7 +24,7 @@
             <td class="text-nowrap">{{ $format.date(item.due_date) }}</td>
             <td>
               <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
-              <span v-else class="text-muted">未起用</span>
+              <span v-else class="text-body-secondary">未起用</span>
             </td>
             <td>
               <div class="btn-group">

@@ -1421,20 +1421,20 @@ $accordion-body-padding-x: $accordion-padding-x !default;
 
 $accordion-button-padding-y: $accordion-padding-y !default;
 $accordion-button-padding-x: $accordion-padding-x !default;
-$accordion-button-color: #336b87; // var(--#{$prefix}body-color) !default;
+$accordion-button-color: var(--#{$prefix}body-color) !default;
 $accordion-button-bg: var(--#{$prefix}accordion-bg) !default;
 $accordion-transition:
   $btn-transition,
   border-radius 0.15s ease !default;
-$accordion-button-active-bg: #90afc5; // var(--#{$prefix}primary-bg-subtle) !default;
-$accordion-button-active-color: #fff; // var(--#{$prefix}primary-text-emphasis) !default;
+$accordion-button-active-bg: #fff; // var(--#{$prefix}primary-bg-subtle) !default;
+$accordion-button-active-color: #212529; // var(--#{$prefix}primary-text-emphasis) !default;
 
 $accordion-button-focus-border-color: $input-focus-border-color !default;
 $accordion-button-focus-box-shadow: 0; //$btn-focus-box-shadow !default;
 
 $accordion-icon-width: 1.25rem !default;
-$accordion-icon-color: #336b87; // $body-color !default;
-$accordion-icon-active-color: #fff; // $primary-text-emphasis !default;
+$accordion-icon-color: $body-color !default;
+$accordion-icon-active-color: $primary-text-emphasis !default;
 $accordion-icon-transition: transform 0.2s ease-in-out !default;
 $accordion-icon-transform: rotate(-180deg) !default;
 

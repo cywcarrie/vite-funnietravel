@@ -4,7 +4,7 @@
 
 ### Demo Website : [Link](https://cywcarrie.github.io/vite-funnietravel/#/)
 
-Simulated travel e-commerce website, including shopping cart, favorites, product list, and FAQ pages. Users can add products to the shopping cart or favorites, add or remove products, apply coupons, and place orders. They can also view detailed information about individual products. The backend allows administrator to add and modify products and coupons.
+Simulated travel e-commerce website, including shopping cart, favorites, product list, order inquiry, and FAQ pages. Users can add products to the shopping cart or favorites, add or remove products, apply coupons, and place orders. They can also view detailed information about individual products and check their orders through the order inquiry page. The backend allows administrator to add and modify products and coupons.
 
 ## Technologies Used
 
@@ -27,6 +27,7 @@ Vue.js, Vite, Pinia, ESLint, Bootstrap 5, SCSS
   - Products Page：Product classification and sort products by price : low to high or high to low
   - Product Page : Product details
   - Favorites Page: Add items to Favorites and remove items as needed
+  - Order Inquiry Page: View order details
   - FAQs Page
   - Shopping Cart： Add items to cart and remove items as needed
   - Checkout Process：Create and submit order

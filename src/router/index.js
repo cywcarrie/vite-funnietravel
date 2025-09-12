@@ -50,6 +50,10 @@ const routes = [
       {
         path: 'faqs',
         component: () => import('@/views/front/FAQsView.vue')
+      },
+      {
+        path: 'searchorder',
+        component: () => import('@/views/front/SearchOrder.vue')
       }
     ]
   },
