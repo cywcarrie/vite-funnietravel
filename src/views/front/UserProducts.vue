@@ -70,7 +70,8 @@
               馬來西亞
             </button>
           </div>
-          <div class="ms-auto mt-3">
+          <div class="d-flex align-items-center flex-nowrap ms-auto mt-3">
+            <label class="me-2 mb-0 text-nowrap">排序：</label>
             <select
               class="form-select fw-bold text-primary"
               aria-label="Default select example"
