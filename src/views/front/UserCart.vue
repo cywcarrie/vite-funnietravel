@@ -98,7 +98,7 @@
           </div>
           <div class="d-block d-lg-none">
             <div
-              class="bg-white p-3 shadow-sm rounded-4 mb-3"
+              class="bg-white p-3 shadow-sm rounded-4 mb-3 border border-light-subtle"
               v-for="item in cart.carts"
               :key="item.id"
             >
