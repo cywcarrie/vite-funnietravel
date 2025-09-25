@@ -3,7 +3,7 @@
   <div class="container my-5 py-5">
     <form class="row justify-content-center py-5 px-3" @submit.prevent="signIn">
       <div class="col-md-7 col-lg-4 bg-light p-5 rounded-2">
-        <h2 class="h3 mb-3 text-center text-nowrap font-weight-normal fw-bold text-primary">
+        <h2 class="h3 mb-3 text-center text-nowrap fw-bold text-primary">
           <i class="bi bi-person-circle pe-2"></i>管理者後台登入
         </h2>
         <div class="mb-2">
@@ -30,11 +30,7 @@
           />
         </div>
         <div class="text-center mt-4">
-          <button
-            class="btn btn-primary btn-block px-4 fw-bold"
-            type="submit"
-            :disabled="isLoading"
-          >
+          <button class="btn btn-primary px-4 fw-bold" type="submit" :disabled="isLoading">
             登入
           </button>
         </div>
