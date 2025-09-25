@@ -29,7 +29,7 @@
               請輸入您的訂單編號以查詢詳細資訊
             </p>
 
-            <div class="input-group shadow-sm d-none d-md-flex mb-5">
+            <div class="input-group d-none d-md-flex mb-5">
               <span class="input-group-text bg-white border-end-0">
                 <i class="bi bi-receipt"></i>
               </span>
