@@ -42,7 +42,7 @@ export const useCartStore = defineStore('cartStore', () => {
       .post(url, { data: cart })
       .then((response) => {
         if (response.data.success) {
-          this.getCart()
+          getCart()
           isDone.value = ''
           ShowNotification('success', '已加入購物車')
         } else {

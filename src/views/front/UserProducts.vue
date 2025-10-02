@@ -146,11 +146,11 @@
                   <button
                     type="button"
                     class="btn btn-outline-primary w-100"
-                    :disabled="this.status.loadingItem === item.id"
+                    :disabled="status.loadingItem === item.id"
                     @click="addCart(item.id)"
                   >
                     <div
-                      v-if="this.status.loadingItem === item.id"
+                      v-if="status.loadingItem === item.id"
                       class="spinner-border text-primary spinner-border-sm"
                       role="status"
                     >
@@ -171,7 +171,7 @@
 </template>
 
 <script>
-import { inject, ref, onMounted, watch } from 'vue'
+import { inject, ref, reactive, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cartStore'
@@ -201,9 +201,7 @@ export default {
     const selectPrice = ref('價格')
     const pagination = ref({})
     const isLoading = ref(false)
-    const status = ref({
-      loadingItem: ''
-    })
+    const status = reactive({ loadingItem: '' })
 
     function getProducts(page = 1) {
       isLoading.value = true

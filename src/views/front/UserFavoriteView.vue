@@ -69,11 +69,11 @@
                     <button
                       type="button"
                       class="btn btn-outline-primary px-4"
-                      :disabled="this.status.loadingItem === item.id"
+                      :disabled="status.loadingItem === item.id"
                       @click="addCart(item.id)"
                     >
                       <div
-                        v-if="this.status.loadingItem === item.id"
+                        v-if="status.loadingItem === item.id"
                         class="spinner-border text-primary spinner-border-sm"
                         role="status"
                       >
@@ -126,11 +126,11 @@
               <button
                 type="button"
                 class="btn btn-outline-primary px-4"
-                :disabled="this.status.loadingItem === item.id"
+                :disabled="status.loadingItem === item.id"
                 @click="addCart(item.id)"
               >
                 <div
-                  v-if="this.status.loadingItem === item.id"
+                  v-if="status.loadingItem === item.id"
                   class="spinner-border text-primary spinner-border-sm"
                   role="status"
                 >
@@ -169,7 +169,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useFavoriteStore } from '@/stores/favoriteStore'
 import { useCartStore } from '@/stores/cartStore'
@@ -188,7 +188,7 @@ export default {
     const { cart } = storeToRefs(cartStore)
     const { addCart } = cartStore
 
-    const status = ref({
+    const status = reactive({
       loadingItem: ''
     })
 
