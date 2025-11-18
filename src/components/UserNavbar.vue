@@ -1,7 +1,7 @@
 <template>
   <div class="fixed-top">
     <div class="bg-body-secondary py-1 d-none d-lg-block">
-      <div class="container text-dark text-center">
+      <div class="container text-center">
         我們專注於真誠的旅遊服務，為您打造難忘的旅程，讓每一刻都成為珍貴的回憶
       </div>
     </div>
@@ -9,7 +9,7 @@
       <div class="container">
         <RouterLink to="/" class="navbar-brand me-auto d-flex align-items-center"
           ><img src="../assets/img/logo.png" alt="funnie-logo" class="funnie-logo-img" />
-          <h1 class="logo text-primary fs-2 fw-bolder mb-0 px-2 me-5">Funnie</h1></RouterLink
+          <h1 class="text-primary fs-2 fw-bolder mb-0 px-2 me-5">Funnie</h1></RouterLink
         >
         <button
           class="navbar-toggler"

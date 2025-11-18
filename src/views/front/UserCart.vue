@@ -199,7 +199,7 @@
 
       <template v-else>
         <div class="py-5 mb-5 text-center">
-          <h2 class="fw-bolder mb-5">您尚未有行程加入購物車</h2>
+          <p class="fw-bold mb-5 fs-2">您尚未有行程加入購物車</p>
           <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部">
             馬上開始選購吧 !
           </RouterLink>

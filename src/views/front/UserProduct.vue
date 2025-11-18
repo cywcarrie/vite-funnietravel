@@ -48,11 +48,11 @@
             >
             <small
               class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
-              >贈 WIFI</small
+              >贈上網卡</small
             >
             <small
               class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
-              >免費接送</small
+              >中文導遊</small
             >
             <small
               class="badge border border-dark-emphasis text-bg-light p-2 rounded-pill text-nowrap"
@@ -61,19 +61,19 @@
           </div>
           <div class="mt-4 text-primary">
             <p class="mb-2 fw-bold"><i class="bi bi-airplane-fill pe-2"></i>台北高雄皆可出發</p>
-            <p class="mb-2 fw-bold"><i class="bi bi-person-badge-fill pe-2"></i>提供中文導遊服務</p>
+            <p class="mb-2 fw-bold"><i class="bi bi-map-fill pe-2"></i>可客製化行程內容</p>
             <p class="mb-2 fw-bold"><i class="bi bi-check-circle-fill pe-2"></i>可以延回或是續住</p>
             <p class="fw-bold"><i class="bi bi-clock-fill pe-2"></i>24小時內確認訂單</p>
           </div>
           <div class="d-flex justify-content-end align-items-center">
-            <div class="h5 text-black-50" v-if="!product.price">
-              NTD {{ $format.currency(product.origin_price) }}
+            <div class="fs-5 text-black-50" v-if="!product.price">
+              TWD {{ $format.currency(product.origin_price) }}
             </div>
-            <del class="h6 text-black-50" v-if="product.price"
-              >NTD {{ $format.currency(product.origin_price) }}</del
+            <del class="fs-6 text-black-50" v-if="product.price"
+              >TWD {{ $format.currency(product.origin_price) }}</del
             >
-            <div class="h5 ms-2 text-danger fw-bold" v-if="product.price">
-              NTD {{ $format.currency(product.price) }}
+            <div class="fs-5 ms-2 text-danger fw-bold" v-if="product.price">
+              TWD {{ $format.currency(product.price) }}
             </div>
           </div>
           <div class="d-flex justify-content-end align-items-center">
@@ -106,7 +106,7 @@
             </div>
           </div>
         </div>
-        <div class="row d-flex justify-content-center bg-white py-5 mt-2 rounded-2">
+        <div class="row d-flex justify-content-center py-5 mt-2 rounded-2">
           <div class="col-lg-6">
             <h4 class="fw-bold text-primary">
               <i class="bi bi-exclamation-circle pe-2"></i>注意事項
@@ -114,9 +114,11 @@
             <div class="mt-3">
               <p class="mb-2">1. 本行程一經售出，不得轉讓他人使用。</p>
               <p class="mb-2">2. 本行程報價已包含機場稅與燃油附加費。</p>
-              <p class="mb-2">3. 本行程報價未包含旅遊平安保險及旅遊不便險。</p>
-              <p class="mb-2">4. 本行程報價未包含每日旅館客房清理及行李小費。</p>
-              <p>5. 本行程未包含護照新辦及簽證費用，如有需要代辦，請洽詢專員。</p>
+              <p class="mb-2">3. 本行程報價已包含每人一張不限流量上網卡。</p>
+              <p class="mb-2">4. 本行程報價未包含旅遊平安保險及旅遊不便險。</p>
+              <p class="mb-2">5. 本行程報價未包含每日旅館客房清理及行李小費。</p>
+              <p class="mb-2">6. 本行程報價未包含旅客自行於當地消費所產生之費用。</p>
+              <p>7. 本行程未包含護照申辦及簽證費用，如有需要代辦，請洽詢專員。</p>
             </div>
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
@@ -138,7 +140,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 bg-white">
+    <div class="mt-5">
       <div class="container">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">熱門行程</h2>
         <Swiper />

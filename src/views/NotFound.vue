@@ -4,7 +4,7 @@
   >
     <i class="bi bi-exclamation-circle mb-2 fs-1 text-primary"></i>
 
-    <h1 class="fs-1 fw-bold text-primary mb-4">404</h1>
+    <p class="fs-1 fw-bold text-primary mb-4">404</p>
 
     <p class="fs-5 text-dark mb-4">哎呀！這個頁面不存在。</p>
 

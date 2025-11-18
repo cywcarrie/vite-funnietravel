@@ -3,10 +3,10 @@
   <div class="container my-5 py-5">
     <form class="row justify-content-center py-5 px-3" @submit.prevent="signIn">
       <div class="col-md-7 col-lg-4 bg-light p-5 rounded-2">
-        <h2 class="h3 mb-3 text-center text-nowrap fw-bold text-primary">
+        <h2 class="fs-3 mb-4 text-center text-nowrap fw-bold text-primary">
           <i class="bi bi-person-circle pe-2"></i>管理者後台登入
         </h2>
-        <div class="mb-2">
+        <div class="mb-3">
           <label for="inputEmail" class="visually-hidden">Email</label>
           <input
             type="email"
@@ -18,7 +18,7 @@
             v-model="user.username"
           />
         </div>
-        <div class="mb-2">
+        <div class="mb-3">
           <label for="inputPassword" class="visually-hidden">密碼</label>
           <input
             type="password"

@@ -22,58 +22,48 @@
       </nav>
       <div class="row my-5">
         <div class="col-lg-3 mb-4 mb-lg-0">
-          <div class="list-group text-start">
+          <div class="list-group text-start d-none d-md-block">
             <button
+              v-for="item in categories"
+              :key="'category-' + item"
               type="button"
               class="list-group-item list-group-item-action fw-bold"
-              aria-current="true"
-              :class="{ active: category === '全部' }"
-              @click="goToCategory('全部')"
+              :class="{ active: category === item }"
+              @click="goToCategory(item)"
             >
               <i class="bi bi-globe me-2"></i>
-              全部
+              {{ item }}
             </button>
-            <button
-              type="button"
-              class="list-group-item list-group-item-action fw-bold"
-              :class="{ active: category === '峇里島' }"
-              @click="goToCategory('峇里島')"
-            >
-              <i class="bi bi-globe me-2"></i>
-              峇里島
-            </button>
-            <button
-              type="button"
-              class="list-group-item list-group-item-action fw-bold"
-              :class="{ active: category === '泰國' }"
-              @click="goToCategory('泰國')"
-            >
-              <i class="bi bi-globe me-2"></i>
-              泰國
-            </button>
-            <button
-              type="button"
-              class="list-group-item list-group-item-action fw-bold"
-              :class="{ active: category === '新加坡' }"
-              @click="goToCategory('新加坡')"
-            >
-              <i class="bi bi-globe me-2"></i>
-              新加坡
-            </button>
-            <button
-              type="button"
-              class="list-group-item list-group-item-action fw-bold"
-              :class="{ active: category === '馬來西亞' }"
-              @click="goToCategory('馬來西亞')"
-            >
-              <i class="bi bi-globe me-2"></i>
-              馬來西亞
-            </button>
+          </div>
+          <div class="d-block d-md-none">
+            <div class="dropdown w-100">
+              <button
+                class="btn btn-secondary dropdown-toggle w-100 fw-bold"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                目的地
+              </button>
+              <ul class="dropdown-menu w-100">
+                <li v-for="item in categories" :key="'dropdown-category-' + item">
+                  <button
+                    type="button"
+                    class="dropdown-item fw-bold"
+                    :class="{ active: category === item }"
+                    @click="goToCategory(item)"
+                  >
+                    <i class="bi bi-globe me-2"></i>
+                    {{ item }}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="d-flex align-items-center flex-nowrap ms-auto mt-3">
             <label class="me-2 mb-0 text-nowrap">排序：</label>
             <select
-              class="form-select fw-bold text-primary"
+              class="form-select fw-bold"
               aria-label="Default select example"
               v-model="selectPrice"
               @change="sortedProducts()"
@@ -93,7 +83,7 @@
               background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
               url(${categoryIntro[category].img});`"
               >
-                <h2 class="text-white fw-bolder fs-1 pt-4 ps-4">{{ category }}</h2>
+                <h3 class="text-white fw-bolder fs-2 pt-4 ps-4">{{ category }}</h3>
                 <p class="text-white fw-bolder fs-5 px-4">{{ categoryIntro[category].describe }}</p>
               </div>
             </div>
@@ -129,14 +119,14 @@
                       }}</small>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                      <div class="h5 text-black-50" v-if="!item.price">
-                        NTD {{ $format.currency(item.origin_price) }}
+                      <div class="fs-5 text-black-50" v-if="!item.price">
+                        TWD {{ $format.currency(item.origin_price) }}
                       </div>
-                      <del class="h6 text-black-50" v-if="item.price"
-                        >NTD {{ $format.currency(item.origin_price) }}
+                      <del class="fs-6 text-black-50" v-if="item.price"
+                        >TWD {{ $format.currency(item.origin_price) }}
                       </del>
-                      <div class="h5 text-danger fw-bold" v-if="item.price">
-                        <small class="text-body-secondary">NTD</small>
+                      <div class="fs-5 text-danger fw-bold" v-if="item.price">
+                        <small class="text-body-secondary">TWD</small>
                         {{ $format.currency(item.price) }}
                       </div>
                     </div>
@@ -197,6 +187,7 @@ export default {
     const product = ref({})
     const products = ref([])
     const category = ref(route.params.category || '')
+    const categories = ['全部', '峇里島', '泰國', '新加坡', '馬來西亞']
     const categoryIntro = ref(categoryObjectData)
     const selectPrice = ref('價格')
     const pagination = ref({})
@@ -279,16 +270,17 @@ export default {
       products,
       category,
       categoryIntro,
+      categories,
       selectPrice,
       pagination,
       isLoading,
       status,
+      isDone,
       getProducts,
       goToCategory,
       getProduct,
       sortedProducts,
-      addCart,
-      isDone
+      addCart
     }
   }
 }

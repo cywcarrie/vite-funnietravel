@@ -9,7 +9,7 @@
         data-aos-delay="50"
       >
         <h2 class="mb-3 fw-bolder fs-1 text-nowrap">探索美麗的東南亞</h2>
-        <h5 class="text-nowrap"><span class="fw-bold fs-4">Funnie</span> 給您輕鬆快樂自由行</h5>
+        <p class="text-nowrap fs-4"><span class="fw-bold fs-2">Funnie</span> 給您輕鬆快樂的旅行</p>
       </div>
       <div
         class="d-flex flex-column align-items-center text-white mt-5 pt-5 more position-absolute"
@@ -25,7 +25,7 @@
         >
       </div>
     </div>
-    <div class="py-5 bg-light">
+    <div class="py-5">
       <div class="container py-3">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">選擇我們的好處</h2>
         <div class="row">
@@ -63,10 +63,9 @@
       <div class="container py-3">
         <h2 class="text-center fw-bolder mb-5 text-secondary text-nowrap">關於 Funnie Travel</h2>
         <div class="text-center text-white px-3 px-md-5">
-          <h3 class="fw-bolder mb-4">東南亞自由行專家</h3>
+          <h3 class="fw-bolder mb-4">東南亞旅行專家</h3>
           <p class="fs-5">
-            <span class="fw-bolder fs-4">Funnie Travel</span>
-            是由一群來自台灣各地熱愛自由行，熱愛東南亞的專業團隊所組成，共同致力於提供客戶最優質、最專業與最安全的旅遊行程，讓旅人能夠放心感受旅行的美好。我們深信自由行是最能貼近當地生活及深入地探索當地文化和風土人情的旅遊方式，期望每個熱愛旅行的您，都能與我們一樣，享受自由行的美好。
+            是由一群來自台灣各地熱愛旅行，熱愛東南亞的專業團隊所組成，共同致力於提供客戶最優質、專業且安全的旅遊行程，讓您能放心享受每一段旅程，體驗旅行的純粹美好。我們深信旅行是最能貼近在地生活、深入探索當地文化與風土人情的方式。期望每一位熱愛旅行的您，都能與我們一樣，從每一次出發中，感受到世界的精彩與感動。
           </p>
         </div>
         <div class="text-center pt-3">
@@ -76,7 +75,7 @@
         </div>
       </div>
     </div>
-    <div class="py-5 bg-light">
+    <div class="py-5">
       <div class="container py-3">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">選擇想去的地方</h2>
         <div class="row justify-content-center">
@@ -135,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 bg-white">
+    <div class="py-5">
       <div class="container py-3">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">熱門行程推薦</h2>
         <Swiper />
@@ -146,14 +145,48 @@
         </div>
       </div>
     </div>
-    <div class="py-5 mt-5 home-bottom-content">
+    <div class="py-5 bg-light">
       <div class="container py-3">
-        <h2 class="text-center fw-bolder py-3 text-secondary">
+        <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">服務專區</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <RouterLink
+              to="/transfer"
+              class="mb-2 mb-lg-0 d-flex align-items-center justify-content-center rounded-2 border border-primary py-3"
+            >
+              <i class="bi bi-car-front-fill text-primary pe-2 f-4"></i
+              ><span class="text-center text-primary f-4 fw-bold">接駁服務</span>
+            </RouterLink>
+          </div>
+          <div class="col-lg-4">
+            <RouterLink
+              to="/customtour"
+              class="mb-2 mb-lg-0 d-flex align-items-center justify-content-center rounded-2 border border-primary py-3"
+            >
+              <i class="bi bi-file-earmark-text-fill text-primary pe-2 f-4"></i
+              ><span class="text-center text-primary f-4 fw-bold">客製旅遊</span>
+            </RouterLink>
+          </div>
+          <div class="col-lg-4">
+            <RouterLink
+              to="/lecture"
+              class="mb-2 mb-lg-0 d-flex align-items-center justify-content-center rounded-2 border border-primary py-3"
+            >
+              <i class="bi bi-journal-bookmark-fill text-primary pe-2 f-4"></i
+              ><span class="text-center text-primary f-4 fw-bold">旅遊講座</span>
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-5 home-bottom-content">
+      <div class="container py-3">
+        <p class="text-center fw-bolder py-3 text-secondary fs-3">
           旅行是唯一讓我們花錢，心靈卻變得更富有的事物
-        </h2>
+        </p>
         <div class="text-center text-white px-3 px-md-5">
           <p class="fw-bolder py-3 fs-3">
-            跟著 <span class="fs-2">Funnie</span> 一起去美麗的東南亞自由行，享受自由行帶給我們的美好
+            跟著 <span class="fs-2">Funnie</span> 一起去美麗的東南亞旅行，享受旅行帶給我們的美好
           </p>
         </div>
       </div>

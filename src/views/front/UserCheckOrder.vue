@@ -9,34 +9,36 @@
   <section class="mb-5">
     <div class="container">
       <div class="d-flex justify-content-center align-items-center mb-5">
-        <h5 class="fw-bold mb-0 text-secondary pay-header">填寫資料</h5>
+        <div class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header">
+          <i class="bi bi-1-circle mb-1"></i>
+          填寫資料
+        </div>
         <i class="bi bi-caret-right-fill fs-5 mx-2 text-secondary"></i>
-        <h5
-          class="fw-bold mb-0 text-secondary pay-header"
+        <div
+          class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header"
           :class="{ active: order.is_paid === false }"
         >
+          <i class="bi bi-2-circle mb-1"></i>
           確認付款
-        </h5>
+        </div>
         <i class="bi bi-caret-right-fill fs-5 mx-2 text-secondary"></i>
-        <h5
-          class="fw-bold mb-0 text-secondary pay-header"
+        <div
+          class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header"
           :class="{ active: order.is_paid === true }"
         >
+          <i class="bi bi-3-circle mb-1"></i>
           訂單完成
-        </h5>
+        </div>
       </div>
       <div class="row justify-content-center align-items-center">
         <div class="col-md-10">
-          <div
-            class="d-flex justify-content-center align-items-center mt-5"
-            v-if="order.is_paid === true"
-          >
-            <i class="bi bi-check-circle-fill fs-2 pe-2 text-success"></i>
-            <h2 class="fw-bold mb-0 text-success">付款成功 !</h2>
+          <div v-if="order.is_paid === true" class="text-center my-5">
+            <div class="d-flex justify-content-center align-items-center">
+              <i class="bi bi-check-circle-fill fs-2 pe-2 text-success"></i>
+              <p class="fw-bold mb-0 text-success fs-2">付款成功 !</p>
+            </div>
+            <p class="fs-5 fw-bold mt-4">感謝您的訂購，訂單明細將會寄送至您的電子信箱 !</p>
           </div>
-          <p class="fs-5 fw-bold mt-4 mb-5 text-center" v-if="order.is_paid === true">
-            感謝您的訂購，訂單明細將會寄送至您的電子信箱 !
-          </p>
           <div class="my-5 row justify-content-center">
             <h3 class="text-center fw-bold mb-4">訂單明細</h3>
             <form class="col-lg-6" @submit.prevent="payOrder">

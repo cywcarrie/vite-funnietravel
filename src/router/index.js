@@ -45,7 +45,7 @@ const routes = [
       },
       {
         path: 'favorite',
-        component: () => import('../views/front/UserFavoriteView.vue')
+        component: () => import('@/views/front/UserFavoriteView.vue')
       },
       {
         path: 'faqs',
@@ -54,6 +54,18 @@ const routes = [
       {
         path: 'searchorder',
         component: () => import('@/views/front/SearchOrder.vue')
+      },
+      {
+        path: 'transfer',
+        component: () => import('@/views/front/UserTransfer.vue')
+      },
+      {
+        path: 'customtour',
+        component: () => import('@/views/front/UserCustomTour.vue')
+      },
+      {
+        path: 'lecture',
+        component: () => import('@/views/front/UserLecture.vue')
       }
     ]
   },
@@ -82,9 +94,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: {
-      name: 'notFound'
-    }
+    redirect: '/not-found'
   }
 ]
 

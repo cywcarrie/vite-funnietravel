@@ -53,15 +53,15 @@
                     {{ item.title }}
                   </td>
                   <td class="text-nowrap">
-                    <div class="h5 text-black-50" v-if="!item.price">
-                      NTD {{ $format.currency(item.origin_price) }}
+                    <div class="fs-5 text-black-50" v-if="!item.price">
+                      TWD {{ $format.currency(item.origin_price) }}
                     </div>
                     <div>
-                      <del class="h6 text-black-50" v-if="item.price"
-                        >NTD {{ $format.currency(item.origin_price) }}
+                      <del class="fs-6 text-black-50" v-if="item.price"
+                        >TWD {{ $format.currency(item.origin_price) }}
                       </del>
-                      <div class="h5 text-dark" v-if="item.price">
-                        NTD {{ $format.currency(item.price) }}
+                      <div class="fs-5 text-dark" v-if="item.price">
+                        TWD {{ $format.currency(item.price) }}
                       </div>
                     </div>
                   </td>
@@ -111,15 +111,15 @@
               <span class="">{{ item.title }}</span>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2">
-              <div class="h5 text-black-50" v-if="!item.price">
-                NTD {{ $format.currency(item.origin_price) }}
+              <div class="fs-5 text-black-50" v-if="!item.price">
+                TWD {{ $format.currency(item.origin_price) }}
               </div>
 
-              <del class="h6 text-black-50 me-2" v-if="item.price"
-                >NTD {{ $format.currency(item.origin_price) }}
+              <del class="fs-6 text-black-50 me-2" v-if="item.price"
+                >TWD {{ $format.currency(item.origin_price) }}
               </del>
-              <div class="h5 text-dark" v-if="item.price">
-                NTD {{ $format.currency(item.price) }}
+              <div class="fs-5 text-dark" v-if="item.price">
+                TWD {{ $format.currency(item.price) }}
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-2">
@@ -158,7 +158,7 @@
       </template>
       <template v-else>
         <div class="py-5 mb-5 text-center">
-          <h2 class="fw-bold mb-5">您尚未有行程加入我的最愛</h2>
+          <p class="fw-bold mb-5 fs-2">您尚未有行程加入我的最愛</p>
           <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部"
             >馬上開始瀏覽行程吧 !</RouterLink
           >

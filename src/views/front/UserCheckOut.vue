@@ -9,11 +9,20 @@
   <section class="mb-5">
     <div class="container">
       <div class="d-flex justify-content-center align-items-center my-5">
-        <h5 class="fw-bold mb-0 text-secondary pay-header active">填寫資料</h5>
+        <div class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header active">
+          <i class="bi bi-1-circle mb-1"></i>
+          填寫資料
+        </div>
         <i class="bi bi-caret-right-fill fs-5 mx-2 text-secondary"></i>
-        <h5 class="fw-bold mb-0 text-secondary pay-header">確認付款</h5>
+        <div class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header">
+          <i class="bi bi-2-circle mb-1"></i>
+          確認付款
+        </div>
         <i class="bi bi-caret-right-fill fs-5 mx-2 text-secondary"></i>
-        <h5 class="fw-bold mb-0 text-secondary pay-header">訂單完成</h5>
+        <div class="d-flex flex-column text-center fw-bold fs-5 text-secondary pay-header">
+          <i class="bi bi-3-circle mb-1"></i>
+          訂單完成
+        </div>
       </div>
       <div class="row my-5 py-5 justify-content-center">
         <div class="col-12 col-md-8">
@@ -62,7 +71,7 @@
               <h3 class="text-center fw-bold mb-4">訂購人資訊</h3>
               <FormVue v-slot="{ errors }" @submit="createOrder" class="col-12">
                 <div class="mb-3">
-                  <label for="name" class="form-label"
+                  <label for="name" class="form-label fw-bold"
                     >訂購人姓名<small class="ps-1 text-danger fw-bold">*</small></label
                   >
                   <FieldVue
@@ -78,8 +87,8 @@
                   <ErrorMessage name="姓名" class="invalid-feedback" />
                 </div>
                 <div class="mb-3">
-                  <label for="email" class="form-label"
-                    >訂購人電子信箱<small class="ps-1 text-danger fw-bold">*</small></label
+                  <label for="email" class="form-label fw-bold"
+                    >電子信箱<small class="ps-1 text-danger fw-bold">*</small></label
                   >
                   <FieldVue
                     id="email"
@@ -94,8 +103,8 @@
                   <ErrorMessage name="email" class="invalid-feedback" />
                 </div>
                 <div class="mb-3">
-                  <label for="tel" class="form-label"
-                    >訂購人電話<small class="ps-1 text-danger fw-bold">*</small></label
+                  <label for="tel" class="form-label fw-bold"
+                    >電話<small class="ps-1 text-danger fw-bold">*</small></label
                   >
                   <FieldVue
                     id="tel"
@@ -110,8 +119,8 @@
                   <ErrorMessage name="電話" class="invalid-feedback" />
                 </div>
                 <div class="mb-3">
-                  <label for="address" class="form-label"
-                    >訂購人地址<small class="ps-1 text-danger fw-bold">*</small></label
+                  <label for="address" class="form-label fw-bold"
+                    >地址<small class="ps-1 text-danger fw-bold">*</small></label
                   >
                   <FieldVue
                     id="address"
@@ -127,7 +136,9 @@
                 </div>
                 <div class="mb-3">
                   <fieldset class="col-12 d-flex flex-md-row flex-column align-md-items-center">
-                    <legend class="form-label me-md-4 me-0 fs-6 fs-md-5 w-auto mb-2 mb-md-0">
+                    <legend
+                      class="form-label me-md-4 me-0 fs-6 fs-md-5 w-auto mb-2 mb-md-0 fw-bold"
+                    >
                       付款方式<small class="ps-1 text-danger fw-bold">*</small>
                     </legend>
                     <div class="normal-input" :class="{ error: errors['付款方式'] }">
@@ -179,7 +190,7 @@
                   </fieldset>
                 </div>
                 <div class="mb-3" v-if="form.user.pay === '信用卡'">
-                  <label for="cardNum" class="form-label"
+                  <label for="cardNum" class="form-label fw-bold"
                     >信用卡號<small class="ps-1 text-danger fw-bold">*</small></label
                   >
                   <div class="row">
@@ -197,7 +208,7 @@
                       />
                       <ErrorMessage name="卡號" class="invalid-feedback" />
                       <div class="my-3 col-12 col-md-6">
-                        <label for="period" class="form-label required"
+                        <label for="period" class="form-label required fw-bold"
                           >有效日期<small class="ps-1 text-danger fw-bold">*</small></label
                         >
                         <FieldVue
@@ -214,7 +225,7 @@
                         <ErrorMessage name="有效日期" class="invalid-feedback" />
                       </div>
                       <div class="mb-3 col-12 col-md-6">
-                        <label for="checkCode" class="form-label required"
+                        <label for="checkCode" class="form-label required fw-bold"
                           >檢查碼<small class="ps-1 text-danger fw-bold">*</small></label
                         >
                         <FieldVue
@@ -234,7 +245,7 @@
                 </div>
                 <div class="mb-3">
                   <fieldset class="col-12 d-flex align-items-center">
-                    <legend class="form-label me-4 mb-0 fs-6 fs-md-5 w-auto">
+                    <legend class="form-label me-4 mb-0 fs-6 fs-md-5 w-auto fw-bold">
                       發票類型<small class="ps-1 text-danger fw-bold">*</small>
                     </legend>
                     <div class="normal-input" :class="{ error: errors['發票類型'] }">
@@ -286,13 +297,12 @@
                   <ErrorMessage name="電子載具" class="invalid-feedback" />
                 </div>
                 <div class="mb-3">
-                  <label for="message" class="form-label">留言</label>
+                  <label for="message" class="form-label fw-bold">備註</label>
                   <textarea
                     name=""
                     id="message"
                     class="form-control"
-                    cols="30"
-                    rows="10"
+                    rows="3"
                     v-model="form.message"
                   ></textarea>
                 </div>
