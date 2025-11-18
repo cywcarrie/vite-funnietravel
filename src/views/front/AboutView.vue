@@ -25,7 +25,7 @@
       <div class="row d-flex justify-content-center align-items-center mt-4 py-5">
         <div class="col-lg-6 col-md-8">
           <div class="mb-5">
-            <h3 class="fw-bolder fs-4 mb-4">品牌簡介</h3>
+            <h3 class="fw-bolder fs-4 mb-3">品牌簡介</h3>
             <p class="lh-lg">
               創立於 2025
               年，是東南亞旅行專家，專注於新加坡、馬來西亞、泰國與峇里島等熱門目的地，為客戶量身打造專屬的旅遊行程。無論是浪漫雙人行、親子同樂或好友出遊，我們都致力於為客戶提供最專業、最優質、最安全且最貼心的專屬旅遊體驗。
@@ -41,7 +41,7 @@
             </p>
           </div>
           <div class="mb-5">
-            <h3 class="fw-bolder fs-4 mb-4">全球服務據點</h3>
+            <h3 class="fw-bolder fs-4 mb-3">全球服務據點</h3>
             <p class="lh-lg">
               在亞洲地區共有 6
               個服務據點，分別位於台灣、新加坡、馬來西亞、日本、泰國與印尼，並且結合 Funnie Travel
