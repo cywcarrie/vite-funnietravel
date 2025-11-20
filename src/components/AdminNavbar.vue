@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand text-white fw-bold me-auto d-flex align-items-center" href="#"
-        ><img src="../assets/img/logo.png" alt="funnie-logo" class="funnie-logo-img" />
+        ><img src="../assets/images/logo.png" alt="funnie-logo" class="funnie-logo-img" />
         <h1 class="text-primary fs-2 fw-bolder mb-0 px-2 me-5">Funnie</h1></a
       >
       <button

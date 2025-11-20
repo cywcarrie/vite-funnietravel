@@ -53,11 +53,11 @@
                     {{ item.title }}
                   </td>
                   <td class="text-nowrap">
-                    <div class="fs-5 text-black-50" v-if="!item.price">
+                    <div class="fs-5 text-dark-emphasis" v-if="!item.price">
                       TWD {{ $format.currency(item.origin_price) }}
                     </div>
                     <div>
-                      <del class="fs-6 text-black-50" v-if="item.price"
+                      <del class="fs-6 text-dark-emphasis" v-if="item.price"
                         >TWD {{ $format.currency(item.origin_price) }}
                       </del>
                       <div class="fs-5 text-dark" v-if="item.price">
@@ -111,11 +111,11 @@
               <span class="">{{ item.title }}</span>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2">
-              <div class="fs-5 text-black-50" v-if="!item.price">
+              <div class="fs-5 text-dark-emphasis" v-if="!item.price">
                 TWD {{ $format.currency(item.origin_price) }}
               </div>
 
-              <del class="fs-6 text-black-50 me-2" v-if="item.price"
+              <del class="fs-6 text-dark-emphasis me-2" v-if="item.price"
                 >TWD {{ $format.currency(item.origin_price) }}
               </del>
               <div class="fs-5 text-dark" v-if="item.price">

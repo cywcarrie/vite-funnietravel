@@ -2,7 +2,7 @@
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(https://i.imgur.com/uqtYcRW.jpg);
+    url(/src/assets/images/home-bg.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -72,7 +72,7 @@
 .about {
   background:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(https://i.imgur.com/3eGy6TD.jpg) no-repeat;
+    url(/src/assets/images/home1.jpeg) no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -86,7 +86,7 @@
 .home-bottom-content {
   background:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(https://i.imgur.com/cMLIXzz.jpg) no-repeat;
+    url(/src/assets/images/home2.jpeg) no-repeat;
   background-size: cover;
   background-position: center;
 }

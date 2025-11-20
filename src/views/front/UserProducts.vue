@@ -106,7 +106,7 @@
                     </span>
                   </div>
                   <div class="card-body p-3">
-                    <h5 class="card-title fw-bolder mb-2 text-primary">{{ item.title }}</h5>
+                    <h4 class="fs-5 card-title fw-bolder mb-2 text-primary">{{ item.title }}</h4>
                     <div class="d-flex align-items-center mb-3 gap-2">
                       <small class="badge text-bg-light p-2 rounded-pill text-nowrap">{{
                         categoryIntro[item.category].badge1
@@ -119,10 +119,10 @@
                       }}</small>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                      <div class="fs-5 text-black-50" v-if="!item.price">
+                      <div class="fs-5 text-dark-emphasis" v-if="!item.price">
                         TWD {{ $format.currency(item.origin_price) }}
                       </div>
-                      <del class="fs-6 text-black-50" v-if="item.price"
+                      <del class="fs-6 text-dark-emphasis" v-if="item.price"
                         >TWD {{ $format.currency(item.origin_price) }}
                       </del>
                       <div class="fs-5 text-danger fw-bold" v-if="item.price">

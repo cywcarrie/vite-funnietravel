@@ -4,20 +4,18 @@
       <footer class="py-5">
         <div class="row">
           <div class="col-6 col-lg-2 mb-3">
-            <h5 class="text-white fw-bold">全球據點</h5>
+            <p class="text-white fw-bold fs-5">全球據點</p>
             <ul class="nav flex-column">
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2" v-for="location in locations" :key="location">
-                  <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
-                    <i class="bi bi-geo-alt-fill text-secondary"></i>{{ location }}
-                  </a>
-                </li>
-              </ul>
+              <li class="nav-item mb-2" v-for="location in locations" :key="location">
+                <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
+                  <i class="bi bi-geo-alt-fill text-secondary"></i>{{ location }}
+                </a>
+              </li>
             </ul>
           </div>
 
           <div class="col-6 col-lg-2 mb-3">
-            <h5 class="text-white fw-bold">追蹤 Funnie</h5>
+            <p class="text-white fw-bold fs-5">追蹤 Funnie</p>
             <ul class="nav flex-column">
               <li class="nav-item mb-2" v-for="social in socials" :key="social.name">
                 <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
@@ -28,7 +26,7 @@
           </div>
 
           <div class="col-6 col-lg-2 mb-3">
-            <h5 class="text-white fw-bold">聯絡 Funnie</h5>
+            <p class="text-white fw-bold fs-5">聯絡 Funnie</p>
             <ul class="nav flex-column">
               <li class="nav-item mb-2" v-for="contact in contacts" :key="contact.text">
                 <a
@@ -43,7 +41,7 @@
           </div>
 
           <div class="col-lg-5 offset-lg-1 mb-3">
-            <h5 class="text-white fw-bold">訂閱 Funnie</h5>
+            <p class="text-white fw-bold fs-5">訂閱 Funnie</p>
             <p class="text-white">訂閱我們，搶先收到最新最熱門的旅遊行程資訊！</p>
             <FormVue
               v-slot="{ errors }"
@@ -82,17 +80,22 @@
           <p class="text-white">本網站僅供作為個人作品使用，非商業用途</p>
           <ul class="list-unstyled d-flex">
             <li class="nav-item">
-              <a class="text-white" href="#" @click.prevent
+              <a class="text-white" href="#" @click.prevent aria-label="Facebook" title="Facebook"
                 ><i class="bi bi-facebook footer-icon-size"></i
               ></a>
             </li>
             <li class="nav-item ms-3">
-              <a class="text-white" href="#" @click.prevent
+              <a class="text-white" href="#" @click.prevent aria-label="GitHub" title="GitHub"
                 ><i class="bi bi-github footer-icon-size"></i
               ></a>
             </li>
             <li class="nav-item ms-3">
-              <a class="text-white" href="#" @click.prevent="goToLogin" title="管理者登入"
+              <a
+                class="text-white"
+                href="#"
+                @click.prevent="goToLogin"
+                aria-label="管理者登入"
+                title="管理者登入"
                 ><i class="bi bi-person-circle footer-icon-size"></i
               ></a>
             </li>
