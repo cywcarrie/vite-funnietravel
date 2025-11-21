@@ -140,7 +140,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5">
+    <div class="py-5">
       <div class="container">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">熱門行程</h2>
         <Swiper />

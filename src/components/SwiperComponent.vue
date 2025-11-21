@@ -1,7 +1,6 @@
 <template>
   <VueLoading :active="isLoading" />
   <swiper
-    class="pb-5"
     :modules="modules"
     :slides-per-view="1"
     :space-between="20"
