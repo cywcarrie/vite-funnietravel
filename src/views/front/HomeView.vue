@@ -1,14 +1,6 @@
 <template>
   <section>
     <div class="home d-flex justify-content-center align-items-center position-relative">
-      <img
-        src="/src/assets/images/home-bg.jpeg"
-        fetchpriority="high"
-        decoding="async"
-        class="home-bg-img"
-        alt=""
-      />
-
       <div
         class="text-center text-light home-content border"
         data-aos="fade-down"
@@ -146,7 +138,7 @@
       <div class="container py-3">
         <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">熱門行程推薦</h2>
         <Swiper />
-        <div class="text-end mt-4">
+        <div class="text-end">
           <RouterLink to="/products/全部" class="btn btn-sm btn-outline-primary">
             更多行程<i class="bi bi-caret-right-fill ps-1"></i>
           </RouterLink>
