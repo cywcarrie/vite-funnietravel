@@ -66,6 +66,10 @@ const routes = [
       {
         path: 'lecture',
         component: () => import('@/views/front/UserLecture.vue')
+      },
+      {
+        path: 'contact',
+        component: () => import('@/views/front/ContactView.vue')
       }
     ]
   },

@@ -37,6 +37,17 @@
                   <i :class="contact.iconClass"></i>{{ contact.text }}
                 </a>
               </li>
+              <li class="contact-service nav-item mb-2">
+                <a
+                  href="#"
+                  @click.prevent="goToContact"
+                  aria-label="聯絡我們"
+                  title="聯絡我們"
+                  class="nav-link p-0 text-white footer-icon-hover"
+                >
+                  <i class="bi bi-envelope-fill text-secondary"></i>聯絡我們</a
+                >
+              </li>
             </ul>
           </div>
 
@@ -146,6 +157,10 @@ export default {
       router.push('/login')
     }
 
+    function goToContact() {
+      router.push('/contact')
+    }
+
     function subscribeUs() {
       ShowNotification('success', '感謝您的訂閱，我們將不定時寄送優惠通知')
       subscribe.value.email = ''
@@ -159,6 +174,7 @@ export default {
       subscribe,
       subscribeForm,
       goToLogin,
+      goToContact,
       subscribeUs
     }
   }
