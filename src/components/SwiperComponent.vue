@@ -1,9 +1,14 @@
 <template>
   <VueLoading :active="isLoading" />
   <swiper
-    class="pb-5"
+    class="swiperComponent pb-5"
     :modules="modules"
     :slides-per-view="1"
+    :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false
+    }"
+    :navigation="true"
     :space-between="20"
     :pagination="{ clickable: true }"
     :breakpoints="{
@@ -22,10 +27,6 @@
       '1200': {
         slidesPerView: 4
       }
-    }"
-    :autoplay="{
-      delay: 3000,
-      disableOnInteraction: false
     }"
   >
     <swiper-slide v-for="item in products" :key="item.id">
@@ -58,9 +59,10 @@
 <script>
 import { inject, ref, onMounted } from 'vue'
 import VueLoading from './VueLoading.vue'
-import { Pagination, A11y, Autoplay } from 'swiper/modules'
+import { Pagination, A11y, Autoplay, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const { VITE_APP_API, VITE_APP_PATH } = import.meta.env
@@ -75,7 +77,7 @@ export default {
     const axios = inject('$axios')
     const isLoading = ref(false)
     const products = ref([])
-    const modules = [Pagination, A11y, Autoplay]
+    const modules = [Pagination, A11y, Autoplay, Navigation]
 
     function getProducts() {
       const url = `${VITE_APP_API}api/${VITE_APP_PATH}/products/all`
