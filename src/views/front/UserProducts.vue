@@ -22,7 +22,12 @@
       </nav>
       <div class="row my-5">
         <div class="col-lg-3 mb-4 mb-lg-0">
-          <div class="list-group text-start d-none d-md-block">
+          <h3
+            class="text-start pb-3 fw-bold fs-4 border-bottom border-primary border-2 d-none d-md-block"
+          >
+            旅遊目的地
+          </h3>
+          <div class="list-group list-group-flush text-start d-none d-md-block">
             <button
               v-for="item in categories"
               :key="'category-' + item"
@@ -43,7 +48,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                目的地
+                旅遊目的地
               </button>
               <ul class="dropdown-menu w-100">
                 <li v-for="item in categories" :key="'dropdown-category-' + item">
