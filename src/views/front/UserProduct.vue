@@ -38,7 +38,7 @@
             <p class="mb-2"><i class="bi bi-globe me-2"></i>{{ product.category }}</p>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <h4 class="m-0 fw-bold">{{ product.title }}</h4>
+            <h3 class="m-0 fw-bold fs-4">{{ product.title }}</h3>
             <FavoriteBtn v-if="product.id" :productFavoriteId="product.id" />
           </div>
           <div class="d-flex align-items-center mt-2 gap-2">
@@ -78,7 +78,9 @@
           </div>
           <div class="d-flex justify-content-end align-items-center">
             <div class="input-group mb-5 product-cart-input">
+              <label for="qty" class="visually-hidden">數量</label>
               <input
+                id="qty"
                 type="number"
                 class="form-control border-primary"
                 v-model.number="qty"

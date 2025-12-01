@@ -87,6 +87,7 @@
                     <button
                       type="button"
                       class="btn btn-outline-danger btn-sm"
+                      aria-label="刪除"
                       :disabled="status.loadingItem === item.id"
                       @click="removeFavorite(item)"
                     >
