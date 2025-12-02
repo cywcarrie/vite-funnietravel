@@ -66,14 +66,14 @@
             <p class="fw-bold"><i class="bi bi-clock-fill pe-2"></i>24小時內確認訂單</p>
           </div>
           <div class="d-flex justify-content-end align-items-center">
-            <div class="fs-5 text-dark-emphasis" v-if="!product.price">
+            <div class="fs-6 text-dark-emphasis text-decoration-line-through" v-if="product.price">
               TWD {{ $format.currency(product.origin_price) }}
             </div>
-            <del class="fs-6 text-dark-emphasis" v-if="product.price"
-              >TWD {{ $format.currency(product.origin_price) }}</del
-            >
             <div class="fs-5 ms-2 text-danger fw-bold" v-if="product.price">
               TWD {{ $format.currency(product.price) }}
+            </div>
+            <div class="fs-5 text-dark-emphasis" v-else>
+              TWD {{ $format.currency(product.origin_price) }}
             </div>
           </div>
           <div class="d-flex justify-content-end align-items-center">

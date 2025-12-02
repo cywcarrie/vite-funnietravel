@@ -35,18 +35,18 @@
           <img :src="item.imageUrl" class="card-img-top object-fit-cover" alt="swiperImage" />
           <div class="card-body p-3">
             <div class="d-flex justify-content-start text-primary fw-bold">
-              <p><i class="bi bi-globe me-2"></i>{{ item.category }}</p>
+              <i class="bi bi-globe me-2"></i>{{ item.category }}
             </div>
-            <p class="card-title fw-bolder mb-3 fs-5">{{ item.title }}</p>
+            <h5 class="card-title fw-bolder mb-3">{{ item.title }}</h5>
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <div class="fs-5 text-dark-emphasis" v-if="!item.price">
+              <div class="fs-6 text-dark-emphasis text-decoration-line-through" v-if="item.price">
                 TWD {{ $format.currency(item.origin_price) }}
               </div>
-              <del class="fs-6 text-dark-emphasis" v-if="item.price">
-                TWD {{ $format.currency(item.origin_price) }}</del
-              >
               <div class="fs-5 text-danger fw-bold" v-if="item.price">
                 TWD {{ $format.currency(item.price) }}
+              </div>
+              <div class="fs-5 text-dark-emphasis" v-else>
+                TWD {{ $format.currency(item.origin_price) }}
               </div>
             </div>
           </div>
