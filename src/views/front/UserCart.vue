@@ -61,9 +61,7 @@
                       <td>
                         <div class="d-flex justify-content-center">
                           <div class="input-group input-group-sm cart-qty">
-                            <label for="數量" class="visually-hidden">數量</label>
                             <input
-                              id="數量"
                               type="number"
                               class="form-control"
                               min="1"
@@ -114,9 +112,7 @@
 
               <div class="mt-3 mb-2 d-flex justify-content-end">
                 <div class="input-group input-group-sm cart-qty">
-                  <label for="mobile-qty" class="visually-hidden">數量</label>
                   <input
-                    id="mobile-qty"
                     type="number"
                     class="form-control"
                     min="1"
