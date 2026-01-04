@@ -1,24 +1,24 @@
 <template>
-  <section class="bg-primary">
+  <section class="footer-custom-bg">
     <div class="container">
       <footer class="py-5">
         <div class="row">
           <div class="col-6 col-lg-2 mb-3">
-            <p class="text-white fw-bold fs-5">全球據點</p>
+            <p class="text-primary fw-bold fs-5">全球據點</p>
             <ul class="nav flex-column">
               <li class="nav-item mb-2" v-for="location in locations" :key="location">
-                <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
-                  <i class="bi bi-geo-alt-fill text-secondary"></i>{{ location }}
+                <a href="#" @click.prevent class="nav-link p-0 text-primary footer-icon-hover">
+                  <i class="bi bi-geo-alt-fill text-primary"></i>{{ location }}
                 </a>
               </li>
             </ul>
           </div>
 
           <div class="col-6 col-lg-2 mb-3">
-            <p class="text-white fw-bold fs-5">追蹤 Funnie</p>
+            <p class="text-primary fw-bold fs-5">追蹤 Funnie</p>
             <ul class="nav flex-column">
               <li class="nav-item mb-2" v-for="social in socials" :key="social.name">
-                <a href="#" @click.prevent class="nav-link p-0 text-white footer-icon-hover">
+                <a href="#" @click.prevent class="nav-link p-0 text-primary footer-icon-hover">
                   <i :class="social.iconClass"></i>{{ social.name }}
                 </a>
               </li>
@@ -26,13 +26,13 @@
           </div>
 
           <div class="col-6 col-lg-2 mb-3">
-            <p class="text-white fw-bold fs-5">聯絡 Funnie</p>
+            <p class="text-primary fw-bold fs-5">聯絡 Funnie</p>
             <ul class="nav flex-column">
               <li class="nav-item mb-2" v-for="contact in contacts" :key="contact.text">
                 <a
                   :href="contact.href || '#'"
                   @click.prevent="!contact.href && $event.preventDefault()"
-                  class="nav-link p-0 text-white footer-icon-hover"
+                  class="nav-link p-0 text-primary footer-icon-hover"
                 >
                   <i :class="contact.iconClass"></i>{{ contact.text }}
                 </a>
@@ -43,17 +43,17 @@
                   @click.prevent="goToContact"
                   aria-label="聯絡我們"
                   title="聯絡我們"
-                  class="nav-link p-0 text-white footer-icon-hover"
+                  class="nav-link p-0 text-primary footer-icon-hover"
                 >
-                  <i class="bi bi-envelope-fill text-secondary"></i>聯絡我們</a
+                  <i class="bi bi-envelope-fill text-primary"></i>聯絡我們</a
                 >
               </li>
             </ul>
           </div>
 
           <div class="col-lg-5 offset-lg-1 mb-3">
-            <p class="text-white fw-bold fs-5">訂閱 Funnie</p>
-            <p class="text-white">訂閱我們，搶先收到最新最熱門的旅遊行程資訊！</p>
+            <p class="text-primary fw-bold fs-5">訂閱 Funnie</p>
+            <p class="text-primary">訂閱我們，搶先收到最新最熱門的旅遊行程資訊！</p>
             <FormVue
               v-slot="{ errors }"
               @submit="subscribeUs"
@@ -75,7 +75,7 @@
                   v-model="subscribe.email"
                 />
                 <button
-                  class="btn btn-secondary text-nowrap text-white rounded-end"
+                  class="btn btn-primary text-nowrap rounded-end"
                   type="submit"
                   :disabled="errors['email'] || !subscribe.email"
                 >
@@ -87,22 +87,24 @@
           </div>
         </div>
 
-        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-          <p class="text-white">本網站僅供作為個人作品使用，非商業用途</p>
+        <div
+          class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top border-dark-subtle"
+        >
+          <p class="text-primary">本網站僅供作為個人作品使用，非商業用途</p>
           <ul class="list-unstyled d-flex">
             <li class="nav-item">
-              <a class="text-white" href="#" @click.prevent aria-label="Facebook" title="Facebook"
+              <a class="text-primary" href="#" @click.prevent aria-label="Facebook" title="Facebook"
                 ><i class="bi bi-facebook footer-icon-size"></i
               ></a>
             </li>
             <li class="nav-item ms-3">
-              <a class="text-white" href="#" @click.prevent aria-label="GitHub" title="GitHub"
+              <a class="text-primary" href="#" @click.prevent aria-label="GitHub" title="GitHub"
                 ><i class="bi bi-github footer-icon-size"></i
               ></a>
             </li>
             <li class="nav-item ms-3">
               <a
-                class="text-white"
+                class="text-primary"
                 href="#"
                 @click.prevent="goToLogin"
                 aria-label="管理者登入"
@@ -131,26 +133,26 @@ export default {
     const locations = ['新加坡', '馬來西亞', '泰國', '印尼', '日本']
 
     const socials = [
-      { name: 'Facebook', iconClass: 'bi bi-facebook text-secondary' },
-      { name: 'Instagram', iconClass: 'bi bi-instagram text-secondary' },
-      { name: 'YouTube', iconClass: 'bi bi-youtube text-secondary' },
-      { name: 'Twitter', iconClass: 'bi bi-twitter text-secondary' },
-      { name: 'Line', iconClass: 'bi bi-line text-secondary' }
+      { name: 'Facebook', iconClass: 'bi bi-facebook text-primary' },
+      { name: 'Instagram', iconClass: 'bi bi-instagram text-primary' },
+      { name: 'YouTube', iconClass: 'bi bi-youtube text-primary' },
+      { name: 'Twitter', iconClass: 'bi bi-twitter text-primary' },
+      { name: 'Line', iconClass: 'bi bi-line text-primary' }
     ]
 
     const contacts = [
-      { text: '台北', iconClass: 'bi bi-geo-alt-fill text-secondary' },
+      { text: '台北', iconClass: 'bi bi-geo-alt-fill text-primary' },
       {
         text: '123-4567',
-        iconClass: 'bi bi-telephone-fill text-secondary',
+        iconClass: 'bi bi-telephone-fill text-primary',
         href: 'tel:+886-2-1234567'
       },
       {
         text: '000-0000',
-        iconClass: 'bi bi-telephone-fill text-secondary',
+        iconClass: 'bi bi-telephone-fill text-primary',
         href: 'tel:+886-2-0000000'
       },
-      { text: '9:00 - 18:00', iconClass: 'bi bi-person-fill text-secondary' }
+      { text: '9:00 - 18:00', iconClass: 'bi bi-person-fill text-primary' }
     ]
 
     function goToLogin() {

@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #90afc5, #336b87)"
+    style="background: linear-gradient(to right, #a8dadc, #457b9d)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">行程列表</h2>
   </div>

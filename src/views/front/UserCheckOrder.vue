@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #f0e9e0)"
+    style="background: linear-gradient(to right, #457b9d, #f1faee)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">結帳流程</h2>
   </div>
@@ -113,12 +113,12 @@
                 </table>
               </div>
               <div class="text-end" v-if="order.is_paid === false">
-                <button class="btn btn-primary ms-auto" type="submit">
+                <button class="btn btn-outline-primary ms-auto" type="submit">
                   確認付款<i class="bi bi-caret-right-fill"></i>
                 </button>
               </div>
               <div class="text-end" v-if="order.is_paid === true">
-                <RouterLink to="/products/全部" class="btn btn-primary ms-auto"
+                <RouterLink to="/products/全部" class="btn btn-outline-primary ms-auto"
                   ><i class="bi bi-cart pe-1"></i>繼續選購</RouterLink
                 >
               </div>

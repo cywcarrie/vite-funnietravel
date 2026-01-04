@@ -2,7 +2,7 @@
   <LoadingVue
     :active="isLoading"
     :loader="'dots'"
-    :color="'#336b87'"
+    :color="'#1d3557'"
     :width="70"
     :height="70"
     :opacity="0.6"

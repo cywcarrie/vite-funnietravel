@@ -1,7 +1,7 @@
 <template>
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #90afc5)"
+    style="background: linear-gradient(to right, #457b9d, #a8dadc)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">常見問題</h2>
   </div>
@@ -37,7 +37,7 @@
                   aria-expanded="false"
                   :aria-controls="`collapse${index}`"
                 >
-                  <i class="bi bi-question-circle-fill me-2 text-primary fs-2"></i
+                  <i class="bi bi-question-circle-fill me-2 text-secondary fs-2"></i
                   >{{ item.question }}
                 </button>
               </h2>

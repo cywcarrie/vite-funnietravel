@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #90afc5, #336b87)"
+    style="background: linear-gradient(to right, #a8dadc, #457b9d)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">購物車</h2>
   </div>
@@ -172,7 +172,11 @@
                   v-model="coupon_code"
                   placeholder="請輸入優惠碼"
                 />
-                <button class="btn btn-primary" type="button" @click="addCouponCode(coupon_code)">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  @click="addCouponCode(coupon_code)"
+                >
                   套用
                 </button>
               </div>
@@ -186,8 +190,8 @@
                   class="d-flex justify-content-between text-success mt-2"
                   v-if="cart.final_total !== cart.total"
                 >
-                  <span class="fs-6">優惠價</span>
-                  <span class="fs-6 fw-bold">{{ $format.currency(cart.final_total) }}</span>
+                  <span class="fs-5">優惠價</span>
+                  <span class="fs-4 fw-bold">{{ $format.currency(cart.final_total) }}</span>
                 </div>
                 <RouterLink to="/checkout" class="btn btn-primary w-100 mt-4">
                   前往結帳 <i class="bi bi-caret-right-fill"></i>
@@ -201,7 +205,7 @@
       <template v-else>
         <div class="py-5 mb-5 text-center">
           <p class="fw-bold mb-5 fs-2">您尚未有行程加入購物車</p>
-          <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部">
+          <RouterLink class="btn btn-secondary btn-lg fw-bold" to="/products/全部">
             馬上開始選購吧 !
           </RouterLink>
         </div>
@@ -230,7 +234,7 @@ export default {
       addCouponCode,
       copyCouponCode
     } = useCartStore()
-    const { carts, total, final_total, cart, isLoading } = storeToRefs(useCartStore())
+    const { cart, isLoading } = storeToRefs(useCartStore())
 
     const coupon_code = ref('')
 
@@ -239,9 +243,6 @@ export default {
     })
 
     return {
-      carts,
-      total,
-      final_total,
       cart,
       isLoading,
       coupon_code,

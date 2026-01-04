@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #f0e9e0)"
+    style="background: linear-gradient(to right, #457b9d, #f1faee)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">結帳流程</h2>
   </div>
@@ -307,10 +307,10 @@
                   ></textarea>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <RouterLink class="btn btn-outline-primary" to="/cart"
+                  <RouterLink class="btn btn-outline-secondary" to="/cart"
                     ><i class="bi bi-caret-left-fill"></i>回上一頁</RouterLink
                   >
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" class="btn btn-outline-primary">
                     確認訂單<i class="bi bi-caret-right-fill"></i>
                   </button>
                 </div>
@@ -343,9 +343,6 @@ export default {
     const store = useCartStore()
     const { cart } = storeToRefs(store)
     const isLoading = ref(false)
-    const total = ref(0)
-    const final_total = ref(0)
-    const coupon_code = ref('')
     const expiryDate = ref('')
     const cardNumber = ref('')
 
@@ -416,10 +413,7 @@ export default {
 
     return {
       isLoading,
-      total,
-      final_total,
       form,
-      coupon_code,
       expiryDate,
       cardNumber,
       cart,

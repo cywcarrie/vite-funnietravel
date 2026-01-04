@@ -89,7 +89,6 @@ export default {
   setup() {
     const axios = inject('$axios')
     const orders = ref([])
-    const isNew = ref(false)
     const pagination = ref({})
     const isLoading = ref(false)
     const tempOrder = ref({})
@@ -118,15 +117,12 @@ export default {
     }
 
     function openModal(item) {
-      // eslint-disable-next-line no-const-assign
       tempOrder.value = { ...item }
       const orderComponent = orderModal.value
       orderComponent.showModal()
     }
     function openDelOrderModal(item) {
-      // eslint-disable-next-line no-const-assign
       tempOrder.value = { ...item }
-      // Object.assign(tempOrder, item)
       const delComponent = delModal.value
       delComponent.showModal()
     }
@@ -198,7 +194,6 @@ export default {
     })
     return {
       orders,
-      isNew,
       pagination,
       isLoading,
       tempOrder,

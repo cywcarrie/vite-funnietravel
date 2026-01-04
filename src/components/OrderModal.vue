@@ -130,8 +130,6 @@ export default {
   emits: ['update-product', 'update-order'],
   setup(props, { emit }) {
     const { modalElement, showModal, hideModal } = useModal()
-    const modal = ref('')
-    const status = ref({})
     const tempOrder = ref({})
     const isPaid = ref(false)
 
@@ -148,8 +146,6 @@ export default {
     }
 
     return {
-      modal,
-      status,
       tempOrder,
       isPaid,
       showModal,

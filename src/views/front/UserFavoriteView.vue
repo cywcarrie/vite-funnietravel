@@ -1,7 +1,7 @@
 <template>
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #90afc5, #336b87)"
+    style="background: linear-gradient(to right, #457b9d, #a8dadc, #457b9d)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">我的最愛</h2>
   </div>
@@ -165,7 +165,7 @@
       <template v-else>
         <div class="py-5 mb-5 text-center">
           <p class="fw-bold mb-5 fs-2">您尚未有行程加入我的最愛</p>
-          <RouterLink class="btn btn-primary btn-lg fw-bold" to="/products/全部"
+          <RouterLink class="btn btn-secondary btn-lg fw-bold" to="/products/全部"
             >馬上開始瀏覽行程吧 !</RouterLink
           >
         </div>

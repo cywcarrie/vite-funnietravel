@@ -1,7 +1,7 @@
 <template>
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #90afc5)"
+    style="background: linear-gradient(to right, #457b9d, #a8dadc)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">客製旅遊</h2>
   </div>

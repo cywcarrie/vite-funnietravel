@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #90afc5, #336b87)"
+    style="background: linear-gradient(to right, #a8dadc, #457b9d)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">查詢訂單</h2>
   </div>
@@ -61,7 +61,7 @@
           <div class="col-lg-8">
             <div class="card border-0 rounded-4 shadow-sm mb-5">
               <div
-                class="card-header rounded-4 rounded-bottom-0 bg-gradient bg-primary text-white text-center py-4"
+                class="card-header rounded-4 rounded-bottom-0 bg-gradient bg-secondary text-white text-center py-4"
               >
                 <h4 class="mb-0"><i class="bi bi-receipt-cutoff me-2"></i>訂單資訊</h4>
               </div>

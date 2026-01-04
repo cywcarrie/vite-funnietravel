@@ -1,7 +1,7 @@
 <template>
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #90afc5)"
+    style="background: linear-gradient(to right, #457b9d, #a8dadc)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">旅遊講座</h2>
   </div>
@@ -56,8 +56,8 @@
             </ul>
             <div class="fs-5 fw-bold mt-4 mb-2">講座資訊</div>
             <p>
-              <i class="bi bi-calendar2-week-fill text-primary pe-2"></i><strong>時間</strong>：2025
-              年 12 月 27 日 晚上 7:00 - 9:00
+              <i class="bi bi-calendar2-week-fill text-primary pe-2"></i><strong>時間</strong>：2026
+              年 3 月 21 日 晚上 7:00 - 9:00
             </p>
             <p>
               <i class="bi bi-geo-fill text-primary pe-2"></i><strong>地點</strong>：Funnie Travel

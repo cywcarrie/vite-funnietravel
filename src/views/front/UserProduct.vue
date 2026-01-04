@@ -2,7 +2,7 @@
   <VueLoading :active="isLoading" />
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #90afc5, #336b87)"
+    style="background: linear-gradient(to right, #a8dadc, #457b9d)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">行程資訊</h2>
   </div>
@@ -113,7 +113,7 @@
             <h4 class="fw-bold text-primary">
               <i class="bi bi-exclamation-circle pe-2"></i>注意事項
             </h4>
-            <ol class="mt-3">
+            <ul class="mt-3">
               <li class="mb-2">本行程一經售出，不得轉讓他人使用。</li>
               <li class="mb-2">本行程報價已包含兩地機場稅與燃油附加費。</li>
               <li class="mb-2">本行程報價已包含每人一張不限流量上網卡。</li>
@@ -121,13 +121,13 @@
               <li class="mb-2">本行程報價未包含每日旅館客房清理及行李小費。</li>
               <li class="mb-2">本行程報價未包含旅客自行於當地消費所產生之費用。</li>
               <li>本行程報價未包含護照申辦及簽證費用，如需代辦服務，請洽詢專員。</li>
-            </ol>
+            </ul>
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
             <h4 class="fw-bold text-primary">
               <i class="bi bi-exclamation-circle pe-2"></i>改退行程須知
             </h4>
-            <ol class="mt-3">
+            <ul class="mt-3">
               <li class="mb-2">若欲辦理取消或是更改行程，請務必先洽詢專員。</li>
               <li class="mb-2">未提前取消行程或因個人因素被拒絕入境，將無法申請退費。</li>
               <li class="mb-2">
@@ -139,7 +139,31 @@
               <li>
                 若遇不可抗力因素如天候異常等導致行程被迫更改或取消，公司將不另收取任何手續費。
               </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center py-5 mt-2 rounded-2">
+          <div class="col-lg-6">
+            <h4 class="fw-bold text-primary"><i class="bi bi-ui-checks pe-2"></i>報名流程</h4>
+            <ol class="mt-3">
+              <li class="mb-2">選擇欲參加之行程與人數，加入購物車</li>
+              <li class="mb-2">完成訂單填寫並送出付款</li>
+              <li class="mb-2">客服人員將於 24 小時內聯繫確認訂單內容</li>
+              <li class="mb-2">行前提供完整出團資料與注意事項</li>
+              <li>依行程日期準時集合出發</li>
             </ol>
+          </div>
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <h4 class="fw-bold text-primary">
+              <i class="bi bi-people-fill pe-2"></i>出團與服務說明
+            </h4>
+            <ul class="mt-3">
+              <li class="mb-2">本行程採小團出發，最低 2 人即可成行。</li>
+              <li class="mb-2">實際出團人數與交通工具將依當團人數安排。</li>
+              <li class="mb-2">行程可能因天候、交通或不可抗力因素進行調整。</li>
+              <li class="mb-2">如遇不可抗力因素導致行程異動，將以旅客權益為優先考量。</li>
+              <li>客服服務時間為週一至週五 9:00 - 18:00。</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -181,7 +205,6 @@ export default {
     const id = ref('')
     const isLoading = ref(false)
     const store = useCartStore()
-    const { cart } = storeToRefs(store)
     const { addCart } = store
     const favoriteStore = useFavoriteStore()
     const { favoriteData } = storeToRefs(favoriteStore)
@@ -236,7 +259,6 @@ export default {
       isLoading,
       id,
       favoriteData,
-      cart,
       addCart,
       getProduct,
       addFavorite

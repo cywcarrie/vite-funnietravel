@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import useModal from '@/shared/modal'
 
 export default {
@@ -45,12 +44,10 @@ export default {
   },
   setup() {
     const { modalElement, showModal, hideModal } = useModal()
-    const modal = ref('')
 
     return {
       showModal,
       hideModal,
-      modal,
       modalElement
     }
   }

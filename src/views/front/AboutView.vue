@@ -1,7 +1,7 @@
 <template>
   <div
     class="my-5 position-relative banner container-fluid"
-    style="background: linear-gradient(to right, #336b87, #90afc5)"
+    style="background: linear-gradient(to right, #457b9d, #a8dadc)"
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">關於我們</h2>
   </div>
@@ -32,6 +32,9 @@
             </p>
             <p class="lh-lg">
               每一個旅遊行程，皆由我們的專業團隊精心規劃並嚴格篩選，旨在為每一位客戶打造安全、愉悅且難忘的旅遊體驗，讓您盡情享受旅行的美好與感動。
+            </p>
+            <p class="lh-lg">
+              我們相信，真正美好的旅行來自細節的累積與用心的安排。從行程設計、住宿選擇到當地體驗與服務流程，每一個環節都經過反覆評估與實地確認，只為確保旅途中的每一刻都能安心無虞，並留下難以忘懷的旅途記憶。
             </p>
             <p class="lh-lg">
               <strong class="text-primary"
