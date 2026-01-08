@@ -90,14 +90,12 @@
   z-index: 99;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   i {
-    font-size: 24px;
+    font-size: 20px;
     color: #f1faee;
   }
   @media screen and (max-width: 767.98px) {
     bottom: 15px;
     right: 15px;
-    i {
-      font-size: 20px;
-    }
   }
 }
+

@@ -8,7 +8,7 @@
     v-show="scY > 500"
     @click="goTop"
   >
-    <i class="bi bi-caret-up-fill"></i>
+    <i class="bi bi-chevron-up"></i>
   </button>
 </template>
 

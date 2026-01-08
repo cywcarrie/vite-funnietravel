@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="item in orders" :key="`orders ${item.id}`">
+        <template v-for="item in orders" :key="`orders-${item.id}`">
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
             <td>{{ $format.date(item.create_at) }}</td>
             <td><span v-text="item.user.email" v-if="item.user"></span></td>

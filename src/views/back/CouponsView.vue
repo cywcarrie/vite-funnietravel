@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in coupons" :key="`coupon ${item.id}`">
+          <tr v-for="item in coupons" :key="`coupon-${item.id}`">
             <td>{{ item.title }}</td>
             <td>{{ item.percent }}%</td>
             <td class="text-nowrap">{{ $format.date(item.due_date) }}</td>

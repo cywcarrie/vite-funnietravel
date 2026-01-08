@@ -26,7 +26,7 @@
             <div
               class="accordion-item mb-3 border border-3 rounded-3"
               v-for="(item, index) in faqItems"
-              :key="index"
+              :key="`faqs-${index}`"
             >
               <h2 class="accordion-header rounded-3" :id="`heading${index}`">
                 <button

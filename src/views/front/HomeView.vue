@@ -131,6 +131,12 @@
         </div>
       </div>
     </div>
+    <div class="py-5">
+      <div class="container py-3">
+        <h2 class="text-center fw-bolder mb-5 text-primary text-nowrap">來自旅人的評價</h2>
+        <Comment />
+      </div>
+    </div>
     <div class="py-5 about" id="about">
       <div class="container py-3">
         <div class="about-card text-center">
@@ -185,12 +191,13 @@
     </div>
     <div class="py-5 home-bottom-content">
       <div class="container py-3">
-        <p class="text-center fw-bolder py-3 text-light fs-3">
-          旅行是唯一讓我們花錢，心靈卻變得更富有的事物
+        <p class="text-center fw-bolder py-3 text-white fs-3">
+          旅行，是唯一讓我們花錢，卻讓心靈更富有的事
         </p>
-        <div class="text-center text-white px-3 px-md-5">
-          <p class="fw-bolder py-3 fs-3">
-            跟著 <span class="fs-2">Funnie</span> 一起去美麗的東南亞旅行，享受旅行帶給我們的美好
+        <div class="text-center text-light px-3 px-md-5">
+          <p class="py-3 fs-3">
+            跟著
+            <span class="fw-bolder fs-2">Funnie</span> 一起出發，把每一次旅行都變成美好回憶
           </p>
         </div>
       </div>
@@ -200,10 +207,12 @@
 
 <script>
 import Swiper from '@/components/SwiperComponent.vue'
+import Comment from '@/components/UserComment.vue'
 
 export default {
   components: {
-    Swiper
+    Swiper,
+    Comment
   }
 }
 </script>

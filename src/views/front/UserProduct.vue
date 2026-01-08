@@ -103,7 +103,7 @@
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
             <h4 class="fw-bold text-primary"><i class="bi bi-globe pe-2"></i>行程簡介</h4>
-            <div class="mt-3">
+            <div class="mt-3 content-text">
               {{ product.description }}
             </div>
           </div>
@@ -114,13 +114,9 @@
               <i class="bi bi-exclamation-circle pe-2"></i>注意事項
             </h4>
             <ul class="mt-3">
-              <li class="mb-2">本行程一經售出，不得轉讓他人使用。</li>
-              <li class="mb-2">本行程報價已包含兩地機場稅與燃油附加費。</li>
-              <li class="mb-2">本行程報價已包含每人一張不限流量上網卡。</li>
-              <li class="mb-2">本行程報價未包含旅遊平安保險與旅遊不便險。</li>
-              <li class="mb-2">本行程報價未包含每日旅館客房清理及行李小費。</li>
-              <li class="mb-2">本行程報價未包含旅客自行於當地消費所產生之費用。</li>
-              <li>本行程報價未包含護照申辦及簽證費用，如需代辦服務，請洽詢專員。</li>
+              <li v-for="(item, index) in notices" :key="`notice-${index}`" class="mb-2">
+                {{ item }}
+              </li>
             </ul>
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
@@ -128,16 +124,8 @@
               <i class="bi bi-exclamation-circle pe-2"></i>改退行程須知
             </h4>
             <ul class="mt-3">
-              <li class="mb-2">若欲辦理取消或是更改行程，請務必先洽詢專員。</li>
-              <li class="mb-2">未提前取消行程或因個人因素被拒絕入境，將無法申請退費。</li>
-              <li class="mb-2">
-                訂單成立後，更改或取消行程，除須依各航空公司之規定收取相關費用外，本公司將另收取相應之手續費。
-              </li>
-              <li class="mb-2">
-                訂單成立後，更改或取消行程，其手續費或罰金將依各飯店回覆之金額為準。本公司將另收取相應之手續費。
-              </li>
-              <li>
-                若遇不可抗力因素如天候異常等導致行程被迫更改或取消，公司將不另收取任何手續費。
+              <li v-for="(item, index) in refundRules" :key="`refund-${index}`" class="mb-2">
+                {{ item }}
               </li>
             </ul>
           </div>
@@ -146,11 +134,9 @@
           <div class="col-lg-6">
             <h4 class="fw-bold text-primary"><i class="bi bi-ui-checks pe-2"></i>報名流程</h4>
             <ol class="mt-3">
-              <li class="mb-2">選擇欲參加之行程與人數，加入購物車</li>
-              <li class="mb-2">完成訂單填寫並送出付款</li>
-              <li class="mb-2">客服人員將於 24 小時內聯繫確認訂單內容</li>
-              <li class="mb-2">行前提供完整出團資料與注意事項</li>
-              <li>依行程日期準時集合出發</li>
+              <li v-for="(step, index) in signupSteps" :key="`step-${index}`" class="mb-2">
+                {{ step }}
+              </li>
             </ol>
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
@@ -158,11 +144,9 @@
               <i class="bi bi-people-fill pe-2"></i>出團與服務說明
             </h4>
             <ul class="mt-3">
-              <li class="mb-2">本行程採小團出發，最低 2 人即可成行。</li>
-              <li class="mb-2">實際出團人數與交通工具將依當團人數安排。</li>
-              <li class="mb-2">行程可能因天候、交通或不可抗力因素進行調整。</li>
-              <li class="mb-2">如遇不可抗力因素導致行程異動，將以旅客權益為優先考量。</li>
-              <li>客服服務時間為週一至週五 9:00 - 18:00。</li>
+              <li v-for="(item, index) in serviceInfo" :key="`serviceinfo-${index}`" class="mb-2">
+                {{ item }}
+              </li>
             </ul>
           </div>
         </div>
@@ -209,6 +193,40 @@ export default {
     const favoriteStore = useFavoriteStore()
     const { favoriteData } = storeToRefs(favoriteStore)
     const { addFavorite } = favoriteStore
+
+    const notices = [
+      '本行程一經售出，不得轉讓他人使用。',
+      '本行程報價已包含兩地機場稅與燃油附加費。',
+      '本行程報價已包含每人一張不限流量上網卡。',
+      '本行程報價未包含旅遊平安保險與旅遊不便險。',
+      '本行程報價未包含每日旅館客房清理及行李小費。',
+      '本行程報價未包含旅客自行於當地消費所產生之費用。',
+      '本行程報價未包含護照申辦及簽證費用，如需代辦服務，請洽詢專員。'
+    ]
+
+    const refundRules = [
+      '若欲辦理取消或是更改行程，請務必先洽詢專員。',
+      '未提前取消行程或因個人因素被拒絕入境，將無法申請退費。',
+      '訂單成立後，更改或取消行程，除須依各航空公司之規定收取相關費用外，本公司將另收取相應之手續費。',
+      '訂單成立後，更改或取消行程，其手續費或罰金將依各飯店回覆之金額為準。本公司將另收取相應之手續費。',
+      '若遇不可抗力因素如天候異常等導致行程被迫更改或取消，公司將不另收取任何手續費。'
+    ]
+
+    const signupSteps = [
+      '選擇欲參加之行程與人數，加入購物車',
+      '完成訂單填寫並送出付款',
+      '客服人員將於 24 小時內聯繫確認訂單內容',
+      '行前提供完整出團資料與注意事項',
+      '依行程日期準時集合出發'
+    ]
+
+    const serviceInfo = [
+      '本行程採小團出發，最低 2 人即可成行。',
+      '實際出團人數與交通工具將依當團人數安排。',
+      '行程可能因天候、交通或不可抗力因素進行調整。',
+      '如遇不可抗力因素導致行程異動，將以旅客權益為優先考量。',
+      '客服服務時間為週一至週五 09:00 ~ 18:00。'
+    ]
 
     watch(
       () => route.params.productId,
@@ -259,6 +277,10 @@ export default {
       isLoading,
       id,
       favoriteData,
+      notices,
+      refundRules,
+      signupSteps,
+      serviceInfo,
       addCart,
       getProduct,
       addFavorite

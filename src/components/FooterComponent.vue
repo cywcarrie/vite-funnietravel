@@ -147,11 +147,6 @@ export default {
         iconClass: 'bi bi-telephone-fill text-primary',
         href: 'tel:+886-2-1234567'
       },
-      {
-        text: '000-0000',
-        iconClass: 'bi bi-telephone-fill text-primary',
-        href: 'tel:+886-2-0000000'
-      },
       { text: '9:00 - 18:00', iconClass: 'bi bi-person-fill text-primary' }
     ]
 

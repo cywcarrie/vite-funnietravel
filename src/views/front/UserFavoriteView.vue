@@ -47,25 +47,15 @@
                     ></div>
                   </td>
                   <td
-                    class="text-nowrap fw-bold text-primary cursor-pointer hover-nav"
+                    class="text-nowrap text-primary fw-bold cursor-pointer hover-nav"
                     @click="getProduct(item.id)"
                   >
                     {{ item.title }}
                   </td>
                   <td class="text-nowrap">
                     <div>
-                      <div
-                        class="fs-6 text-dark-emphasis text-decoration-line-through"
-                        v-if="item.price"
-                      >
-                        TWD {{ $format.currency(item.origin_price) }}
-                      </div>
-                      <div class="fs-5 text-dark" v-if="item.price">
-                        TWD {{ $format.currency(item.price) }}
-                      </div>
-                      <div class="fs-5 text-dark-emphasis" v-else>
-                        TWD {{ $format.currency(item.origin_price) }}
-                      </div>
+                      <small>TWD</small>
+                      {{ $format.currency(item.price) }}
                     </div>
                   </td>
                   <td class="text-nowrap text-end ps-4 ps-lg-0">
@@ -94,7 +84,7 @@
                       :disabled="status.loadingItem === item.id"
                       @click="removeFavorite(item)"
                     >
-                      <i class="bi bi-x-lg"></i>
+                      <i class="bi bi-trash"></i>
                     </button>
                   </td>
                 </tr>
@@ -108,30 +98,16 @@
             v-for="item in favoriteProduct"
             :key="item.id"
           >
-            <div
-              class="text-primary fw-bold cursor-pointer hover-nav mb-4"
-              @click="getProduct(item.id)"
-            >
+            <div class="fw-bold cursor-pointer hover-nav mb-4" @click="getProduct(item.id)">
               <span class="">{{ item.title }}</span>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2">
-              <div
-                class="fs-6 text-dark-emphasis me-2 text-decoration-line-through"
-                v-if="item.price"
-              >
-                TWD {{ $format.currency(item.origin_price) }}
-              </div>
-              <div class="fs-5 text-dark" v-if="item.price">
-                TWD {{ $format.currency(item.price) }}
-              </div>
-              <div class="fs-5 text-dark-emphasis" v-if="!item.price">
-                TWD {{ $format.currency(item.origin_price) }}
-              </div>
+              <small>TWD </small>&nbsp;{{ $format.currency(item.price) }}
             </div>
             <div class="d-flex justify-content-between align-items-center mt-2">
               <button
                 type="button"
-                class="btn btn-outline-primary px-4"
+                class="btn btn-outline-primary"
                 :disabled="status.loadingItem === item.id"
                 @click="addCart(item.id)"
               >
@@ -164,10 +140,10 @@
       </template>
       <template v-else>
         <div class="py-5 mb-5 text-center">
-          <p class="fw-bold mb-5 fs-2">您尚未有行程加入我的最愛</p>
-          <RouterLink class="btn btn-secondary btn-lg fw-bold" to="/products/全部"
-            >馬上開始瀏覽行程吧 !</RouterLink
-          >
+          <p class="fw-bold mb-5 fs-3">尚未有行程加入我的最愛</p>
+          <RouterLink class="btn btn-secondary" to="/products/全部"
+            >開始瀏覽行程<i class="bi bi-caret-right-fill ps-1"></i
+          ></RouterLink>
         </div>
       </template>
     </div>
