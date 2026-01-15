@@ -6,7 +6,7 @@
   >
     <h2 class="position-absolute text-center text-white fw-bolder banner-title fs-2">購物車</h2>
   </div>
-  <section class="cart-section mb-5">
+  <section class="mb-5">
     <div class="container">
       <nav
         aria-label="breadcrumb"
@@ -203,7 +203,7 @@
       </template>
 
       <template v-else>
-        <div class="py-5 mb-5 text-center">
+        <div class="py-5 text-center empty-state">
           <p class="fw-bold mb-5 fs-3">尚未有行程加入購物車</p>
           <RouterLink class="btn btn-secondary" to="/products/全部">
             前往選購行程<i class="bi bi-caret-right-fill ps-1"></i>

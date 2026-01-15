@@ -6,3 +6,18 @@
   background-size: cover;
   background-position: center center;
 }
+.empty-state {
+  margin-bottom: 50px;
+}
+
+@media (min-width: 768px) {
+  .empty-state {
+    margin-bottom: 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .empty-state {
+    margin-bottom: 150px;
+  }
+}

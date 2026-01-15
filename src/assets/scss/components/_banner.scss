@@ -1,11 +1,11 @@
 .banner {
-  height: 200px;
+  height: 150px;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 767.98px) {
-    height: 150px;
+  @media (min-width: 768px) {
+    height: 200px;
   }
 }
 

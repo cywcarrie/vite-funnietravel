@@ -139,7 +139,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="py-5 mb-5 text-center">
+        <div class="py-5 text-center empty-state">
           <p class="fw-bold mb-5 fs-3">尚未有行程加入我的最愛</p>
           <RouterLink class="btn btn-secondary" to="/products/全部"
             >開始瀏覽行程<i class="bi bi-caret-right-fill ps-1"></i
