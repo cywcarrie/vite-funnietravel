@@ -1,0 +1,1 @@
+import{_ as t,h as a,o as s,B as c,e as i}from"./index-CbJ6xAuF.js";const r={setup(){return{isLoading:a(!1)}}};function d(o,p,_,e,l,u){const n=i("LoadingVue");return s(),c(n,{active:e.isLoading,loader:"dots",color:"#1d3557",width:70,height:70,opacity:.6},null,8,["active"])}const g=t(r,[["render",d]]);export{g as V};
